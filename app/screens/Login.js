@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {View, StatusBar, KeyboardAvoidingView, Text, StyleSheet} from 'react-native';
 import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
-import {LoginInput} from '../components/Input'
+import {LoginInput, LoginButton} from '../components/Login_SignUp'
 
 import { Input, Button } from 'react-native-elements';
 
-const styles = StyleSheet.create({
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
+const textColor = '#92C7C7';
+
+const styles = EStyleSheet.create({
+  forgotPassword: {
+    color: '$LoginScreenText',
+    paddingLeft: 130,
+    paddingTop: 5,
   },
-  first: {
-    width: "70%",
-  },
+  newUser:{
+    color: '$LoginScreenText',
+    alignItems: 'center',
+    paddingTop: 20,
+    fontSize: 20
+  }
 });
 
 class Login extends Component {
@@ -24,7 +30,9 @@ class Login extends Component {
         <Logo/>
         <LoginInput text='Email'/>
         <LoginInput text='Password'/>
-        <Button title = 'Login'/>
+        <Text style={styles.forgotPassword}> Forgot Password</Text>
+        <LoginButton text='Login'/>
+        <Text style={styles.newUser}> New User? SIGN UP.</Text>
       </Container>
     );
   }

@@ -8,6 +8,9 @@ EStyleSheet.build({
    $border: '#E2E2E2',
    $inputText: '#797979',
    $lightGray: '#F0F0F0',
+   $background: "#FFF",
+   $buttonBackground: 'grey',
+   $LoginScreenText: '#92C7C7',
 
    //$outline: 1, //Use this to outline containers
 });

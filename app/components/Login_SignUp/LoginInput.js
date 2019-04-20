@@ -6,7 +6,7 @@ import styles from './styles';
 
 const LoginInput = ({text}) => {
   return (
-    <Input containerStyle={styles.container} inputStyle={styles.label} placeholder={text}/>
+    <Input containerStyle={styles.loginInputContainer} inputStyle={styles.loginInputLabel} placeholder={text}/>
   );
 };
 
