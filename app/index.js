@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './screens/Login';
+import Signup from './screens/Signup';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 EStyleSheet.build({
@@ -16,3 +17,4 @@ EStyleSheet.build({
 });
 
 export default () => <Login/>;
+//export default () => <Signup/>;
