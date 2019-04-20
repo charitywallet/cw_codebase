@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, StatusBar, KeyboardAvoidingView, Text, StyleSheet} from 'react-native';
 import {Container} from '../components/Container';
+import {Logo} from '../components/Logo';
+import {LoginInput} from '../components/Input'
 
 import { Input, Button } from 'react-native-elements';
 
@@ -11,24 +13,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   first: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    height: 200,
+    width: "70%",
   },
 });
 
 class Login extends Component {
-
-
   render() {
-    return (
+    return(
       <Container>
-        <View style={styles.first}>
-          <Input placeholder='Email'/>
-        </View>
-        <View style={styles.first}>
-          <Input placeholder='Password'/>
-        </View>
+        <Logo/>
+        <LoginInput text='Email'/>
+        <LoginInput text='Password'/>
         <Button title = 'Login'/>
       </Container>
     );
