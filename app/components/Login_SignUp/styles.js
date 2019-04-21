@@ -8,6 +8,7 @@ export default EStyleSheet.create({
   //$buttonBackgroundColorModifier: 0.1,
   loginInputContainer: {
     width: "70%",
+    paddingTop: 15,
   },
   loginInputLabel: {
     paddingLeft: 15,

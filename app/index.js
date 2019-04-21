@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Navigator from './config/routes';
 
 EStyleSheet.build({
    $primaryBlue: '#92C7C7',
@@ -16,5 +17,4 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 
-export default () => <Login/>;
-//export default () => <Signup/>;
+export default () => <Navigator />;

@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 
 import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
-import {LoginInput, LoginButton} from '../components/Login_SignUp'
-
-import { Input, Button } from 'react-native-elements';
 
 const textColor = '#92C7C7';
 
@@ -25,20 +22,16 @@ const styles = EStyleSheet.create({
   }
 });
 
-class Login extends Component {
+class MockDashboard extends Component {
+
   render() {
-    const {navigate} = this.props.navigation;
     return(
       <Container>
         <Logo/>
-        <LoginInput text='Email'/>
-        <LoginInput text='Password'/>
-        <Text style={styles.forgotPassword}> Forgot Password</Text>
-        <LoginButton text='Login' onPress = {() => navigate('UserDashboard')}/>
-        <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
+        <Text> Dashboard will go here.</Text>
       </Container>
     );
   }
 }
 
-export default Login;
+export default MockDashboard;

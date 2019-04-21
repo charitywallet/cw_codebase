@@ -15,6 +15,8 @@ export default EStyleSheet.create({
   },
   image: {
     width: imageWidth,
+    height: imageWidth,
+    marginTop: -90,
   },
   text: {
     fontWeight: '600',

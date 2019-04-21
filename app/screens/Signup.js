@@ -28,7 +28,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-class Login extends Component {
+class Signup extends Component {
   render() {
     return(
       <Container>
@@ -47,4 +47,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default Signup;
