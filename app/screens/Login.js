@@ -9,7 +9,6 @@ import {LoginInput, LoginButton} from '../components/Login_SignUp'
 
 import { Input, Button } from 'react-native-elements';
 
-const textColor = '#92C7C7';
 
 const styles = EStyleSheet.create({
   forgotPassword: {

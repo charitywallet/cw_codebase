@@ -10,13 +10,15 @@ import { StackNavigator, createStackNavigator, createAppContainer } from 'react-
 
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
+import Signup2 from '../screens/Signup2'
 import MockDashboard from '../screens/MockDashboard'
 
 const RootStack = createStackNavigator(
   {
   	UserLogin: { screen: Login },
     UserSignup: { screen: Signup },
-    UserDashboard: {screen: MockDashboard}
+    UserSignup2: { screen: Signup2},
+    UserDashboard: {screen: MockDashboard},
   },
   {
     navigationOptions: {

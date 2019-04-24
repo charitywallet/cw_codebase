@@ -8,8 +8,6 @@ import {LoginInput, LoginButton} from '../components/Login_SignUp'
 
 import { Input, Button, SocialIcon } from 'react-native-elements';
 
-
-const textColor = '#92C7C7';
 const imageWidth = Dimensions.get('window').width;
 
 const styles = EStyleSheet.create({
@@ -17,19 +15,19 @@ const styles = EStyleSheet.create({
     paddingTop: 15,
   },
   orText: {
-    color: textColor,
+    color: '$textColor',
     paddingTop: 10,
     paddingBottom: 8,
     fontWeight: 'bold'
   },
   socialContainer: {
-    //height: '20%',
-    width:imageWidth/1.5,
+    width: imageWidth/1.5,
   },
 });
 
 class Signup extends Component {
   render() {
+    const {navigate} = this.props.navigation;
     return(
       <Container>
         <Logo/>
@@ -37,7 +35,7 @@ class Signup extends Component {
         <LoginInput text='Password'/>
         <LoginInput text='Re-enter Password'/>
         <View style={styles.signUp}>
-          <LoginButton text='Sign Up'/>
+          <LoginButton text='Sign Up' onPress = {() => navigate('UserSignup2')}/>
         </View>
         <Text style={styles.orText}>────────   Or   ────────</Text>
         <View style={styles.socialContainer}>
