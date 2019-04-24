@@ -19,5 +19,5 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 
-export default () => <Navigator />;
-//export default () => <Signup2 />;
+//export default () => <Navigator />;
+export default () => <Signup2 />;
