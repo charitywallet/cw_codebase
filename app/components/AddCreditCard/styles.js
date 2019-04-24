@@ -6,12 +6,12 @@ const imageHeight = Dimensions.get('window').height;
 
 export default EStyleSheet.create({
     container: {
-      flex: .2,
+      flex: .22,
       backgroundColor: '#fff',
       //justifyContent: 'center',
-      paddingTop: (Platform.OS == 'ios') ? 5 : 0,
+      paddingTop: (Platform.OS == 'ios') ? 15 : 0,
       //paddingLeft: 50,
-      width: imageWidth/1.5,
+      width: imageWidth/1.4,
     },
 
     viewHolder: {
@@ -46,14 +46,15 @@ export default EStyleSheet.create({
 
     btnImage: {
       resizeMode: 'contain',
-      width: '15%',
+      width: '12.5%',
       height: 35,
       //tintColor: 'white',
     },
 
     removeBtn: {
       position: 'absolute',
-      right: 13,
+      right: -15,
+      top: 18,
       width: 25,
       height: 25,
       // borderRadius: 15,
@@ -70,13 +71,12 @@ export default EStyleSheet.create({
     },
 
       creditCardContainer: {
-        // paddingTop: 15,
-        // width: '50%',
-        // paddingLeft: 20,
-        // paddingRight: 20,
-        // marginRight: 20,
+        //width: 50,
       },
-      addButtonContainer: {
-        paddingLeft: 20,
-      },
+      textStyle: {
+        color: 'grey',
+        paddingTop:9,
+        alignItems: 'center',
+        fontSize:18,
+      }
   });

@@ -26,7 +26,7 @@ import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-i
 
 const imageWidth = Dimensions.get('window').width;
 
-class Signup2 extends Component {
+class Signup3 extends Component {
 
   constructor() {
      super();
@@ -48,25 +48,19 @@ class Signup2 extends Component {
    handleCC = form => console.log(form);
 
   render() {
-    const {navigate} = this.props.navigation;
+    //const {navigate} = this.props.navigation;
     return(
       <View style={{flex: 1,}}>
-        <Text style={styles.skip} onPress={() => navigate('UserDashboard')}> SKIP</Text>
+        <Text style={styles.skip}> SKIP</Text>
         <Container>
-          <OverlaySignup text = 'Thanks for signing up! There are a few more details we would like you to fill for a better experience.'
-           stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
-           handleFillNowButton={this.handleFillNowButton}
-           handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}
-           button1="Fill Now" button2="Later"/>
+          <Text style={{width: 300, fontSize: 18,}}> Almost done! To help us recommend more personalized drives and charities to you,
+          tell us about the causes you really care about.</Text>
+          <Text>Please select up to 5</Text>
 
-          <LoginInput text='First Name'/>
-          <LoginInput text='Last Name'/>
-          <AddCreditCard/>
-          <AddCreditCard/>
-          <LoginButton text='Next' onPress = {() => navigate('UserSignup3')}/>
+          <LoginButton text='Finish'/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
-            <Dot active={true}/>
             <Dot/>
+            <Dot active={true}/>
           </View>
 
         </Container>
@@ -105,7 +99,7 @@ const styles = EStyleSheet.create({
 });
 
 
-export default Signup2;
+export default Signup3;
 
 //<Text style={styles.newUser} onPress={() => navigate('UserDashboard')}> SKIP</Text>
 

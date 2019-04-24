@@ -14,7 +14,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-evenly',
   },
   overlayText: {
-    paddingTop: 30,
+    paddingTop: 20,
     paddingLeft: 15,
     paddingRight: 15,
     justifyContent: 'space-evenly',
@@ -24,7 +24,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    paddingTop: 50,
+    paddingTop: 30,
   },
   buttonContainer1: {
     width: imageWidth/3.5,

@@ -153,7 +153,7 @@ class AddCreditCard extends Component {
             onPress={this.addMore}
           >
             <Image source = { require('./images/add_icon.png') } style = { styles.btnImage }/>
-            <Text> Add Spending Account </Text>
+            <Text style={styles.textStyle}> Add Spending Account </Text>
           </TouchableOpacity>
             {this.state.valueArray.map(ele => {
               return (

@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Signup2 from './screens/Signup2';
+import Signup3 from './screens/Signup3';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Navigator from './config/routes';
 
@@ -19,5 +20,5 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 
-//export default () => <Navigator />;
-export default () => <Signup2 />;
+export default () => <Navigator />;
+//export default () => <Signup3 />;
