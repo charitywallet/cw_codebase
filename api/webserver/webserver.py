@@ -8,9 +8,10 @@ from utils.utils import start_session, check_session, end_session
 import datetime
 
 app = Flask(__name__)
+app.debug = True
 
 
-@app.route('/login', methods=["POST"])
+@app.route('/signup', methods=["POST"])
 def signup():
     response={}
     if request.headers['Content-Type'] == 'application/json':
@@ -25,13 +26,14 @@ def signup():
             if success:
                 user_id=user.get_id()
                 status_code = 200
-                response['user_id']=user_id
                 start_session(user_id,datetime.datetime)
+                response['user_id']=user_id
                 logging.info("New User {} created".format(user_id))
             else:
                 message="Something went wrong"
                 logging.info(message)
                 response['message']=message
+                status_code = 400
 
         except Exception as e:
             status_code = 400
@@ -48,14 +50,14 @@ def signup():
     print(result)
     return Response(result, status=status_code, mimetype='application/json')
 
-@app.route('/login', methods=["GET"])
+@app.route('/login', methods=["POST"])
 def signin():
     response={}
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         username = arguments.get("username")
         password = arguments.get("password")       
-        status=""
+        
         try:
             auth_obj=Auth()
             user,success=auth_obj.signin_user(username,password)
@@ -88,3 +90,4 @@ def signin():
     print(response)
     
     return Response(result, status=status_code, mimetype='application/json')
+

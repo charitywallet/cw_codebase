@@ -13,6 +13,7 @@ class Donor(object):
     def __init__(self,uid=""):
         """Return a Customer object whose name is *name* and starting
         balance is *balance*."""
+        
         self.name = "Donor"
         self.uid=uid
 
@@ -20,14 +21,15 @@ class Donor(object):
 
     def set_profile(self, name ):
         """Saves user profile details"""
-        
+        pass
 
 
     def get_profile(self):
-        """Fetches user profile details"""
-        
+        """Fetches user profile details"""        
         return self
     
     def get_id(self):
-        """Fetches user id"""        
+        """Fetches user id"""
+        print("get_id",self.uid)       
         return self.uid
+
