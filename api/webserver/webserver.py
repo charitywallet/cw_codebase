@@ -16,7 +16,7 @@ def signup():
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         username = arguments.get("username")
-        password = arguments.get("password")       
+        password = arguments.get("password")
         status=""
         try:
             auth_obj=Auth()
@@ -39,7 +39,7 @@ def signup():
             message="Error:{}".format(status)
             logging.info(message)
             response['message']=message
-        
+
     else:
         status_code = 400
         logging.warning("Bad Request Format")
@@ -54,7 +54,7 @@ def signin():
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         username = arguments.get("username")
-        password = arguments.get("password")       
+        password = arguments.get("password")
         status=""
         try:
             auth_obj=Auth()
@@ -64,7 +64,7 @@ def signin():
                 status_code = 200
                 user_id=user.get_id()
                 response['user_id']=user_id
-                start_session(user_id,datetime.datetime)            
+                start_session(user_id,datetime.datetime)
                 logging.info("New User {} created".format(user_id))
             else:
                 status_code = 400
@@ -78,13 +78,13 @@ def signin():
             message="Error:{}".format(status)
             logging.info(message)
             response['message']=message
-        
+
     else:
         status_code = 400
         logging.warning("Bad Request Format")
         response['message']="Bad Request Format"
-    
+
     result=json.dumps(response)
     print(response)
-    
+
     return Response(result, status=status_code, mimetype='application/json')
