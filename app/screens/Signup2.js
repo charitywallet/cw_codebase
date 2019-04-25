@@ -41,19 +41,18 @@ class Signup2 extends Component {
      this.setState({ isVisible: false });
    };
 
-  //  handleLaterButton = () => {
-  //    navigate('UserDashboard');
-  //  };
-
    handleCC = form => console.log(form);
 
   render() {
-    //const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
+    const { navigation } = this.props;
+    const itemId = navigation.getParam('userId', 'NO-ID');
+
     return(
       <View style={{flex: 1,}}>
         <Text style={styles.skip} onPress = {() => navigate('UserDashboard')}> SKIP</Text>
         <Container>
-        <OverlaySignup text = 'Thanks for signing up! There are a few more details we would like you to fill for a better experience.'
+        <OverlaySignup userId = {JSON.stringify(itemId)}
          stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
          handleFillNowButton={this.handleFillNowButton}
          handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}

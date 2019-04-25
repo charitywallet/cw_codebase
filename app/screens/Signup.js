@@ -26,16 +26,75 @@ const styles = EStyleSheet.create({
 });
 
 class Signup extends Component {
+
+  state = {
+    email: '',
+    password: '',
+    error: '',
+  }
+
+  onPressSignIn() {
+    if (this.state.email == ''){
+      alert("Please enter a valid Email ID")
+      return
+    }
+
+    if (this.state.password == ''){
+      alert("Please enter a valid Password")
+      return
+    }
+
+    const { email, password } = this.state;
+
+    // Function to process the response we get from API - done to retrieve status code
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://0.0.0.0:5000/signup', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: email,
+      password: password,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        console.log("data",data.user_id);
+        this.props.navigation.navigate('UserSignup2', {userId: data.user_id})
+      } else {
+        alert();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      console.log(message)
+    });;
+  }
+
   render() {
-    const {navigate} = this.props.navigation;
+    //const {navigate} = this.props.navigation;
+    const isEnabled = this.state.email.length > 0 && this.state.password.length > 0;
+
     return(
       <Container>
         <Logo/>
-        <LoginInput text='Email'/>
-        <LoginInput text='Password'/>
-        <LoginInput text='Re-enter Password'/>
+        <LoginInput text='Email' onChangeText={email => this.setState({ email })}
+              value={this.state.email}/>
+        <LoginInput text='Password' onChangeText={password => this.setState({ password })}
+              value={this.state.password}/>
         <View style={styles.signUp}>
-          <LoginButton text='Sign Up' onPress = {() => navigate('UserSignup2')}/>
+          <LoginButton text='Sign Up' onPress={ () => this.onPressSignIn() } disabled={!isEnabled}/>
         </View>
         <Text style={styles.orText}>────────   Or   ────────</Text>
         <View style={styles.socialContainer}>
@@ -46,3 +105,6 @@ class Signup extends Component {
   }
 }
 export default Signup;
+
+        // <LoginInput text='Re-enter Password'/>
+        // onPress = {() => navigate('UserSignup2')}

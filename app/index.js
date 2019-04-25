@@ -21,4 +21,4 @@ EStyleSheet.build({
 });
 
 export default () => <Navigator />;
-//export default () => <Signup2/>;
+//export default () => <Login/>;
