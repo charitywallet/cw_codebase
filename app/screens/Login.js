@@ -25,15 +25,41 @@ const styles = EStyleSheet.create({
 });
 
 class Login extends Component {
+
+  state = {
+    email: '',
+    password: '',
+    authenticating: false,
+    user: null,
+    error: '',
+  }
+
+  onPressSignIn() {
+    if (this.state.email == ''){
+      alert("Please enter a valid Email ID")
+      return
+    }
+    if (this.state.password == ''){
+      alert("Please enter a valid Password")
+      return
+    }
+    this.setState({
+      authenticating: true,
+    });
+    const { email, password } = this.state;
+  }
+
   render() {
     const {navigate} = this.props.navigation;
     return(
       <Container>
         <Logo/>
-        <LoginInput text='Email'/>
-        <LoginInput text='Password'/>
+        <LoginInput text='Email' onChangeText={email => {this.setState({ email }); console.log(this.state.email)}}
+              value={this.state.email}/>
+        <LoginInput text='Password' onChangeText={password => this.setState({ password })}
+              value={this.state.password}/>
         <Text style={styles.forgotPassword}> Forgot Password</Text>
-        <LoginButton text='Login' onPress = {() => navigate('UserDashboard')}/>
+        <LoginButton text='Login' onPress={() => this.onPressSignIn()}/>
         <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
       </Container>
     );

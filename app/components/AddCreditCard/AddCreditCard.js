@@ -76,21 +76,25 @@ class Item extends Component {
 
     return (
       <Animated.View style={[
-        styles.viewHolder, {
+         styles.viewHolder, {
           transform: [{ translateX: translateAnimation}],
           opacity: opacityAnimation
         }]}
       >
-        <LiteCreditCardInput onChange={this.handleCC} inputStyle={styles.creditCardContainer}/>
-        <TouchableOpacity
-          style={styles.removeBtn}
-          onPress={this.removeItem}
-        >
-          <Image
-            source={require('./images/remove_icon.png')}
-            style={styles.removeIcon}
-          />
-        </TouchableOpacity>
+        <View>
+          <LiteCreditCardInput onChange={this.handleCC} inputStyle={styles.creditCardContainer}/>
+        </View>
+        <View style={{marginTop: -49, marginLeft: -85, paddingVertical: 10,}}>
+          <TouchableOpacity
+            style={styles.removeBtn}
+            onPress={this.removeItem}
+          >
+            <Image
+              source={require('./images/remove_icon.png')}
+              style={styles.removeIcon}
+            />
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     );
   }

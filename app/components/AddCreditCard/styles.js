@@ -22,6 +22,7 @@ export default EStyleSheet.create({
       // margin: 4,
       // paddingLeft: 15,
       // borderRadius: 10
+      width: '90%',
     },
 
     text: {
@@ -71,7 +72,7 @@ export default EStyleSheet.create({
     },
 
       creditCardContainer: {
-        //width: 50,
+        width: '90%',
       },
       textStyle: {
         color: 'grey',

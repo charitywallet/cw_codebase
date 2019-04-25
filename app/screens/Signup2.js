@@ -48,22 +48,24 @@ class Signup2 extends Component {
    handleCC = form => console.log(form);
 
   render() {
-    const {navigate} = this.props.navigation;
+    //const {navigate} = this.props.navigation;
     return(
       <View style={{flex: 1,}}>
-        <Text style={styles.skip} onPress={() => navigate('UserDashboard')}> SKIP</Text>
+        <Text style={styles.skip} onPress = {() => navigate('UserDashboard')}> SKIP</Text>
         <Container>
-          <OverlaySignup text = 'Thanks for signing up! There are a few more details we would like you to fill for a better experience.'
-           stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
-           handleFillNowButton={this.handleFillNowButton}
-           handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}
-           button1="Fill Now" button2="Later"/>
+        <OverlaySignup text = 'Thanks for signing up! There are a few more details we would like you to fill for a better experience.'
+         stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
+         handleFillNowButton={this.handleFillNowButton}
+         handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}
+         button1="Fill Now" button2="Later"/>
 
           <LoginInput text='First Name'/>
           <LoginInput text='Last Name'/>
           <AddCreditCard/>
           <AddCreditCard/>
+          <View style={{paddingTop:10,}}>
           <LoginButton text='Next' onPress = {() => navigate('UserSignup3')}/>
+          </View>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot active={true}/>
             <Dot/>
@@ -108,5 +110,10 @@ const styles = EStyleSheet.create({
 export default Signup2;
 
 //<Text style={styles.newUser} onPress={() => navigate('UserDashboard')}> SKIP</Text>
-
+// <OverlaySignup text = 'Thanks for signing up! There are a few more details we would like you to fill for a better experience.'
+//  stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
+//  handleFillNowButton={this.handleFillNowButton}
+//  handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}
+//  button1="Fill Now" button2="Later"/>
+//  onPress = {() => navigate('UserSignup3')}
 // onPress = {() => navigate('UserDashboard')}

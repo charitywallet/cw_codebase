@@ -4,14 +4,17 @@ import { Input } from 'react-native-elements';
 
 import styles from './styles';
 
-const LoginInput = ({text}) => {
+const LoginInput = ({text, onChangeText, value}) => {
   return (
-    <Input containerStyle={styles.loginInputContainer} inputStyle={styles.loginInputLabel} placeholder={text}/>
+    <Input containerStyle={styles.loginInputContainer} inputStyle={styles.loginInputLabel} placeholder={text}
+    onChangeText={onChangeText} value={value}/>
   );
 };
 
 LoginInput.propTypes = {
   text: PropTypes.any,
+  onChangeText: PropTypes.func,
+  value: PropTypes.any,
 }
 
 export default LoginInput;
