@@ -83,7 +83,7 @@ class Signup extends Component {
   }
 
   render() {
-    //const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
     const isEnabled = this.state.email.length > 0 && this.state.password.length > 0;
 
     return(
@@ -100,6 +100,7 @@ class Signup extends Component {
         <View style={styles.socialContainer}>
           <SocialIcon title='Sign In With Facebook' button type='facebook'/>
         </View>
+        <Text style={styles.newUser} onPress={() => navigate('UserSignup2')}>Developer Sign Up.</Text>
       </Container>
     );
   }

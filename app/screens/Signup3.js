@@ -20,7 +20,7 @@ const imageWidth = Dimensions.get('window').width;
 class Signup3 extends Component {
 
   render() {
-    //const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
 
     return(
       <View style={{flex: 1,}}>
@@ -31,7 +31,7 @@ class Signup3 extends Component {
           tell us about the causes you really care about.</Text>
           <Text>Please select up to 5</Text>
 
-          <LoginButton text='Finish'/>
+          <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot/>
             <Dot active={true}/>

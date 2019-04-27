@@ -22,8 +22,7 @@ const styles = EStyleSheet.create({
   }
 });
 
-class MockDashboard extends Component {
-
+class MockDashboard extends Component {  
   render() {
     return(
       <Container>

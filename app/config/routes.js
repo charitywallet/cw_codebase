@@ -16,17 +16,31 @@ import MockDashboard from '../screens/MockDashboard'
 
 const RootStack = createStackNavigator(
   {
-  	UserLogin: { screen: Login },
+  	UserLogin: {
+      screen: Login,
+      navigationOptions: {
+      title: "Login",
+      headerLeft: null,
+    },
+  },
     UserSignup: { screen: Signup },
     UserSignup2: { screen: Signup2},
     UserSignup3: { screen: Signup3},
-    UserDashboard: {screen: MockDashboard},
-  },
-  {
-    navigationOptions: {
-      header: null
+    UserDashboard: {screen: MockDashboard,
+      navigationOptions: {
+      title: "Dashboard",
+      //headerLeft: null, TODO: Uncomment this.
     },
-});
+  },
+  },
+//   {
+//     navigationOptions: {
+//       header: null,
+//       headerLeft: null,
+//       visible: false,
+//     },
+// }
+);
 
 const AppContainer = createAppContainer(RootStack);
 
