@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
-
+import styles from './styles'
 export default class CharityFeedCard extends Component {
   render() {
     return (
       <Container>
         <Content>
-          <Card style={{flex: 0}}>
+          <Card style={{flex: 1}}>
             <CardItem>
               <Left>
                 <Thumbnail source={this.props.charity.charityImageURL} />
@@ -19,7 +19,7 @@ export default class CharityFeedCard extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <Image source={this.props.charity.feedImageURL} style={{height: 200, width: 200, flex: 1}}/>
+                <Image source={this.props.charity.feedImageURL} style={styles.feedImage}/>
                 <Text>
                   {this.props.charity.feedMessage}
                 </Text>
