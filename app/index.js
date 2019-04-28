@@ -1,16 +1,24 @@
 import React from 'react';
-import Dashboard_1 from './screens/Dashboard_1';
-import Home from './screens/Home';
-import TabsAdvancedExample from './screens/dashboardMain';
+import Login from './screens/Login';
+import Signup from './screens/Signup';
+import Signup2 from './screens/Signup2';
+import Signup3 from './screens/Signup3';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Navigator from './config/routes';
 
 EStyleSheet.build({
-  $primaryBlue: '#4F6D7A',
-  $white: '#FFFFFF',
-  $lightGray: '#F0F0F0',
-  $border: '#979797',
-  $inputText: '#797979',
-  //$outline: 1,
+   $primaryBlue: '#92C7C7',
+   $white: '#fff',
+   $border: '#E2E2E2',
+   $inputText: '#797979',
+   $lightGray: '#F0F0F0',
+   $background: "#FFF",
+   $buttonBackground: 'grey',
+   $LoginScreenText: '#92C7C7',
+   $textColor: '#92C7C7',
+
+   //$outline: 1, //Use this to outline containers
 });
 
-export default () => <TabsAdvancedExample/>;
+export default () => <Navigator />;
+//export default () => <Login/>;

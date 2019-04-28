@@ -1,36 +1,36 @@
 import React, {Component} from 'react';
+import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {View, StatusBar, KeyboardAvoidingView, Text, StyleSheet, ActivityIndicator} from 'react-native';
-import PropTypes from 'prop-types';
 
 import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
 import {LoginInput, LoginButton} from '../components/Login_SignUp'
 
-import { Input, Button } from 'react-native-elements';
+import { Input, Button, SocialIcon } from 'react-native-elements';
 
+const imageWidth = Dimensions.get('window').width;
 
 const styles = EStyleSheet.create({
-  forgotPassword: {
-    color: '$LoginScreenText',
-    paddingLeft: 130,
-    paddingTop: 5,
+  signUp: {
+    paddingTop: 15,
   },
-  newUser:{
-    color: '$LoginScreenText',
-    alignItems: 'center',
-    paddingTop: 20,
-    fontSize: 20
-  }
+  orText: {
+    color: '$textColor',
+    paddingTop: 10,
+    paddingBottom: 8,
+    fontWeight: 'bold'
+  },
+  socialContainer: {
+    width: imageWidth/1.5,
+  },
 });
 
-class Login extends Component {
+class Signup extends Component {
 
   state = {
     email: '',
     password: '',
     error: '',
-    authenticating: false,
   }
 
   onPressSignIn() {
@@ -38,16 +38,15 @@ class Login extends Component {
       alert("Please enter a valid Email ID")
       return
     }
+
     if (this.state.password == ''){
       alert("Please enter a valid Password")
       return
     }
-    this.setState({
-     authenticating: true,
-    });
 
     const { email, password } = this.state;
 
+    // Function to process the response we get from API - done to retrieve status code
     function processResponse(response) {
       const statusCode = response.status;
       const data = response.json();
@@ -57,7 +56,7 @@ class Login extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/login', {
+    fetch('http://0.0.0.0:5000/signup', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -72,36 +71,21 @@ class Login extends Component {
       const { statusCode, data } = response;
       if (statusCode == 200) {
         console.log("data",data.user_id);
-        this.props.navigation.navigate('UserDashboard', {userId: data.user_id})
+        this.props.navigation.navigate('UserSignup2', {userId: data.user_id})
       } else {
-        alert(data.message);
+        alert();
       }
-      this.setState({
-        authenticating: false,
-      });
     })
     .catch((error) => {
-      alert(error)
-      this.setState({
-        authenticating: false,
-      });
-    });
-  }
-
-  onPressForgotPassword() {
-    alert("Please check your inbox to recover your password.")
+      console.error(error);
+      console.log(message)
+    });;
   }
 
   render() {
-    if(this.state.authenticating){
-      return(
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator size='large'/>
-        </View>
-      )
-    }
-
     const {navigate} = this.props.navigation;
+    const isEnabled = this.state.email.length > 0 && this.state.password.length > 0;
+
     return(
       <Container>
         <Logo/>
@@ -109,13 +93,19 @@ class Login extends Component {
               value={this.state.email}/>
         <LoginInput text='Password' onChangeText={password => this.setState({ password })}
               value={this.state.password}/>
-        <Text style={styles.forgotPassword} onPress={() => this.onPressForgotPassword()}> Forgot Password</Text>
-        <LoginButton text='Login' onPress={() => this.onPressSignIn()}/>
-        <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
-        <Text style={styles.newUser} onPress={() => navigate('UserDashboard')}>Developer Sign in.</Text>
+        <View style={styles.signUp}>
+          <LoginButton text='Sign Up' onPress={ () => this.onPressSignIn() } disabled={!isEnabled}/>
+        </View>
+        <Text style={styles.orText}>────────   Or   ────────</Text>
+        <View style={styles.socialContainer}>
+          <SocialIcon title='Sign In With Facebook' button type='facebook'/>
+        </View>
+        <Text style={styles.newUser} onPress={() => navigate('UserSignup2')}>Developer Sign Up.</Text>
       </Container>
     );
   }
 }
+export default Signup;
 
-export default Login;
+        // <LoginInput text='Re-enter Password'/>
+        // onPress = {() => navigate('UserSignup2')}
