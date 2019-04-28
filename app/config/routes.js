@@ -12,7 +12,7 @@ import Login from '../screens/Login'
 import Signup from '../screens/Signup'
 import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
-import MockDashboard from '../screens/MockDashboard'
+import Dashboard from '../screens/dashboardMain'
 
 const RootStack = createStackNavigator(
   {
@@ -26,7 +26,7 @@ const RootStack = createStackNavigator(
     UserSignup: { screen: Signup },
     UserSignup2: { screen: Signup2},
     UserSignup3: { screen: Signup3},
-    UserDashboard: {screen: MockDashboard,
+    UserDashboard: {screen: Dashboard,
       navigationOptions: {
       title: "Dashboard",
       //headerLeft: null, TODO: Uncomment this.

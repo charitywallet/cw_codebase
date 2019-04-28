@@ -5,12 +5,6 @@ export default class TabsAdvancedExample extends Component {
   render() {
     return (
       <Container>
-        <Header hasTabs>
-          <Left/>
-          <Body>
-            <Title>Dashboard</Title>
-          </Body>
-          <Right /></Header>
         <Tabs>
           <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading>}>
             <Dashboard_1 />

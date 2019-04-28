@@ -61,7 +61,6 @@ typings/
 .next
 
 .DS_Store
-app/index.js
 package-lock.json
 .expo/packager-info.json
 package.json
