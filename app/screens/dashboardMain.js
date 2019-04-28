@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right, Title } from 'native-base';
 import Dashboard_1 from './Dashboard_1';
+import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
 export default class TabsAdvancedExample extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class TabsAdvancedExample extends Component {
             <Dashboard_1 />
           </Tab>
         </Tabs>
+        <MyFooter />
       </Container>
     );
   }

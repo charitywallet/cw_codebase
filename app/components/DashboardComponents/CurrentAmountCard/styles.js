@@ -6,27 +6,33 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 400,
-    backgroundColor: 'white'
+    height: 280,
+    backgroundColor: '$background',
+    marginTop: -100,
   },
   date:{
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 16,
+    //fontWeight: 'bold',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    color: '$inputText',
   },
   amount:{
-    paddingTop: 40,
-    fontSize: 70,
+    paddingTop: 10,
+    fontSize: 50,
     fontWeight: 'bold',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    //color: '$inputText',
+    opacity: .8,
   },
   bottomText:{
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'normal',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    color: '$inputText',
+    paddingTop: 10,
   },
   buttonContainer:
   {
@@ -38,8 +44,11 @@ export default EStyleSheet.create({
     paddingTop: 30,
   },
   buttonStyle:{
-    height:65,
-    width:160,
-    borderRadius: 18,
+    height:40,
+    width: 120,
+    //width:160,
+    borderRadius: 8,
+    borderColor: '$primaryBlue',
+    backgroundColor: '$primaryBlue',
   },
 });

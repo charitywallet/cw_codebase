@@ -16,23 +16,26 @@ export default EStyleSheet.create({
       backgroundColor: "#92C7C7"
     },
     carousel: {
-      maxHeight: 350,
+      maxHeight: 250,
       maxWidth: "100%",
     },
     textView: {
       alignItems: 'center',
+      backgroundColor: "#92C7C7",
+      borderRadius: 4,
     },
     cardTitle: {
-      fontSize: 25,
-      fontWeight: "bold",
+      fontSize: 18,
+      //fontWeight: "bold",
       justifyContent: 'center',
       alignItems:'center',
       textAlign: 'center',
+      color: '$white'
     },
     cardAmount: {
-      fontSize: 50,
+      fontSize: 38,
       fontWeight: "bold",
-      color: "black",
+      color: "$white",
       justifyContent: 'center',
       alignItems:'center',
       textAlign: 'center',
@@ -40,9 +43,9 @@ export default EStyleSheet.create({
       marginTop: 30,
     },
     cardMessage: {
-      fontSize: 17,
-      fontWeight: "normal",
-      color: "#666",
+      fontSize: 18,
+      fontWeight: "bold",
+      color: "$white",
       justifyContent: 'center',
       alignItems:'center',
       textAlign: 'center',
