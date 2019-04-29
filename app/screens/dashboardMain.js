@@ -3,6 +3,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right
 import Dashboard_1 from './Dashboard_1';
 import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
+import Drives from './Drives';
 export default class TabsAdvancedExample extends Component {
   render() {
     return (
@@ -15,7 +16,7 @@ export default class TabsAdvancedExample extends Component {
             <CharityFeed />
           </Tab>
           <Tab heading={ <TabHeading><Text>Awards</Text></TabHeading>}>
-            <Dashboard_1 />
+            <CharityFeed />
           </Tab>
         </Tabs>
         <MyFooter />
