@@ -10,13 +10,13 @@ import styles from './styles';
 export default class CausesCards extends Component {
   render() {
     return (
-      <Card containerStyle={styles.cardContainer} title = "Animals" titleStyle={styles.titleStyle}>
+      <Card containerStyle={styles.cardContainer} title ={this.props.cause.causeName} titleStyle={styles.titleStyle}>
         <View style={styles.imageContainer}>
           <SvgUri
           width="45"
           height="45"
           fill = "#F0F0F0"
-          source={require('./images/dog-paw.svg')}
+          source={this.props.cause.causeImageURL}
           />
         </View>
       </Card>

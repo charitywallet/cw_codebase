@@ -34,17 +34,19 @@ class Signup3 extends Component {
 
           <View>
           <FlatList
-                data={[{causeImageURL: './images/animals.jpg'
+                data=
+                {[{causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                 , causeName: 'Animals'},
-                {causeImageURL: './images/animals.jpg'
+                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                 , causeName: 'Cancer'},
-                {causeImageURL: './images/animals.jpg'
+                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                 , causeName: 'Education'},
-                {causeImageURL: './images/animals.jpg'
+                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                 , causeName: 'Poverty'}]}
+
                 numColumns = {3}
                 renderItem={({item}) => (
-                <CausesCards/>
+                <CausesCards cause={item}/>
               )}
               keyExtractor={(item, index) => index.toString()}
           />
@@ -93,7 +95,8 @@ const styles = EStyleSheet.create({
       width: 300,
       fontSize: 18,
       paddingTop: 25,
-      fontWeight: '300',
+      paddingBottom: 15,
+      //fontWeight: '300',
       color: '$inputText',
       textAlign: 'justify',
     },

@@ -32,7 +32,7 @@ export default EStyleSheet.create({
   },
   cardContainer: {
     height: 115,
-    width: 85,
+    width: 90,
     backgroundColor: '$teal',
     opacity: .8,
     marginBottom: 15,
