@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-//import { Image } from 'react-native';
+import {Text} from 'react-native';
+import { Button, Icon } from 'native-base';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 import styles from './styles'
 
@@ -7,28 +8,24 @@ export default class CharityFeedCard2 extends Component {
   render() {
     return (
       <Card>
-        <CardImage
-          source={{uri: 'http://placehold.it/480x270'}}
-          title="Above all i am here"
-        />
         <CardTitle
-          title="This is a title"
-          subtitle="This is subtitle"
+          avatarSource={this.props.charity.charityImageURL}
+          title={this.props.charity.charityName}
+          subtitle={this.props.charity.updateDate}
          />
-        <CardContent text="Your device will reboot in few seconds once successful, be patient meanwhile" />
+        <CardImage
+          source={this.props.charity.feedImageURL}
+        />
+        <CardContent
+        text={this.props.charity.feedMessage}
+         />
         <CardAction
           separator={true}
           inColumn={false}>
-          <CardButton
-            onPress={() => {}}
-            title="Push"
-            color="blue"
-          />
-          <CardButton
-            onPress={() => {}}
-            title="Later"
-            color="blue"
-          />
+          <Icon
+            name="rose"
+            style={styles.Icon} />
+          <Text style={styles.footerText}>{this.props.charity.numDonations} people have donated till now</Text>
         </CardAction>
       </Card>
     );

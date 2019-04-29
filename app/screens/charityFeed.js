@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {FlatList, View} from 'react-native';
 import {CharityFeedCard} from '../components/DashboardComponents/CharityFeedCard';
 import {CharityFeedCard2} from '../components/DashboardComponents/CharityFeedCard2';
+import {DefaultCharityFeedCard} from '../components/DashboardComponents/DefaultCharityFeedCard';
 
 class CharityFeed extends Component {
 
@@ -23,9 +24,11 @@ class CharityFeed extends Component {
             , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , feedMessage: 'Thank you so much guys!!', numDonations: '25'}]}
             renderItem={({item}) => (
-            <CharityFeedCard2/>
+            <CharityFeedCard2
+              charity= {item}/>
           )}
           keyExtractor={(item, index) => index.toString()}
+          ListFooterComponent={<DefaultCharityFeedCard />}
       />
       </View>
     );
