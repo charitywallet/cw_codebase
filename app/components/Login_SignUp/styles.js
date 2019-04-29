@@ -29,5 +29,24 @@ export default EStyleSheet.create({
   },
   disabledStyle: {
     opacity: 0.7,
-  }
+  },
+  cardContainer: {
+    height: 115,
+    width: 85,
+    backgroundColor: '$teal',
+    opacity: .8,
+    marginBottom: 15,
+  },
+  imageStyle: {
+    height: '70%'
+  },
+  titleStyle: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: "$lightGray"
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginTop: -10,
+  },
 });

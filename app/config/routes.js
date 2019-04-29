@@ -19,19 +19,35 @@ const RootStack = createStackNavigator(
   	UserLogin: {
       screen: Login,
       navigationOptions: {
-      title: "Login",
-      headerLeft: null,
+        title: "Login",
+        headerLeft: null,
+      },
     },
-  },
-    UserSignup: { screen: Signup },
-    UserSignup2: { screen: Signup2},
-    UserSignup3: { screen: Signup3},
-    UserDashboard: {screen: Dashboard,
+    UserSignup: {
+      screen: Signup,
       navigationOptions: {
-      title: "Dashboard",
-      //headerLeft: null, TODO: Uncomment this.
+        title: "Signup",
+      },
     },
-  },
+    UserSignup2: {
+      screen: Signup2,
+      navigationOptions: {
+        title: "Signup",
+      },
+    },
+    UserSignup3: {
+      screen: Signup3,
+      navigationOptions: {
+        title: "Signup",
+      },
+    },
+    UserDashboard: {
+      screen: Dashboard,
+      navigationOptions: {
+        title: "Dashboard",
+        //headerLeft: null, TODO: Uncomment this.
+      },
+    },
   },
 //   {
 //     navigationOptions: {

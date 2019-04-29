@@ -8,9 +8,10 @@ import Navigator from './config/routes';
 
 EStyleSheet.build({
    $primaryBlue: '#92C7C7',
+   $teal: '#6FACB4',
    $white: '#fff',
    $border: '#E2E2E2',
-   $inputText: '#797979',
+   $inputText: 'grey',
    $lightGray: '#F0F0F0',
    $background: "#FFF",
    $buttonBackground: 'grey',
@@ -21,4 +22,4 @@ EStyleSheet.build({
 });
 
 export default () => <Navigator />;
-//export default () => <Login/>;
+//export default () => <Signup3/>;

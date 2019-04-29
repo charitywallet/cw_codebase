@@ -19,6 +19,7 @@
     "react-native-linear-gradient": "^2.5.4",
     "react-native-material-cards": "^1.0.9",
     "react-native-snap-carousel": "^3.7.5",
+    "react-native-svg-uri": "^1.2.3",
     "react-navigation": "^3.9.1"
   },
   "devDependencies": {
