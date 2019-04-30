@@ -36,6 +36,7 @@ export default EStyleSheet.create({
     paddingLeft:4,
     fontWeight: 'bold',
     textTransform: 'capitalize',
+    paddingBottom: 5,
   },
   // driveAbout:{
   //   flex: {1},
@@ -46,6 +47,7 @@ export default EStyleSheet.create({
   },
   currentMoney:{
     paddingLeft:4,
+    paddingTop: 5,
   },
   targetMoney:{
 
