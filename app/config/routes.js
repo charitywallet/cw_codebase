@@ -13,6 +13,7 @@ import Signup from '../screens/Signup'
 import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
+import Drives from '../screens/Drives'
 
 const RootStack = createStackNavigator(
   {
@@ -46,6 +47,12 @@ const RootStack = createStackNavigator(
       navigationOptions: {
         title: "Dashboard",
         //headerLeft: null, TODO: Uncomment this.
+      },
+    },
+    UserDrives: {
+      screen: Drives,
+      navigationOptions: {
+        title: "Drives",
       },
     },
   },

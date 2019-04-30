@@ -19,7 +19,7 @@ export default class TabsAdvancedExample extends Component {
             <CharityFeed />
           </Tab>
         </Tabs>
-        <MyFooter />
+        <MyFooter navigation={this.props.navigation}/>
       </Container>
     );
   }
