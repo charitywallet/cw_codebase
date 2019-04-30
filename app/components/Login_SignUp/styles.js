@@ -30,6 +30,19 @@ export default EStyleSheet.create({
   disabledStyle: {
     opacity: 0.7,
   },
+  container: {
+    //height: 115,
+    width: 105,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 15,
+  },
+  TouchableHighlightContainer: {
+    height: 115,
+    width: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   cardContainer: {
     height: 115,
     width: 90,
