@@ -8,8 +8,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   containerImage: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    //justifyContent: 'center',
     width: imageWidth,
     height: imageWidth,
   },
