@@ -19,6 +19,11 @@ const imageWidth = Dimensions.get('window').width;
 
 class Signup3 extends Component {
 
+  onPressCard = (id) => {
+    console.log("Item selected", id);
+    //this.setState({ isVisible: false });
+  }
+
   render() {
     //const {navigate} = this.props.navigation;
 
@@ -46,7 +51,7 @@ class Signup3 extends Component {
 
                 numColumns = {3}
                 renderItem={({item}) => (
-                <CausesCards cause={item}/>
+                    <CausesCards cause={item}/>
               )}
               keyExtractor={(item, index) => index.toString()}
           />
@@ -92,7 +97,7 @@ const styles = EStyleSheet.create({
       backgroundColor: '#D2D2D4',
     },
     introText: {
-      width: 300,
+      width: 290,
       fontSize: 18,
       paddingTop: 25,
       paddingBottom: 15,

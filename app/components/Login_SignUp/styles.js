@@ -49,4 +49,9 @@ export default EStyleSheet.create({
     alignItems: 'center',
     marginTop: -10,
   },
+  wrapper: {
+    width: 80,
+    marginLeft: -10,
+    alignContent: 'center'
+  },
 });
