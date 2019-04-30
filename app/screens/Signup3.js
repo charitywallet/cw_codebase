@@ -19,13 +19,8 @@ const imageWidth = Dimensions.get('window').width;
 
 class Signup3 extends Component {
 
-  onPressCard = (id) => {
-    console.log("Item selected", id);
-    //this.setState({ isVisible: false });
-  }
-
   render() {
-    //const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
 
     return(
       <View style={{flex: 1,
@@ -37,17 +32,33 @@ class Signup3 extends Component {
           <Text style={styles.introText}>Almost done! To help us recommend more personalized drives and charities to you,
           please select the causes you really care about.</Text>
 
-          <View>
+          <View style={styles.list}>
           <FlatList
                 data=
-                {[{causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                , causeName: 'Animals'},
-                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                , causeName: 'Cancer'},
-                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                , causeName: 'Education'},
-                {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                , causeName: 'Poverty'}]}
+                {[
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
+                  , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Poverty'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Poverty'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Education'}
+              ]}
 
                 numColumns = {3}
                 renderItem={({item}) => (
@@ -55,14 +66,13 @@ class Signup3 extends Component {
               )}
               keyExtractor={(item, index) => index.toString()}
           />
-          </View>
 
-          <LoginButton text='Finish'/>
+          </View>
+          <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot/>
             <Dot active={true}/>
           </View>
-
 
       </View>
     );
@@ -105,6 +115,9 @@ const styles = EStyleSheet.create({
       color: '$inputText',
       textAlign: 'justify',
     },
+    list: {
+      flex: .92,
+    }
 });
 
 

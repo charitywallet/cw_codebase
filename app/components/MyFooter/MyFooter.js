@@ -11,7 +11,7 @@ const MyFooter = () => {
     <Footer>
             <FooterTab>
               <Button>
-                <Icon name="charity" />
+                <Icon name="ios-home" />
               </Button>
               <Button active>
                 <Icon active name="ios-home" />
