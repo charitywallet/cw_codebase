@@ -29,5 +29,42 @@ export default EStyleSheet.create({
   },
   disabledStyle: {
     opacity: 0.7,
-  }
+  },
+  container: {
+    //height: 115,
+    width: 105,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 15,
+  },
+  TouchableHighlightContainer: {
+    height: 115,
+    width: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardContainer: {
+    height: 115,
+    width: 90,
+    backgroundColor: '$teal',
+    opacity: .8,
+    marginBottom: 15,
+  },
+  imageStyle: {
+    height: '70%'
+  },
+  titleStyle: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: "$lightGray"
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginTop: -10,
+  },
+  wrapper: {
+    width: 80,
+    marginLeft: -10,
+    alignContent: 'center'
+  },
 });

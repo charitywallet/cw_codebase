@@ -85,7 +85,7 @@ const Dot = (props) => {
 
 const styles = EStyleSheet.create({
     skip: {
-      paddingTop: 30,
+      paddingTop: 20,
       paddingLeft: 320,
       color: '$textColor',
       fontWeight: 'bold'

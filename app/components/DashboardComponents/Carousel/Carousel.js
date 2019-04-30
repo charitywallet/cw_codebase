@@ -10,7 +10,7 @@ const backgroundImageLink = './image/background.jpg'
 const MOCK_DATA = [
   {
     id: "1",
-    cardTitle: "Lifetime Donations!",
+    cardTitle: "Your lifetime donations through the app are",
     cardAmount: "$1234.56",
     cardMessage: "Congrats! Way to go..."
   },
@@ -48,14 +48,12 @@ const Carousel = () => {
           data={MOCK_DATA}
           renderItem={info => (
             <View>
-              <ImageBackground source={require(backgroundImageLink)} style={styles.backgroundImage}>
-              <Icon name='dollar' type='font-awesome' size={50} color= 'blue'/>
               <View style={styles.textView}>
                   <Text style={styles.cardMessage}>{info.item.cardMessage}</Text>
-                  <Text style={styles.cardAmount}>{info.item.cardAmount}</Text>
                   <Text style={styles.cardTitle}>{info.item.cardTitle}</Text>
+                  <Text style={styles.cardAmount}>{info.item.cardAmount}</Text>
+
               </View>
-              </ImageBackground>
             </View>
           )}
           keyExtractor={item => item.id}
@@ -69,3 +67,13 @@ const Carousel = () => {
 // };
 
 export default Carousel;
+
+//
+// <ImageBackground source={require(backgroundImageLink)} style={styles.backgroundImage}>
+// <Icon name='dollar' type='font-awesome' size={50} color= 'blue'/>
+// <View style={styles.textView}>
+//     <Text style={styles.cardMessage}>{info.item.cardMessage}</Text>
+//     <Text style={styles.cardAmount}>{info.item.cardAmount}</Text>
+//     <Text style={styles.cardTitle}>{info.item.cardTitle}</Text>
+// </View>
+// </ImageBackground>

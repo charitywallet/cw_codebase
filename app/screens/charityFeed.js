@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {FlatList, View} from 'react-native';
 import {CharityFeedCard} from '../components/DashboardComponents/CharityFeedCard';
+import {CharityFeedCard2} from '../components/DashboardComponents/CharityFeedCard2';
+import {DefaultCharityFeedCard} from '../components/DashboardComponents/DefaultCharityFeedCard';
 
 class CharityFeed extends Component {
 
@@ -11,7 +13,8 @@ class CharityFeed extends Component {
             data={[{charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , charityName: 'ABSforTheWin', updateDate: 'April 27, 2019'
             , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
-            , feedMessage: 'Thank you so much guys!!', numDonations: '25'},
+            , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
+            , numDonations: '25'},
             {charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , charityName: 'BASforTheWin', updateDate: 'April 27, 2019'
             , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
@@ -21,10 +24,11 @@ class CharityFeed extends Component {
             , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , feedMessage: 'Thank you so much guys!!', numDonations: '25'}]}
             renderItem={({item}) => (
-            <CharityFeedCard
-              charity= {item} />
+            <CharityFeedCard2
+              charity= {item}/>
           )}
           keyExtractor={(item, index) => index.toString()}
+          ListFooterComponent={<DefaultCharityFeedCard />}
       />
       </View>
     );
@@ -36,3 +40,5 @@ export default CharityFeed;
 
 // '../Carousel/image/background.jpg'
 // '../components/DashboardComponents/Carousel/image/background.jpg'
+// <CharityFeedCard
+//   charity= {item} />

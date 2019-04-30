@@ -13,7 +13,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
-import {LoginInput, LoginButton} from '../components/Login_SignUp'
+import {LoginInput, LoginButton, CausesCards} from '../components/Login_SignUp'
 
 const imageWidth = Dimensions.get('window').width;
 
@@ -23,21 +23,57 @@ class Signup3 extends Component {
     const {navigate} = this.props.navigation;
 
     return(
-      <View style={{flex: 1,}}>
+      <View style={{flex: 1,
+          alignItems: 'center',
+          backgroundColor: '$background'}}>
         <Text style={styles.skip}> SKIP</Text>
-        <Container>
 
-          <Text style={{width: 300, fontSize: 18,}}> Almost done! To help us recommend more personalized drives and charities to you,
-          tell us about the causes you really care about.</Text>
-          <Text>Please select up to 5</Text>
 
+          <Text style={styles.introText}>Almost done! To help us recommend more personalized drives and charities to you,
+          please select the causes you really care about.</Text>
+
+          <View style={styles.list}>
+          <FlatList
+                data=
+                {[
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
+                  , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Poverty'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Poverty'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'Education'}
+              ]}
+
+                numColumns = {3}
+                renderItem={({item}) => (
+                    <CausesCards cause={item}/>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+          />
+
+          </View>
           <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot/>
             <Dot active={true}/>
           </View>
 
-        </Container>
       </View>
     );
   }
@@ -52,7 +88,7 @@ const Dot = (props) => {
 
 const styles = EStyleSheet.create({
     skip: {
-      paddingTop: 30,
+      paddingTop: 20,
       paddingLeft: 320,
       color: '$textColor',
       fontWeight: 'bold'
@@ -70,6 +106,18 @@ const styles = EStyleSheet.create({
     dotInactive: {
       backgroundColor: '#D2D2D4',
     },
+    introText: {
+      width: 290,
+      fontSize: 18,
+      paddingTop: 25,
+      paddingBottom: 15,
+      //fontWeight: '300',
+      color: '$inputText',
+      textAlign: 'justify',
+    },
+    list: {
+      flex: .92,
+    }
 });
 
 
@@ -84,3 +132,4 @@ export default Signup3;
 //   renderItem={this._renderItem}
 // />
 // </View>
+// <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>
