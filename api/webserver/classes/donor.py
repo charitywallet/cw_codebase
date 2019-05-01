@@ -19,6 +19,10 @@ class Donor(object):
         self.uid=uid
         this.last_logged_in = datetime.datetime.now()
         this.fav_causes =[]
+        this.username=""
+        this.password=""
+
+        this.sync_from_db()
 
     def set_profile(self, name, fav_causes):
         """Saves user profile details"""
@@ -28,7 +32,7 @@ class Donor(object):
 
         try:
             db_obj=SqlConn()
-            validation_flag=db_obj.update_donor_profile(username,password)
+            validation_flag=db_obj.update_donor_profile(this)
             return validation_flag
         except Exception as e:
             logging.info(e)
@@ -37,7 +41,7 @@ class Donor(object):
             db_obj.close_conn()
 
 
-    def get_profile(self):
+    def sycn_from_db(self):
         """Fetches user profile details"""
         return self
 

@@ -18,7 +18,7 @@ export default class MyFooter extends Component{
                   <Button active onPress={() => navigate('dashboardMain')}>
                     <Icon active name="ios-home" />
                   </Button>
-                  <Button onPress={() => navigate('UserLogin')}>
+                  <Button onPress={() => navigate('dashboardMain')}>
                     <Icon name="settings" />
                   </Button>
                 </FooterTab>
