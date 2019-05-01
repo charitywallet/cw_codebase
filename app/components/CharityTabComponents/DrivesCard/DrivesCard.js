@@ -15,7 +15,7 @@ export default class DrivesCard extends Component {
     return (
         <TouchableOpacity onPress= {() => this.onPressDrive(this.props.drive.driveTitle)}>
         <View style={styles.Container}>
-          <Image resizeMode= 'contain' source={this.props.drive.driveImageURL} style={styles.driveImage} />
+          <Image resizeMode= 'contain' source={{uri:this.props.drive.driveImageURL}} style={styles.driveImage} />
           <Text style={styles.location}>{this.props.drive.driveLocation}</Text>
           <Text numberOfLines={2} style={styles.driveTitle}>{this.props.drive.driveTitle}</Text>
           {/*<Text numberOfLines={2} style={styles.driveAbout}>{this.props.drive.driveAbout}</Text>*/}
