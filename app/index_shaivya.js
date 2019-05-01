@@ -22,5 +22,5 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 
- export default () => <Navigator />;
+export default () => <Navigator />;
 //export default () => <Dashboard/>;
