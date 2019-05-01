@@ -12,7 +12,7 @@ class CharityFeed extends Component {
       <FlatList
             data={[{charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , charityName: 'ABSforTheWin', updateDate: 'April 27, 2019'
-            , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
+            , feedImageURL: require('../components/DashboardComponents/Carousel/image/homeless.jpg')
             , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
             , numDonations: '25'},
             {charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
