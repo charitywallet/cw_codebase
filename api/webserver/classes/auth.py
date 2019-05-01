@@ -59,20 +59,33 @@ class Auth(object):
         finally:
             db_obj.close_conn()
 
-    def update_credentials(self, username,password,new_password):
+    def update_password(self, username,password,new_password):
         """Change credentials for existing user, returns user object with valid id."""
 
         try:
             db_obj=SqlConn()
             uid, validation_flag=db_obj.check_user(username,password)
-            user=None
             if validation_flag:
                 user=Donor(uid)
+                self.status=user.set_password(new_password)
+            return self.status
+        except Exception as e:
+            logging.info(e)
+            raise
+        finally:
+            db_obj.close_conn()
 
-                print (uid,user)
-                self.status=True
-            return user, self.status
+    def reset_password(self, username):
+        """Change credentials for existing user, returns user object with valid id."""
 
+        try:
+            db_obj=SqlConn()
+            validation_flag=db_obj.check_user(username,password)
+            if validation_flag:
+                user=Donor(uid)
+                self.status=user.set_password("CharityWallet#123")
+                #send pwd in mail
+            return self.status
         except Exception as e:
             logging.info(e)
             raise
