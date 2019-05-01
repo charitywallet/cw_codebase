@@ -21,13 +21,19 @@ class Drives extends Component {
             , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
             , currentMoney: '450'
             , targetMoney: '2000'
-            , percentCompleted: 0.8},
+            , percentCompleted: 0.3},
+            {driveImageURL: require('../components/DashboardComponents/Carousel/image/homeless.jpg')
+            , driveLocation: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
+            , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
+            , currentMoney: '450'
+            , targetMoney: '2000'
+            , percentCompleted: 0.3},
             {driveImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , driveLocation: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
             , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
             , currentMoney: '450'
             , targetMoney: '2000'
-            , percentCompleted: 0.8}]}
+            , percentCompleted: 0.5}]}
             renderItem={({item}) => (
             <DrivesCard
               drive= {item}/>
