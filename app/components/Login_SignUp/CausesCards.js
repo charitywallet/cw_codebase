@@ -25,7 +25,6 @@ export default class CausesCards extends Component {
     } else {
       CausesChosen.push( name );
     }
-    //console.log("causes", CausesChosen);
   }
 
   render() {

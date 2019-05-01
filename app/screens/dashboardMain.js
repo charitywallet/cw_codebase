@@ -9,17 +9,17 @@ export default class TabsAdvancedExample extends Component {
     return (
       <Container>
         <Tabs>
-          <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading>}>
-            <Dashboard_1 />
+          <Tab heading={ <TabHeading><Text>Drives</Text></TabHeading>}>
+            <Drives />
           </Tab>
           <Tab heading={ <TabHeading><Text>Charity Feed</Text></TabHeading>}>
             <CharityFeed />
           </Tab>
-          <Tab heading={ <TabHeading><Text>Awards</Text></TabHeading>}>
-            <CharityFeed />
+          <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading>}>
+            <Dashboard_1 />
           </Tab>
         </Tabs>
-        <MyFooter />
+        <MyFooter navigation={this.props.navigation}/>
       </Container>
     );
   }
