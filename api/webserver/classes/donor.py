@@ -7,7 +7,7 @@ class Donor(object):
         name: A string representing the customer's name.
         username: app login username
         password: app login password
-        monthly balance: A float tracking the current balance of the change accumulated this month.
+        monthly balance: A float tracking the current balance of the change accumulated self month.
         location: A string representing the customer's name.
     """
 
@@ -17,22 +17,22 @@ class Donor(object):
 
         self.name = "Donor"
         self.uid=uid
-        this.last_logged_in = datetime.datetime.now()
-        this.fav_causes =[]
-        this.username=""
-        this.password=""
+        self.last_logged_in = datetime.datetime.now()
+        self.fav_causes =[]
+        self.username=""
+        self.password=""
 
-        this.sync_from_db()
+        # self.sync_from_db()
 
     def set_profile(self, name, fav_causes):
         """Saves user profile details"""
-        this.name =name
-        this.last_logged_in = datetime.datetime.now()
-        this.fav_causes =fav_causes
+        self.name =name
+        self.last_logged_in = datetime.datetime.now()
+        self.fav_causes =fav_causes
 
         try:
             db_obj=SqlConn()
-            validation_flag=db_obj.update_donor_profile(this)
+            validation_flag=db_obj.update_donor_profile(self)
             return validation_flag
         except Exception as e:
             logging.info(e)
