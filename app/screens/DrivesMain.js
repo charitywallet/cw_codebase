@@ -16,7 +16,6 @@ export default class TabsAdvancedExample extends Component {
             <Dashboard_1 />
           </Tab>
         </Tabs>
-        <MyFooter navigation={this.props.navigation}/>
       </Container>
     );
   }
