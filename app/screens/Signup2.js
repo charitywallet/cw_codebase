@@ -18,11 +18,9 @@ import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
 import {LoginInput, LoginButton} from '../components/Login_SignUp'
 import {OverlaySignup} from '../components/OverlaySignup'
-import {AddCreditCard} from '../components/AddCreditCard'
+import {AddPlaidAccount} from '../components/AddCreditCard'
 
 import { Input, Button, SocialIcon } from 'react-native-elements';
-
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 const imageWidth = Dimensions.get('window').width;
 
@@ -60,8 +58,8 @@ class Signup2 extends Component {
 
           <LoginInput text='First Name'/>
           <LoginInput text='Last Name'/>
-          <AddCreditCard/>
-          <AddCreditCard/>
+          <AddPlaidAccount navigation={this.props.navigation}/>
+          <AddPlaidAccount navigation={this.props.navigation}/>
           <View style={{paddingTop:10,}}>
           <LoginButton text='Next' onPress = {() => navigate('UserSignup3')}/>
           </View>

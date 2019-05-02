@@ -30,7 +30,6 @@ export default class TabsAdvancedExample extends Component {
             <DriveInfo drive={data}/>
           </Tab>
         </Tabs>
-        <MyFooter navigation={this.props.navigation}/>
       </Container>
     );
   }

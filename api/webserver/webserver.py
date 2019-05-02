@@ -131,7 +131,7 @@ def reset_password():
     return Response(result, status=status_code, mimetype='application/json')
 
 
-@app.route('/get_user_totals/<user_id>', methods=["POST"])
+@app.route('/get_user_totals/<user_id>', methods=["GET"])
 def user_totals(user_id):
     response={}
     if request.headers['Content-Type'] == 'application/json':
@@ -143,10 +143,11 @@ def user_totals(user_id):
             session_flag= True
 
             if session_flag:
-                current_user=donor(user_id)
+                current_user=Donor(user_id)
                 #get totals from user class - current_user.get_totals()
 
                 response["totals"]= {'user_id':user_id,'month_total':20,'lifetime_total':200,'active_drives':3,'active_charities':1}
+                status_code = 400
                 logging.info(response)
             else:
                 status_code = 400

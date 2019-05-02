@@ -61,5 +61,9 @@ export default EStyleSheet.create({
         paddingTop:9,
         alignItems: 'center',
         fontSize:18,
+      },
+      plaidOverlay: {
+        //height: imageHeight*.9
+        //flex: 1,
       }
   });

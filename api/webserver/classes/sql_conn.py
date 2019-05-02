@@ -1,5 +1,5 @@
 import MySQLdb
-
+import datetime
 
 
 class SqlConn(object):
@@ -21,7 +21,7 @@ class SqlConn(object):
         """Saves user profile details"""
         self.cursor.execute(query,data)
         self.db.commit()
-        
+
 
     def get_query(self,query,data):
         """Saves user profile details"""
@@ -38,11 +38,11 @@ class SqlConn(object):
         return False
 
     def create_user(self,username,password):
-        query="Insert into donor (username, password, name) values(%s,%s,%s)"
-        data = (username,password,"Donor",)
+        query="Insert into donor (username, password, name, activation_date) values(%s,%s,%s,%s)"
+        data = (username,password,"Donor",datetime.datetime.now(),)
         self.set_query(query,data)
         result= self.get_query("Select donor_id from donor where username = %s",(username,))
-        
+
         return result[0][0]
 
     def check_user(self,username,password):
@@ -54,7 +54,3 @@ class SqlConn(object):
             uid=result[0][0]
             return uid,True
         return uid, False
-
-    
-
-    
