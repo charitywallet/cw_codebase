@@ -19,7 +19,7 @@ EStyleSheet.build({
    $LoginScreenText: '#92C7C7',
    $textColor: '#92C7C7',
 
-   //$outline: 1, //Use this to outline containers
+   // $outline: 1, //Use this to outline containers
 });
 
 export default () => <Navigator />;
