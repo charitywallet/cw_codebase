@@ -8,7 +8,6 @@ import {DefaultCharityFeedCard} from '/Users/anuj/Documents/School_Work/spring_2
 
 const imageWidth = (Dimensions.get('window').width);
 
-
 export default class DriveInfo extends Component {
   render() {
     return (
