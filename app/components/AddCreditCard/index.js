@@ -1,4 +1,5 @@
 import AddCreditCard from './AddCreditCard';
+import AddPlaidAccount from './AddPlaidAccount';
 import styles from './styles';
 
-export {AddCreditCard, styles};
+export {AddCreditCard, AddPlaidAccount, styles};

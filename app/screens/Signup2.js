@@ -18,11 +18,10 @@ import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
 import {LoginInput, LoginButton} from '../components/Login_SignUp'
 import {OverlaySignup} from '../components/OverlaySignup'
-import {AddCreditCard} from '../components/AddCreditCard'
+import {AddPlaidAccount} from '../components/AddCreditCard'
 
-import { Input, Button, SocialIcon } from 'react-native-elements';
-
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+import { Input, Button, SocialIcon, Tooltip } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const imageWidth = Dimensions.get('window').width;
 
@@ -60,8 +59,22 @@ class Signup2 extends Component {
 
           <LoginInput text='First Name'/>
           <LoginInput text='Last Name'/>
-          <AddCreditCard/>
-          <AddCreditCard/>
+          <AddPlaidAccount navigation={this.props.navigation}/>
+          <View style={styles.tooltip1}>
+            <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
+                  This is the account we will use to calculate the change from each transaction.</Text>}
+                 backgroundColor="#F0F0F0" height={100} width={200}>
+              <Ionicons name='ios-information-circle' size={30} color='grey' />
+            </Tooltip>
+          </View>
+          <AddPlaidAccount navigation={this.props.navigation}/>
+          <View style={styles.tooltip1}>
+            <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
+                  This is the account we will use to calculate the change from each transaction.</Text>}
+                 backgroundColor="#F0F0F0" height={100} width={200}>
+              <Ionicons name='ios-information-circle' size={30} color='grey' />
+            </Tooltip>
+          </View>
           <View style={{paddingTop:10,}}>
           <LoginButton text='Next' onPress = {() => navigate('UserSignup3')}/>
           </View>
@@ -102,6 +115,10 @@ const styles = EStyleSheet.create({
     },
     dotInactive: {
       backgroundColor: '#D2D2D4',
+    },
+    tooltip1: {
+      paddingLeft: 270,
+      marginTop: -139,
     },
 });
 

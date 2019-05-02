@@ -50,11 +50,6 @@ class Drives extends Component {
 
 export default Drives;
 
-// '../Carousel/image/background.jpg'
-// '../components/DashboardComponents/Carousel/image/background.jpg'
-// <CharityFeedCard
-//   charity= {item} />
-
 const styles= EStyleSheet.create({
   row: {
   flex: 1,

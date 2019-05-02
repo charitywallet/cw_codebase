@@ -15,9 +15,6 @@ export default EStyleSheet.create({
     alignItems:'flex-start',
     justifyContent:'flex-start',
     margin: 5,
-    // borderColor: 'gray',
-    // borderWidth: 1,
-    // borderRadius: 10
   },
   driveImage:{
     height: imageWidth,
@@ -38,10 +35,6 @@ export default EStyleSheet.create({
     textTransform: 'capitalize',
     paddingBottom: 5,
   },
-  // driveAbout:{
-  //   flex: {1},
-  //   fontSize: {25}
-  // },
   moneyRaised:{
     flexDirection:'row'
   },
@@ -49,7 +42,5 @@ export default EStyleSheet.create({
     paddingLeft:4,
     paddingTop: 5,
   },
-  targetMoney:{
 
-  },
 });

@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+import PlaidAuthenticator from 'react-native-plaid-link';
+import { Overlay, Button } from 'react-native-elements';
 
 import styles from './styles';
 
@@ -24,6 +26,7 @@ class Item extends Component {
   constructor() {
     super();
     this.animatedValue = new Animated.Value(0);
+    this.state = { isVisible: true }
 
     if( Platform.OS === 'android' ) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -63,6 +66,15 @@ class Item extends Component {
     });
   }
 
+  handlePressBackdrop = () => {
+    this.setState({ isVisible: false });
+  }
+
+  onMessage = (data) => {
+    console.log("data", data);
+    this.setState({data})
+  }
+
   render() {
     const translateAnimation = this.animatedValue.interpolate({
       inputRange: [0, 0.5, 1],
@@ -82,7 +94,18 @@ class Item extends Component {
         }]}
       >
         <View>
-          <LiteCreditCardInput onChange={this.handleCC} inputStyle={styles.creditCardContainer}/>
+        <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
+        <PlaidAuthenticator
+         onMessage={this.onMessage}
+         publicKey="0cfea3b8cf3611b374aecb1a215a39"
+         env="sandbox"
+         product="transactions"
+         clientName="CharityWallet"
+         selectAccount={false}
+         style={{flex:1,}}
+       />
+        </Overlay>
+
         </View>
         <View style={{marginTop: -49, marginLeft: -85, paddingVertical: 10,}}>
           <TouchableOpacity
@@ -104,7 +127,7 @@ class Item extends Component {
 class AddCreditCard extends Component {
   constructor() {
      super();
-     this.state = { isVisible: true, valueArray: [], disabled: false }
+     this.state = { isVisible: true, valueArray: [], disabled: false, isVisible: true, textVisible: false, text: ''}
      this.addNewEle = false;
      this.index = 0;
    };
@@ -119,11 +142,30 @@ class AddCreditCard extends Component {
   addMore = () => {
     this.addNewEle = true;
     const newlyAddedValue = { id: "id_" + this.index, text: this.index + 1 };
-    
+    //alert("added");
+    //console.log("before", this.state.showPlaid);
     this.setState({
-      disabled: true,
-      valueArray: [...this.state.valueArray, newlyAddedValue]
+      //disabled: true,
+      valueArray: [...this.state.valueArray, newlyAddedValue],
+      //showPlaid: true,
+      isVisible: true,
     });
+  //  console.log("after", this.state.showPlaid);
+
+    //navigate('AddAccount');
+  }
+
+  onMessage = (data) => {
+    //console.log("data", data);
+    this.setState({data});
+    console.log("Data", this.state.data);
+    if (this.state.data && this.state.data.metadata && this.state.data.metadata.pulic_token) {
+      console.log(this.state.data.metadata.institution_name);
+      this.setState({
+        text: this.state.data.metadata.institution_name,
+        textVisible: true,
+      })
+    }
   }
 
   remove(id) {
@@ -140,7 +182,12 @@ class AddCreditCard extends Component {
     });
   }
 
+  handlePressBackdrop = () => {
+    this.setState({ isVisible: false });
+  }
+
   render() {
+    //const {navigate} = this.props.navigation;
     return(
       <View style={styles.container}>
         <ScrollView
@@ -154,19 +201,27 @@ class AddCreditCard extends Component {
             activeOpacity={0.8}
             style={styles.btn}
             disabled={this.state.disabled}
-            onPress={this.addMore}
+            onPress={() => this.addMore()}
           >
             <Image source = { require('./images/add_icon.png') } style = { styles.btnImage }/>
             <Text style={styles.textStyle}> Add Spending Account </Text>
           </TouchableOpacity>
-            {this.state.valueArray.map(ele => {
+
+            {this.state.valueArray.map((ele, index) => {
               return (
-                <Item
-                  key={ele.id}
-                  item={ele}
-                  removeItem={(id) => this.remove(id)}
-                  afterAnimationComplete={this.afterAnimationComplete}
-                />
+                <View key={index}>
+                <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
+                  <PlaidAuthenticator
+                   onMessage={this.onMessage}
+                   publicKey="0cfea3b8cf3611b374aecb1a215a39"
+                   env="sandbox"
+                   product="transactions"
+                   clientName="CharityWallet"
+                   selectAccount={false}
+                 />
+                </Overlay>
+
+                </View>
               )
             })}
           </View>
@@ -178,3 +233,11 @@ class AddCreditCard extends Component {
 }
 
 export default AddCreditCard;
+
+// <Item
+//   key={ele.id}
+//   item={ele}
+//   removeItem={(id) => this.remove(id)}
+//   afterAnimationComplete={this.afterAnimationComplete}
+// />
+// {this.state.data && <Text>{this.state.data.institution.name}</Text>}
