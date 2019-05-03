@@ -10,5 +10,10 @@ export default EStyleSheet.create({
   //   alignItems: "center",
   //   justifyContent: "center",
   // },
-
+  separator:{
+    height: 2,
+    width: "86%",
+    backgroundColor: "black",
+    marginLeft: "14%",
+  },
 });

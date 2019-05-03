@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
-import { ListItem } from "react-native-elements";
-import { SearchBar } from 'react-native-elements';
+import { ListItem, SearchBar } from "react-native-elements";
 import styles from './styles';
 
 const data=
@@ -28,19 +27,49 @@ const data=
 
 export default class CharityList extends Component {
 
-  state = {
-    search: '',
-  };
+  constructor(props) {
+    super(props);
+    //setting default state
+    this.state = { search: '' };
+  }
 
-  updateSearch = search => {
+  updateSearch = (search) => {
     this.setState({ search });
+    console.log(search)
   };
 
   onPressButton = (text) => {
     console.log(text,' is pressed')
-  }
+  };
 
   keyExtractor = (item, index) => index.toString()
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+        }}
+      />
+    );
+  };
+
+  renderHeader = () => {
+
+    const { search } = this.state;
+
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+        autoCorrect={false} 
+        platform="ios"
+      />
+    )
+  };
 
   renderItem = ({ item }) => (
   <ListItem
@@ -50,16 +79,19 @@ export default class CharityList extends Component {
       rounded: false
     }}
     chevron
-    onPress= {() => this.onPressButton(item.charityName)}
+    onPress={() => this.onPressButton(item.charityName)}
   />
   )
 
   render() {
+
     return (
         <FlatList
           data= {data}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader()}
           />
     );
   }
