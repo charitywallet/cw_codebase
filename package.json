@@ -22,7 +22,8 @@
     "react-native-progress": "^3.6.0",
     "react-native-snap-carousel": "^3.7.5",
     "react-native-svg-uri": "^1.2.3",
-    "react-navigation": "^3.9.1"
+    "react-navigation": "^3.9.1",
+    "rn-tooltip": "^1.1.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
