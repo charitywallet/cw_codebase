@@ -4,7 +4,8 @@ import Dashboard_1 from './Dashboard_1';
 import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
 import Drives from './Drives';
-import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
+import {View} from 'react-native';
+//import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
 
 const data=
   {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
@@ -19,18 +20,22 @@ export default class TabsAdvancedExample extends Component {
   render() {
     return (
       <Container>
-        <Tabs>
-          <Tab heading={ <TabHeading><Text>Charity Feed</Text></TabHeading>}>
+        <Tabs initialPage={0}
+        tabBarUnderlineStyle={{backgroundColor:'#6FACB4', borderRadius : .1, borderStyle: 'dashed', borderWidth: .1, height: 2,}}>
+          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Feed</Text></TabHeading>}>
             <CharityFeed />
           </Tab>
-          <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Overview</Text></TabHeading>}>
             <Dashboard_1 />
           </Tab>
-          <Tab heading={ <TabHeading><Text>Awards</Text></TabHeading>}>
-            <DriveInfo drive={data}/>
+          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Awards</Text></TabHeading>}>
+            <Dashboard_1/>
           </Tab>
         </Tabs>
-      </Container>
+        </Container>
     );
   }
 }
+
+// <Tab heading={ <TabHeading><Text>Awards</Text></TabHeading>}>
+//   <DriveInfo drive={data}/>
