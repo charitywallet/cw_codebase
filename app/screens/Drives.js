@@ -37,7 +37,7 @@ class Drives extends Component {
             , percentCompleted: 0.5}]}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item}/>
+              drive= {item} navigation={this.props.navigation}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
