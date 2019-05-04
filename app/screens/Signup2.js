@@ -45,16 +45,16 @@ class Signup2 extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const { navigation } = this.props;
-    const itemId = navigation.getParam('userId', 'NO-ID');
+    const user_id = JSON.stringify(navigation.getParam('userId', 'NO-ID'));
 
     return(
       <View style={{flex: 1,}}>
         <Text style={styles.skip} onPress = {() => navigate('UserDashboard')}> SKIP</Text>
         <Container>
-        <OverlaySignup userId = {JSON.stringify(itemId)}
+        <OverlaySignup userId = {JSON.stringify(user_id)}
          stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
          handleFillNowButton={this.handleFillNowButton}
-         handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard')}}
+         handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard', {user_id: user_id})}}
          button1="Fill Now" button2="Later"/>
 
           <LoginInput text='First Name'/>
@@ -77,7 +77,7 @@ class Signup2 extends Component {
             </Tooltip>
           </View>
           <View style={{paddingTop:10,}}>
-          <LoginButton text='Next' onPress = {() => navigate('UserSignup3')}/>
+          <LoginButton text='Next' onPress = {() => navigate('UserSignup3', {user_id: user_id})}/>
           </View>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot active={true}/>

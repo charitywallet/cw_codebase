@@ -7,40 +7,45 @@ import {Icon} from 'react-native-elements';
 
 const backgroundImageLink = './image/background.jpg'
 
-const MOCK_DATA = [
-  {
-    id: "1",
-    cardTitle: "Your lifetime donations through the app are",
-    cardAmount: "$1234.56",
-    cardMessage: "Congrats! Way to go..."
-  },
-  {
-    id: "2",
-    cardTitle: "Charities Supported",
-    cardAmount: "12",
-    cardMessage: "You da MVP!"
-  },
-  {
-    id: "3",
-    cardTitle: "Charities Supported",
-    cardAmount: "12",
-    cardMessage: "You da MVP!"
-  },
-  {
-    id: "4",
-    cardTitle: "Charities Supported",
-    cardAmount: "12",
-    cardMessage: "You da MVP!"
-  },
-  {
-    id: "5",
-    cardTitle: "Charities Supported",
-    cardAmount: "12",
-    cardMessage: "You da MVP!"
-  },
-];
+const Carousel = ({
+  lifetime_total,
+  active_charities,
+  active_drives
+}) => {
 
-const Carousel = () => {
+  const MOCK_DATA = [
+    {
+      id: "1",
+      cardTitle: "Your lifetime donations through the app are",
+      cardAmount: lifetime_total,
+      cardMessage: "Congrats! Way to go..."
+    },
+    {
+      id: "2",
+      cardTitle: "Drives Supported",
+      cardAmount: active_drives,
+      cardMessage: "You da MVP!"
+    },
+    {
+      id: "3",
+      cardTitle: "Charities Supported",
+      cardAmount: active_charities,
+      cardMessage: "You da MVP!"
+    },
+    {
+      id: "4",
+      cardTitle: "Charities Supported",
+      cardAmount: "12",
+      cardMessage: "You da MVP!"
+    },
+    {
+      id: "5",
+      cardTitle: "Charities Supported",
+      cardAmount: "12",
+      cardMessage: "You da MVP!"
+    },
+  ];
+
     return(
       <View>
         <HorizontalCarousel
@@ -62,9 +67,11 @@ const Carousel = () => {
     )
 };
 
-// Carousel.propTypes = {
-//   carousel_data: PropTypes.object,
-// };
+Carousel.propTypes = {
+  lifetime_total: PropTypes.any,
+  active_charities: PropTypes.any,
+  active_drives: PropTypes.any,
+};
 
 export default Carousel;
 
