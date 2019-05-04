@@ -12,14 +12,14 @@ client = plaid.Client(client_id = PLAID_CLIENT_ID, secret=PLAID_SECRET,
 
 def get_access_token(uid,public_token):
     """get access token from Plaid api and save to DB"""
-  try:
-    exchange_response = client.Item.public_token.exchange(public_token)
-    access_token = exchange_response['access_token']
-    item = exchange_response['access_token']
-    return True
-  except plaid.errors.PlaidError as e:
-      raise
-      logging.info(e)
+    try:
+        exchange_response = client.Item.public_token.exchange(public_token)
+        access_token = exchange_response['access_token']
+        item = exchange_response['access_token']
+        return True
+    except plaid.errors.PlaidError as e:
+        raise
+        logging.info(e)
 
 
 

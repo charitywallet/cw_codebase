@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS donor (
 CREATE TABLE IF NOT EXISTS charity (
     charity_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     char_name VARCHAR(255) NOT NULL UNIQUE,
-    char_desc VARCHAR(1000) UNIQUE,
+    char_desc VARCHAR(540) UNIQUE,
     char_image VARCHAR(255) UNIQUE,
     char_address VARCHAR(255) UNIQUE,
     char_city VARCHAR(255) UNIQUE,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS drive (
     drive_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     charity_id INTEGER REFERENCES charity(char_id),
     name VARCHAR(255) NOT NULL UNIQUE,
-    drive_desc VARCHAR(1000) UNIQUE,
+    drive_desc VARCHAR(540) UNIQUE,
     drive_image VARCHAR(255) UNIQUE,
     target_amt FLOAT,
     collected_amt FLOAT,
