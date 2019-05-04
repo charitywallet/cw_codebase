@@ -4,6 +4,7 @@ import Dashboard_1 from './Dashboard_1';
 import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
 import CharityInformation from './CharityInformation'
+import DriveInformation from './DriveInformation'
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
@@ -30,7 +31,7 @@ export default class TabsAdvancedExample extends Component {
             <Dashboard_1 />
           </Tab>
           <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Information</Text></TabHeading>}>
-            <CharityInformation/>
+            <DriveInformation/>
           </Tab>
         </Tabs>
         </Container>

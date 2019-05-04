@@ -1,45 +1,62 @@
-import React, {Component} from 'react';
-import {Text, View, StyleSheet, ImageBackground} from 'react-native';
-import {Carousel} from '../components/DashboardComponents/Carousel'
-import {CurrentAmountCard} from '../components/DashboardComponents/CurrentAmountCard';
-
-//This data can either be fetched again from backend, or just passed onPress from Drives.js
-const driveData=
-  {
-    driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-  , driveLocation: 'Berkeley, CA'
-  , driveTitle: 'Help Detective Pikachu'
-  , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-  , currentMoney: '450'
-  , targetMoney: '2000'
-  , percentCompleted: 0.8
-  , charityName: 'Pokemon Squad'
-  , numDonations: '30'
-  }
+import React, { Component } from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {CharityFeedCard2} from 'app/components/DashboardComponents/CharityFeedCard2';
+import {DefaultCharityFeedCard} from 'app/components/DashboardComponents/DefaultCharityFeedCard';
+import { Text, View, Image, TouchableOpacity, TouchableHighlight, FlatList} from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
+import { Dimensions } from 'react-native';
+import {DriveInfoHeader} from 'app/components/CharityTabComponents/DriveInfoHeader'
 
 
+const imageWidth = (Dimensions.get('window').width);
 
+const driveInfo =
+      {
+        driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
+      , driveCity: 'Berkeley'
+      , driveState: 'CA'
+      , driveTitle: 'Help Detective Pikachu'
+      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
+      , currentMoney: '450'
+      , targetMoney: '2000'
+      , percentCompleted: 0.8
+      , charityName: 'Pokemon Squad'
+      , numDonations: '30'
+      }
 
-class Dashboard_1 extends Component {
+const driveFeedUpdate =
+      [
+        {
+          charityImageURL: require('app/components/CharityTabComponents/DriveInfoHeader/image/background.jpg')
+        , charityName: 'ABSforTheWin'
+        , updateDate: 'April 27, 2019'
+        , feedImageURL: require('app/components/CharityTabComponents/DriveInfoHeader/image/homeless.jpg')
+        , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
+        , numDonations: '25'
+        }
+      ]
 
+export default class DriveInformation extends Component {
   render() {
-    return(
-      <View style={styles.container}>
-      <CurrentAmountCard/>
-      <Carousel/>
-      </View>
+    return (
+        <View style={styles.Container}>
+          <FlatList
+                data={driveFeedUpdate}
+                renderItem={({item}) => (
+                <CharityFeedCard2
+                  charity= {item}/>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+              ListHeaderComponent={<DriveInfoHeader drive={driveInfo} />}
+              ListFooterComponent={<DefaultCharityFeedCard />}
+          />
+        </View>
     );
   }
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    //backgroundColor: "pink"
+const styles= EStyleSheet.create({
+  Container:{
+    flex:1
   },
 });
-
-
-export default Dashboard_1;
