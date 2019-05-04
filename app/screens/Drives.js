@@ -6,7 +6,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 //The data below needs to be called using an API
 const driveData = [
   {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-, driveLocation: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
+, driveLocation: 'Berkeley, CA'
+, driveTitle: 'Help Detective Pikachu'
 , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
 , currentMoney: '450'
 , targetMoney: '2000'
@@ -52,7 +53,7 @@ class Drives extends Component {
             data={driveData}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation}/>
+              drive= {item}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
