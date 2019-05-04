@@ -17,7 +17,7 @@ import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
-import AddAccount from '../screens/PlaidTry'
+import DriveInfo from '../components/CharityTabComponents/DriveInfo/DriveInfo'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -90,16 +90,20 @@ const RootStack = createStackNavigator(
       screen: Drives,
       navigationOptions: {
         title: "Drives",
-        //headerLeft: null, //TODO: Uncomment this.
       },
     },
-    AddAccount: {
-      screen: AddAccount,
+    DriveInfo: {
+      screen: DriveInfo,
       navigationOptions: {
-        title: "Add Account",
-        //headerLeft: null, //TODO: Uncomment this.
+        //title: "Drives",
       },
     },
+    // AddAccount: {
+    //   screen: AddAccount,
+    //   navigationOptions: {
+    //     title: "Add Account",
+    //   },
+    // },
   },
 );
 
