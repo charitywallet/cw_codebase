@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {CharityFeedCard2} from 'app/components/DashboardComponents/CharityFeedCard2';
+import {DefaultCharityFeedCard} from 'app/components/DashboardComponents/DefaultCharityFeedCard';
 import { Text, View, Image, TouchableOpacity, TouchableHighlight, FlatList} from 'react-native';
 import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
 import { Dimensions } from 'react-native';
-import {CharityFeedCard2} from '/Users/shaivya/Downloads/ReactNative/cw_codebase/app/components/DashboardComponents/CharityFeedCard2';
-import {DefaultCharityFeedCard} from '/Users/shaivya/Downloads/ReactNative/cw_codebase/app/components/DashboardComponents/DefaultCharityFeedCard';
+
 
 const imageWidth = (Dimensions.get('window').width);
 
