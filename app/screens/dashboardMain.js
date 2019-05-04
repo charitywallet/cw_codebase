@@ -3,6 +3,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right
 import Dashboard_1 from './Dashboard_1';
 import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
+import CharityInformation from './CharityInformation'
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
@@ -28,8 +29,8 @@ export default class TabsAdvancedExample extends Component {
           <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Overview</Text></TabHeading>}>
             <Dashboard_1 />
           </Tab>
-          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Awards</Text></TabHeading>}>
-            <Dashboard_1/>
+          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Information</Text></TabHeading>}>
+            <CharityInformation/>
           </Tab>
         </Tabs>
         </Container>
