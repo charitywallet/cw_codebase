@@ -13,7 +13,7 @@ class Dashboard_1 extends Component {
     lifetime_total: '',
   }
 
-componentWillMount() {
+componentDidMount() {
     function processResponse(response) {
       const statusCode = response.status;
       const data = response.json();
@@ -36,6 +36,7 @@ componentWillMount() {
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
+        console.log("response", data)
         this.setState({
           active_charities: data.totals.active_charities,
           active_drives: data.totals.active_drives,
