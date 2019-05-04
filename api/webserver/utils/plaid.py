@@ -17,9 +17,10 @@ def get_access_token(uid,public_token):
         access_token = exchange_response['access_token']
         item = exchange_response['access_token']
         return True
+        logging.info(e)
     except plaid.errors.PlaidError as e:
         raise
-    logging.info(e)
+        logging.info(e)
 
 
 

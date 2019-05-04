@@ -361,7 +361,7 @@ def drive_list():
         'image_url':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
         'target_amt':1000, 'collected_amt':200,
         'location':'Berkeley',
-        'state':"California"
+        'state':"California",
         'causes':['Community Foundations'],
         'precent_complete':20
         },
