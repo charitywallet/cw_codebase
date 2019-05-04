@@ -4,11 +4,21 @@ import logging
 import time
 from classes.auth import Auth
 from classes.donor import Donor
-from utils.utils import start_session, check_session, end_session
+from utils.session import start_session, check_session, end_session
+from utils.plaid import get_access_token
 import datetime
 
 app = Flask(__name__)
 app.debug = True
+
+# working endpoints
+# 1. /signup - new user signup
+# 2. /login - user login
+# 3. /get_drives - fetch all drive
+# 4. /get_charities - fetch all charities
+# 5. /get_user_totals - user totals for dashboard
+# 6. /set_ptoken - send plaid public token to backend for plaid setup
+# 7. /drive_selection - save drives
 
 
 @app.route('/signup', methods=["POST"])
@@ -180,8 +190,7 @@ def plaid_access_token_gen():
         plaid_public_token = arguments.get("public_token")
         status=""
         try:
-            # validation_flag= fetch_access_token()
-            validation_flag=True
+            validation_flag= get_access_token(user_id,plaid_public_token)
             if validation_flag:
                 status_code = 200
                 message="Plaid Link Successfull at Backend"
@@ -352,7 +361,9 @@ def drive_list():
         'image_url':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
         'target_amt':1000, 'collected_amt':200,
         'location':'Berkeley',
-        'causes':['Community Foundations']
+        'state':"California"
+        'causes':['Community Foundations'],
+        'precent_complete':20
         },
         {
         'drive_id':2,'name':'Support Unlocking Silent',
@@ -360,21 +371,24 @@ def drive_list():
         'image_url':'https://greatnonprofits.org/images/uploads/reviews/ush.jpg',
         'target_amt':5000, 'collected_amt':2000,
         'location':'Global',
-        'causes':['Charity & Voluntarism Promotion','Nature']
+        'causes':['Charity & Voluntarism Promotion','Nature'],
+        'precent_complete':40
         },
         {'drive_id':3,'name':'Renovating Chaparral House',
         'description': 'Renovations to  Chaparral House for providing a safe home like atmosphere with engaging and stimulating activities',
         'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
         'target_amt':200, 'collected_amt':90,
         'location':'Berkeley',
-        'causes':['Health', 'Nursing Facilities', 'Seniors']
+        'causes':['Health', 'Nursing Facilities', 'Seniors'],
+        'precent_complete':45
         },
         {'drive_id':4,'name':'The Ama Foundation',
-        'description': 'Chaparral House provides care for frail elders in a dynamic, life-affirming, homelike environment where privacy and self-esteem are respected, freedom of choice and freedom of expression are encouraged, and participation and contribution are appreciated.',
+        'description': 'The ama food drive',
         'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
-        'target_amt':0, 'collected_amt':90,
+        'target_amt':270, 'collected_amt':90,
         'location':'Berkeley',
-        'causes':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief']
+        'causes':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief'],
+        'precent_complete':33
         }
 
         ]

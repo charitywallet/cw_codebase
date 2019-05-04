@@ -3,18 +3,17 @@ import datetime
 
 
 class SqlConn(object):
-    """asdad
-    """
+    """Class to connect with MYSQL db"""
 
     def __init__(self):
-        """asd"""
+        """Class to connect with MYSQL db"""
 
         self.db = MySQLdb.connect("localhost", "root", "capstone", "charity_wallet")
         self.cursor = self.db.cursor()
 
 
     def close_conn(self):
-        """Saves user profile details"""
+        """Closes DB connection"""
         self.db.close()
 
     def set_query(self,query,data):

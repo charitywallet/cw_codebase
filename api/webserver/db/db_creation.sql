@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS donor (
     last_logged_in DATETIME,
     password VARCHAR(255) NOT NULL,
     lifetime_donation FLOAT,
-    fav_causes VARCHAR(255)
+    fav_causes VARCHAR(255),
     account_status BOOLEAN NOT NULL
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     place VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     plaid_transaction_id VARCHAR(255) NOT NULL,
-    transaction_date DATETIME NOT NULL
+    transaction_date DATETIME NOT NULL,
     transaction_amt FLOAT NOT NULL,
     donation_amt FLOAT NOT NULL
 );
@@ -80,6 +80,6 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE TABLE IF NOT EXISTS plaid_Setup (
     donor_id INTEGER REFERENCES donor(donor_id),
     entry_date DATETIME NOT NULL,
-    plaid_access_token VARCHAR(255) NOT NULL
+    plaid_access_token VARCHAR(255) NOT NULL,
     status BOOLEAN NOT NULL
 );
