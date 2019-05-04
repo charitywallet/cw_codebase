@@ -21,6 +21,7 @@ class Signup3 extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    const title = this.props.navigation.getParam('title', 'NO-title');
 
     return(
       <View style={{flex: 1,
@@ -29,7 +30,7 @@ class Signup3 extends Component {
         <Text style={styles.skip}> SKIP</Text>
 
 
-          <Text style={styles.introText}>Almost done! To help us recommend more personalized drives and charities to you,
+          <Text style={styles.introText}>{title} Almost done! To help us recommend more personalized drives and charities to you,
           please select the causes you really care about.</Text>
 
           <View style={styles.list}>

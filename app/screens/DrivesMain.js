@@ -11,7 +11,7 @@ export default class TabsAdvancedExample extends Component {
       <Container>
         <Tabs>
           <Tab heading={ <TabHeading><Text>Drives</Text></TabHeading>}>
-            <Drives />
+            <Drives navigation={this.props.navigation}/>
           </Tab>
           <Tab heading={ <TabHeading><Text>Charities</Text></TabHeading>}>
             <CharityList />

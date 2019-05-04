@@ -158,14 +158,17 @@ class AddCreditCard extends Component {
   onMessage = (data) => {
     //console.log("data", data);
     this.setState({data});
-    console.log("Data", this.state.data);
-    if (this.state.data && this.state.data.metadata && this.state.data.metadata.pulic_token) {
-      console.log(this.state.data.metadata.institution_name);
-      this.setState({
-        text: this.state.data.metadata.institution_name,
-        textVisible: true,
-      })
-    }
+    //console.log("Data", data);
+    // if (this.state.data && this.state.data.metadata && this.state.data.metadata.pulic_token) {
+    //   console.log(this.state.data.metadata.pulic_token);
+    // }
+    // if (this.state.data && this.state.data.metadata && this.state.data.metadata.pulic_token) {
+    //   console.log(this.state.data.metadata.institution_name);
+    //   this.setState({
+    //     text: this.state.data.metadata.institution_name,
+    //     textVisible: true,
+    //   })
+    // }
   }
 
   remove(id) {
@@ -184,6 +187,7 @@ class AddCreditCard extends Component {
 
   handlePressBackdrop = () => {
     this.setState({ isVisible: false });
+    //console.log(this.state);
   }
 
   render() {
@@ -210,17 +214,24 @@ class AddCreditCard extends Component {
             {this.state.valueArray.map((ele, index) => {
               return (
                 <View key={index}>
-                <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
-                  <PlaidAuthenticator
-                   onMessage={this.onMessage}
-                   publicKey="0cfea3b8cf3611b374aecb1a215a39"
-                   env="sandbox"
-                   product="transactions"
-                   clientName="CharityWallet"
-                   selectAccount={false}
-                 />
-                </Overlay>
-
+                  <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
+                    <PlaidAuthenticator
+                     onMessage={this.onMessage}
+                     publicKey="0cfea3b8cf3611b374aecb1a215a39"
+                     env="sandbox"
+                     product="transactions"
+                     clientName="CharityWallet"
+                     selectAccount={false}
+                   />
+                   <View>
+                   {this.state.data && this.state.data.metadata &&
+                     this.state.data.metadata.public_token ?
+                     <View style={{justifyContent:'center', marginBottom: 300, alignItems:'center'}}>
+                        <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution_name} Account added!</Text>
+                        <Button containerStyle={{}} key={index} title="Finish" titleStlye={{color:'white'}} onPress={this.handlePressBackdrop}/>
+                     </View>: null }
+                   </View>
+                  </Overlay>
                 </View>
               )
             })}

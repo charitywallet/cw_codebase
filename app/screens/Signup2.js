@@ -67,6 +67,7 @@ class Signup2 extends Component {
               <Ionicons name='ios-information-circle' size={30} color='grey' />
             </Tooltip>
           </View>
+
           <AddPlaidAccount navigation={this.props.navigation}/>
           <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
@@ -117,8 +118,10 @@ const styles = EStyleSheet.create({
       backgroundColor: '#D2D2D4',
     },
     tooltip1: {
-      paddingLeft: 270,
+      //paddingLeft: 270,
+      marginLeft: 310,
       marginTop: -139,
+      width:30,
     },
 });
 
@@ -133,3 +136,12 @@ export default Signup2;
 //  button1="Fill Now" button2="Later"/>
 //  onPress = {() => navigate('UserSignup3')}
 // onPress = {() => navigate('UserDashboard')}
+
+//
+// <View style={styles.tooltip1}>
+//   <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
+//         This is the account we will use to calculate the change from each transaction.</Text>}
+//        backgroundColor="#F0F0F0" height={100} width={200}>
+//     <Ionicons name='ios-information-circle' size={30} color='grey' />
+//   </Tooltip>
+// </View>
