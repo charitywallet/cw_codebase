@@ -39,7 +39,9 @@ export default class CharityList extends Component {
   };
 
   onPressButton = (text) => {
-    console.log(text,' is pressed')
+    console.log(text,' is pressed');
+    this.props.navigation.navigate('CharityInformation');
+    //this.props.navigation.navigate('CharityInformation', {title: this.props.drive.driveTitle});
   };
 
   keyExtractor = (item, index) => index.toString()
@@ -65,7 +67,7 @@ export default class CharityList extends Component {
         placeholder="Type Here..."
         onChangeText={this.updateSearch}
         value={search}
-        autoCorrect={false} 
+        autoCorrect={false}
         platform="ios"
       />
     )
