@@ -38,29 +38,35 @@ class Signup3 extends Component {
                 data=
                 {[
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'AIDS'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                   , causeName: 'Animals'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/children.svg')
+                  , causeName: 'Children'},
+                  {causeImageURL: require('../components/Login_SignUp/images/civil-rights.svg')
+                  , causeName: 'Civil Rights'},
+                  {causeImageURL: require('../components/Login_SignUp/images/drug.svg')
+                  , causeName: 'Drug & Alcohol Abuse'},
+                  {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
+                  , causeName: 'Environment'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/health.svg')
+                  , causeName: 'Health'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
+                  , causeName: 'Homelessness'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
+                  , causeName: 'Hunger'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
+                  , causeName: 'LGBTQ'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'},
+                  , causeName: 'Mental Health'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
+                  , causeName: 'Public Policy'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
+                  , causeName: 'Senior Citizens'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'}
+                  , causeName: 'Women'}
               ]}
 
                 numColumns = {3}
