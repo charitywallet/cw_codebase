@@ -14,4 +14,13 @@ export default EStyleSheet.create({
     color: "lightblue",
     fontSize: 25,
   },
+  driveName:{
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  driveNameContainer:{
+    paddingRight: 16,
+    paddingLeft: 16,
+    paddingBottom: 16,
+  }
 });

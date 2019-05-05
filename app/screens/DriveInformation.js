@@ -27,12 +27,13 @@ const driveInfo =
 const driveFeedUpdate =
       [
         {
-          charityImageURL: require('app/components/CharityTabComponents/DriveInfoHeader/image/background.jpg')
+          charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
         , charityName: 'ABSforTheWin'
         , updateDate: 'April 27, 2019'
-        , feedImageURL: require('app/components/CharityTabComponents/DriveInfoHeader/image/homeless.jpg')
+        , feedImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
         , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
         , numDonations: '25'
+        , driveName: 'Help Detective Pikachu'
         }
       ]
 
