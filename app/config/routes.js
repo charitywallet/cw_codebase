@@ -45,7 +45,7 @@ const AppContainer1 = createBottomTabNavigator(
         } else if (routeName === 'Charities') {
           iconName = `settings${focused ? '' : ''}`;
         }
-        return <Icon name={iconName} size={5} color={tintColor} style={{color: 'gray'}}/>;
+        return <Icon name={iconName} size={5} color={'#4B97A1'} style={{color: '#4B97A1'}}/>;
       },
     }),
     tabBarOptions: {
