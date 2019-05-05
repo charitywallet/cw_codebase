@@ -3,34 +3,58 @@ from classes.sql_conn import SqlConn
 def get_charities(uid=0):
     """starts session"""
     charities=[
-        {'charity_id':1,'name':'The Pollination Project Foundation',
-        'description': 'The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
-        'address':'15 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':5,
-        'causes':['Community Foundations', 'Philanthropy', 'Charity & Voluntarism Promotion', 'Voluntarism & Grantmaking Foundations']
+        {'charity_id':1,'charityName':'The Pollination Project Foundation',
+        'charityAbout': 'The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.',
+        'charityImageURL':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
+        'charityAddress':'15 Berkeley Way, Berkeley',
+        'charityCity':'Berkeley',
+        'charityState':"CA",
+        'charityActiveDrives':5,
+        'charityCauses':['Community Foundations', 'Philanthropy', 'Charity & Voluntarism Promotion', 'Voluntarism & Grantmaking Foundations']
         },
-        {'charity_id':2,'name':'The Ama Foundation',
-        'description': ' The Ama Foundation was created to provide a home, family environment and education for the most underprivileged children of Nepal.  we rescue children from trafficking, drugs and malnutrition and help them to grow up to be productive, happy and healthy citizens of Nepal',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/AmaLogoDarkRedWords.jpg',
-        'address':'25 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':1,
-        'causes':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief']
+        {'charity_id':2,'charityName':'The Ama Foundation',
+        'charityAbout': ' The Ama Foundation was created to provide a home, family environment and education for the most underprivileged children of Nepal.  we rescue children from trafficking, drugs and malnutrition and help them to grow up to be productive, happy and healthy citizens of Nepal',
+        'charityImageURL':'https://cdn.greatnonprofits.org/images/logos/AmaLogoDarkRedWords.jpg',
+        'charityAddress':'25 Berkeley Way, Berkeley',
+        'charityCity':'Berkeley','charityState':"CA",
+        'charityActiveDrives':1,
+        'charityCauses':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief']
         },
-        {'charity_id':3,'name':'Chaparral Foundation',
-        'description': 'Chaparral House provides care for frail elders in a dynamic, life-affirming, homelike environment where privacy and self-esteem are respected, freedom of choice and freedom of expression are encouraged, and participation and contribution are appreciated.',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
-        'address':'35 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':2,
-        'causes':['Health', 'Nursing Facilities', 'Philanthropy', 'Private Operating Foundations', 'Seniors']
+        {'charity_id':3,'charityName':'Chaparral Foundation',
+        'charityAbout': 'Chaparral House provides care for frail elders in a dynamic, life-affirming, homelike environment where privacy and self-esteem are respected, freedom of choice and freedom of expression are encouraged, and participation and contribution are appreciated.',
+        'charityImageURL':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
+        'charityAddress':'35 Berkeley Way, Berkeley',
+        'charityCity':'Berkeley','charityState':"CA",
+        'charityActiveDrives':2,
+        'charityCauses':['Health', 'Nursing Facilities', 'Philanthropy', 'Private Operating Foundations', 'Seniors']
         }
-        ]
-    if uid==0:
-        #get all charities
-        print("all")
+    ]
+    # if uid==0:
+    #     #get all charities
+    #     print("all")
+    #     try:
+    #         db_obj=SqlConn()
+    #         query="Select * from charities"
+    #         data = (username,)
+    #         result=db_obj.get_query(query,data)
+    #         if len(result)>0:
+    #             print(result)
+    #         else:
+    #             # query="Insert into donor (username, password, name, activation_date, account_status) values(%s,%s,%s,%s,%s)"
+    #             # data = (username,password,"Donor",datetime.datetime.now(),True,)
+    #             # db_obj.set_query(query,data)
+    #             # result= db_obj.get_query("Select donor_id from donor where username = %s",(username,))
+    #             # uid=result[0][0]
+    #             # user = Donor(uid)
+    #             # return user, True
+    #             print("error")
+    #
+    #     except Exception as e:
+    #         logging.info(e)
+    #         raise
+    #     finally:
+    #         db_obj.close_conn()
+
         return charities
 
     else:

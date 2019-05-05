@@ -1,5 +1,6 @@
 import datetime;
 from classes.sql_conn import SqlConn
+import logging
 
 class Donor(object):
     """Donor class. Donors have the
@@ -64,15 +65,15 @@ class Donor(object):
         try:
             db_obj=SqlConn()
 
-            query="Select lifetime_donation, monthly_collected,  from donor \
-             where donor_id = %s"
-            data = (self.uid,)
+            query="Select lifetime_donation, monthly_collected  from donor \
+            where donor_id = %s"
+            data = (int(self.uid),)
             result = db_obj.get_query(query,data)
 
             query="Select count(distinct drive_id), \
             count(distinct charity_id) from donor_drive \
              where donor_id = %s"
-            
+
             result2 = db_obj.get_query(query,data)
 
             return {'user_id':self.uid,'month_total':result[0][1],'lifetime_total':result[0][0],'active_drives':result2[0][0],'active_charities':result2[0][1]}

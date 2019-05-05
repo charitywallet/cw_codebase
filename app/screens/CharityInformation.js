@@ -35,18 +35,19 @@ const driveData =
       , percentCompleted: 0.7},
     ]
 
-const charityData =
-    {
-      charityName: 'Chen Award Foundation'
-    , charityCity: 'Berkeley'
-    , charityState: 'CA'
-    , charityImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-    , charityAbout: 'This charity was established to give the MIMS students something to work towards in their final semester. It keeps most of the money for itself and pays peanuts to the winners.'
-    , numDonations: '20'
-    }
+// const charityData =
+//     {
+//       charityName: 'Chen Award Foundation'
+//     , charityCity: 'Berkeley'
+//     , charityState: 'CA'
+//     , charityImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
+//     , charityAbout: 'This charity was established to give the MIMS students something to work towards in their final semester. It keeps most of the money for itself and pays peanuts to the winners.'
+//     , numDonations: '20'
+//     }
 
 export default class CharityInfo extends Component {
   render() {
+    const charity = this.props.navigation.getParam('charity', 'No-Charity');
     return (
         <View style={styles.Container}>
           <FlatList
@@ -55,7 +56,7 @@ export default class CharityInfo extends Component {
                 renderItem={({item}) => (<DrivesCard drive= {item}/>)}
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
-                ListHeaderComponent={<CharityInfoHeader charityData= {charityData} />}
+                ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
           />
         </View>
     );

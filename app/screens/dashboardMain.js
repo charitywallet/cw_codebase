@@ -44,7 +44,7 @@ export default class TabsAdvancedExample extends Component {
             <CharityFeed />
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
-            <Dashboard_1 user_id={user_id}/>
+            <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Trial Page</Text></TabHeading>}>
             <ReactNativeAnimatedIcons/>

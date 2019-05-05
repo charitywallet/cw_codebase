@@ -106,9 +106,9 @@ class Login extends Component {
       <Container>
         <Logo/>
         <LoginInput text='Email' onChangeText={email => this.setState({ email })}
-              value={this.state.email}/>
+              value={this.state.email} autoCapitalize='none'/>
         <LoginInput text='Password' onChangeText={password => this.setState({ password })}
-              value={this.state.password}/>
+              value={this.state.password} autoCapitalize='none'/>
         <Text style={styles.forgotPassword} onPress={() => this.onPressForgotPassword()}> Forgot Password</Text>
         <LoginButton text='Login' onPress={() => this.onPressSignIn()}/>
         <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
