@@ -13,7 +13,7 @@ class Dashboard_1 extends Component {
     active_drives: '',
     month_total: '',
     lifetime_total: '',
-    drives_supported: true,
+    drives_supported: false,
   }
 
 componentDidMount() {

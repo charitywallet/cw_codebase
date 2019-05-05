@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {FlatList, View} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SearchBar} from 'react-native-elements';
 
 //The data below needs to be called using an API
 // const driveData = [
@@ -45,9 +46,15 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Drives extends Component {
 
-  state = {
+constructor(props) {
+  super(props);
+  this.state = {
+    isLoading: true,
+    search: '',
     user_id: this.props.user_id,
-  }
+  };
+  this.arrayholder = [];
+}
 
 componentDidMount() {
     function processResponse(response) {
@@ -71,7 +78,13 @@ componentDidMount() {
       if (statusCode == 200) {
         this.setState({
           drives: data.drives,
-        })
+          isLoading: false,
+          dataSource: data.drives,
+        },
+        function() {
+          this.arrayholder = data.drives;
+        }
+      )
         //console.log("data", this.state.drives);
       } else {
         alert(data.message); //TODO: Network error component
@@ -80,15 +93,47 @@ componentDidMount() {
     .catch((error) => {
       alert(error)
     });
+  };
+
+  search = text => {
+    console.log(text);
+  };
+  clear = () => {
+    this.search.clear();
+  };
+
+  SearchFilterFunction(text) {
+    //passing the inserted text in textinput
+    const newData = this.arrayholder.filter(function(item) {
+      //applying filter for the inserted text in search bar
+      const itemData = item.driveTitle ? item.driveTitle.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      //setting the filtered newData on datasource
+      //After setting the data it will automatically re-render the view
+      dataSource: newData,
+      search: text,
+    });
   }
 
 
   render() {
     return(
       <View>
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={text => this.SearchFilterFunction(text)}
+        onClear={text => this.SearchFilterFunction('')}
+        value={this.state.search}
+        autoCorrect={false}
+        platform="ios"
+      />
       <FlatList
             columnWrapperStyle={styles.row}
-            data={this.state.drives}
+            data={this.state.dataSource}
             renderItem={({item}) => (
             <DrivesCard
               drive= {item} navigation={this.props.navigation}/>

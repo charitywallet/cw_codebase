@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import styles from './styles';
-// 
+//
 // const data=
 //   [{charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
 //     , charityName: 'United Way Worldwide', charityId: '1'},
@@ -29,11 +29,12 @@ export default class CharityList extends Component {
 
   constructor(props) {
     super(props);
-    //setting default state
     this.state = {
+      isLoading: true,
       search: '',
       user_id: this.props.user_id,
     };
+    this.arrayholder = [];
   }
 
 componentDidMount() {
@@ -58,7 +59,13 @@ componentDidMount() {
       if (statusCode == 200) {
         this.setState({
           charities: data.charities,
-        })
+          isLoading: false,
+          dataSource: data.charities,
+        },
+        function() {
+          this.arrayholder = data.charities;
+        }
+      )
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -68,15 +75,35 @@ componentDidMount() {
     });
   }
 
-  updateSearch = (search) => {
-    this.setState({ search });
-    console.log(search)
-  };
-
   onPressButton = (charity) => {
     //console.log("charities", charity);
     this.props.navigation.navigate('CharityInformation', {charity: charity, navigation:this.props.navigation,});
   };
+
+  search = text => {
+    console.log(text);
+  };
+  clear = () => {
+    this.search.clear();
+  };
+
+  SearchFilterFunction(text) {
+    //passing the inserted text in textinput
+    const newData = this.arrayholder.filter(function(item) {
+      //applying filter for the inserted text in search bar
+      const itemData = item.charityName ? item.charityName.toUpperCase() : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      //setting the filtered newData on datasource
+      //After setting the data it will automatically re-render the view
+      dataSource: newData,
+      search: text,
+    });
+  }
+
 
   keyExtractor = (item, index) => index.toString()
 
@@ -99,8 +126,9 @@ componentDidMount() {
     return (
       <SearchBar
         placeholder="Type Here..."
-        onChangeText={this.updateSearch}
-        value={search}
+        onChangeText={text => this.SearchFilterFunction(text)}
+        onClear={text => this.SearchFilterFunction('')}
+        value={this.state.search}
         autoCorrect={false}
         platform="ios"
       />
@@ -120,10 +148,18 @@ componentDidMount() {
   )
 
   render() {
+    if (this.state.isLoading) {
+      //Loading View while data is loading
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
 
     return (
         <FlatList
-          data= {this.state.charities}
+          data= {this.state.dataSource}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.renderSeparator}

@@ -38,6 +38,8 @@ class Signup3 extends Component {
                 data=
                 {[
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  , causeName: 'AIDS'},
+                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                   , causeName: 'Animals'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
