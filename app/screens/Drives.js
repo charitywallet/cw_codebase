@@ -94,7 +94,7 @@ componentDidMount() {
             data={this.state.drives}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item}/>
+              drive= {item} navigation={this.props.navigation}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}

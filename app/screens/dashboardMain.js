@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right, Title } from 'native-base';
 import Dashboard_1 from './Dashboard_1';
-import {MyFooter} from '../components/MyFooter';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import CharityFeed from './CharityFeed';
 import CharityInformation from './CharityInformation'
 import DriveInformation from './DriveInformation'
@@ -18,6 +18,19 @@ const data=
 , percentCompleted: 0.8
 , charityName: 'Pokemon Squad', numDonations: '30'}
 
+const styles = EStyleSheet.create({
+  tabHeading: {
+    backgroundColor:'$primaryBlue',
+    borderRadius : .1,
+    borderStyle: 'dashed',
+    borderWidth: .1,
+    height: 2,
+  },
+  tabText: {
+    color:'$primaryBlue',
+  },
+});
+
 export default class TabsAdvancedExample extends Component {
 
   render() {
@@ -25,15 +38,14 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3');
     return (
       <Container>
-        <Tabs initialPage={1}
-        tabBarUnderlineStyle={{backgroundColor:'#6FACB4', borderRadius : .1, borderStyle: 'dashed', borderWidth: .1, height: 2,}}>
-          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Feed</Text></TabHeading>}>
+        <Tabs initialPage={1} tabBarUnderlineStyle={styles.tabHeading}>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Charity Feed</Text></TabHeading>}>
             <CharityFeed />
           </Tab>
-          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Overview</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
             <Dashboard_1 user_id={user_id}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Information</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Charity Information</Text></TabHeading>}>
             <DriveInformation/>
           </Tab>
         </Tabs>
