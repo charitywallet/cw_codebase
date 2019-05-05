@@ -30,7 +30,42 @@ export default class CharityList extends Component {
   constructor(props) {
     super(props);
     //setting default state
-    this.state = { search: '' };
+    this.state = {
+      search: '',
+      user_id: this.props.user_id, };
+  }
+
+componentDidMount() {
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://0.0.0.0:5000/get_charities', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        this.setState({
+          charities: data.charities,
+        })
+        console.log("data", this.state.charities);
+      } else {
+        alert(data.message); //TODO: Network error component
+      }
+    })
+    .catch((error) => {
+      alert(error)
+    });
   }
 
   updateSearch = (search) => {
