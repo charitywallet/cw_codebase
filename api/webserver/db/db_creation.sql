@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS drive (
     drive_image VARCHAR(255),
     target_amt FLOAT,
     collected_amt FLOAT,
+    drive_city VARCHAR(255),
+    drive_state VARCHAR(255),
     begin_date DATETIME,
     end_date DATETIME,
     active_status BOOLEAN NOT NULL,
@@ -126,3 +128,34 @@ values (
   "charity3","charity3",
   2,"Health, Nursing Facilities, Philanthropy, Private Operating Foundations, Seniors"
 );
+
+
+
+
+
+
+
+
+Insert into drive (
+charity_id
+,name
+,drive_desc
+,drive_image
+,target_amt
+,collected_amt
+,begin_date
+,end_date
+,active_status,
+drive_city,
+drive_state
+,causes
+,activation_date
+,is_default)
+
+values (
+1,"Save the pollens",
+"The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.",
+"https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg",
+1000.00,200.00,SYSDATE(),NULL,True,
+"Berkeley","CA","Community Foundations, Nature", SYSDATE(),True
+)
