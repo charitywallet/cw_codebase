@@ -2,28 +2,28 @@ import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import styles from './styles';
-
-const data=
-  [{charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-    , charityName: 'United Way Worldwide', charityId: '1'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/feeding-america_100x100.jpg'
-      , charityName: 'Feeding America', charityId: '2'},
-    {charityImageURL: 'https://specials-images.forbesimg.com/imageserve/5a32ad2331358e6e1b1d7138/200x200.jpg'
-      , charityName: 'Americares Foundation', charityId: '3'},
-    {charityImageURL: 'https://specials-images.forbesimg.com/imageserve/5852bc65a7ea431d601b17b9/200x200.jpg'
-      , charityName: 'Task Force for Global Health', charityId: '4'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '5'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '6'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '7'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '8'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '9'},
-    {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-      , charityName: 'United Way Worldwide', charityId: '10'}]
+// 
+// const data=
+//   [{charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//     , charityName: 'United Way Worldwide', charityId: '1'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/feeding-america_100x100.jpg'
+//       , charityName: 'Feeding America', charityId: '2'},
+//     {charityImageURL: 'https://specials-images.forbesimg.com/imageserve/5a32ad2331358e6e1b1d7138/200x200.jpg'
+//       , charityName: 'Americares Foundation', charityId: '3'},
+//     {charityImageURL: 'https://specials-images.forbesimg.com/imageserve/5852bc65a7ea431d601b17b9/200x200.jpg'
+//       , charityName: 'Task Force for Global Health', charityId: '4'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '5'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '6'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '7'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '8'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '9'},
+//     {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
+//       , charityName: 'United Way Worldwide', charityId: '10'}]
 
 export default class CharityList extends Component {
 
@@ -32,7 +32,8 @@ export default class CharityList extends Component {
     //setting default state
     this.state = {
       search: '',
-      user_id: this.props.user_id, };
+      user_id: this.props.user_id,
+    };
   }
 
 componentDidMount() {
@@ -58,7 +59,6 @@ componentDidMount() {
         this.setState({
           charities: data.charities,
         })
-        console.log("data", this.state.charities);
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -73,10 +73,9 @@ componentDidMount() {
     console.log(search)
   };
 
-  onPressButton = (text) => {
-    console.log(text,' is pressed');
-    this.props.navigation.navigate('CharityInformation');
-    //this.props.navigation.navigate('CharityInformation', {title: this.props.drive.driveTitle});
+  onPressButton = (charity) => {
+    //console.log("charities", charity);
+    this.props.navigation.navigate('CharityInformation', {charity: charity, navigation:this.props.navigation,});
   };
 
   keyExtractor = (item, index) => index.toString()
@@ -116,7 +115,7 @@ componentDidMount() {
       rounded: false
     }}
     chevron
-    onPress={() => this.onPressButton(item.charityName)}
+    onPress={() => this.onPressButton(item)}
   />
   )
 
@@ -124,7 +123,7 @@ componentDidMount() {
 
     return (
         <FlatList
-          data= {data}
+          data= {this.state.charities}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.renderSeparator}

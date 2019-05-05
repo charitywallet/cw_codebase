@@ -65,9 +65,6 @@ componentDidMount() {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    // body: JSON.stringify({
-    //   user_id: this.state.user_id,
-    // }),
   }).then(processResponse)
     .then(response => {
       const { statusCode, data } = response;
@@ -75,7 +72,7 @@ componentDidMount() {
         this.setState({
           drives: data.drives,
         })
-        console.log("data", this.state.drives);
+        //console.log("data", this.state.drives);
       } else {
         alert(data.message); //TODO: Network error component
       }
