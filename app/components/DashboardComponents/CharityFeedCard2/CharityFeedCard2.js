@@ -7,7 +7,7 @@ import styles from './styles'
 export default class CharityFeedCard2 extends Component {
   render() {
     return (
-      <Card>
+      <Card style={{marginTop:0}}>
         <CardTitle
           avatarSource={{uri:this.props.charity.charityImageURL}}
           title={this.props.charity.charityName}

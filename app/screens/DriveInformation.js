@@ -59,6 +59,8 @@ export default class DriveInformation extends Component {
 
 const styles= EStyleSheet.create({
   Container:{
-    flex:1
+    backgroundColor: '$blueBackground',
+    flex:1,
+    paddingTop:5,
   },
 });
