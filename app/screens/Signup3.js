@@ -41,31 +41,29 @@ class Signup3 extends Component {
                   , causeName: 'Animals'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
-                  {causeImageURL: require('../components/Login_SignUp/images/children.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/child.svg')
                   , causeName: 'Children'},
-                  {causeImageURL: require('../components/Login_SignUp/images/civil-rights.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/civil.svg')
                   , causeName: 'Civil Rights'},
-                  {causeImageURL: require('../components/Login_SignUp/images/drug.svg')
-                  , causeName: 'Drug & Alcohol Abuse'},
                   {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
                   , causeName: 'Environment'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
                   {causeImageURL: require('../components/Login_SignUp/images/health.svg')
                   , causeName: 'Health'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Homelessness'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/homeless.svg')
+                  , causeName: 'Homeless'},
+                  {causeImageURL: require('../components/Login_SignUp/images/food.svg')
                   , causeName: 'Hunger'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/flag.svg')
                   , causeName: 'LGBTQ'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Mental Health'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/world.svg')
+                  , causeName: 'International'},
+                  {causeImageURL: require('../components/Login_SignUp/images/policy.svg')
                   , causeName: 'Public Policy'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Senior Citizens'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
+                  {causeImageURL: require('../components/Login_SignUp/images/religion.svg')
+                  , causeName: 'Religion'},
+                  {causeImageURL: require('../components/Login_SignUp/images/women.svg')
                   , causeName: 'Women'}
               ]}
 

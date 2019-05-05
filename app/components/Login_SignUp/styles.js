@@ -56,11 +56,12 @@ export default EStyleSheet.create({
   titleStyle: {
     fontSize: 13,
     fontWeight: '500',
-    color: "$lightGray"
+    color: "$lightGray",
+    padding: -5,
   },
   imageContainer: {
     alignItems: 'center',
-    marginTop: -10,
+    marginTop: -7,
   },
   wrapper: {
     width: 80,

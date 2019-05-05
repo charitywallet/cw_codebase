@@ -33,7 +33,7 @@ export default class CausesCards extends Component {
         <TouchableHighlight onPress={() => this.onPressCard(this.props.cause.causeName)} activeOpacity = {.9}
         style = {[styles.TouchableHighlightContainer, this.state.selected ? {}: {backgroundColor: 'rgba(0,0,0,1)'}]}>
           <Card containerStyle={styles.cardContainer} title ={this.props.cause.causeName} titleStyle={styles.titleStyle}
-          wrapperStyle={styles.wrapper}>
+          wrapperStyle={styles.wrapper} titleNumberOfLines={1}>
             <View style={styles.imageContainer}>
               <SvgUri
               width="45"

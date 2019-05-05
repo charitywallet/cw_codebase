@@ -28,19 +28,28 @@ export default EStyleSheet.create({
     textTransform: 'uppercase',
     fontWeight:'bold',
     color: '$primaryBlue',
+    fontFamily: '$headingFont',
   },
   driveTitle:{
     paddingLeft:4,
     fontWeight: 'bold',
     textTransform: 'capitalize',
     paddingBottom: 5,
+    fontFamily: '$headingFont',
   },
   moneyRaised:{
-    flexDirection:'row'
+    flexDirection:'row',
+    fontFamily: '$textFont',
   },
   currentMoney:{
     paddingLeft:4,
     paddingTop: 5,
+    fontFamily: '$textFont',
+  },
+  textHeartContainer: {
+    width: imageWidth-5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
 });
