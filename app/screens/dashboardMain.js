@@ -23,7 +23,7 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3');
     return (
       <Container>
-        <Tabs initialPage={0}
+        <Tabs initialPage={1}
         tabBarUnderlineStyle={{backgroundColor:'#6FACB4', borderRadius : .1, borderStyle: 'dashed', borderWidth: .1, height: 2,}}>
           <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Feed</Text></TabHeading>}>
             <CharityFeed />

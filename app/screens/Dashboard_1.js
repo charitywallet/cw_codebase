@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ImageBackground} from 'react-native';
+import {Text, View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
 import {Carousel} from '../components/DashboardComponents/Carousel'
 import {CurrentAmountCard} from '../components/DashboardComponents/CurrentAmountCard';
+
+const imageWidth = Dimensions.get('window').width;
 
 class Dashboard_1 extends Component {
 
@@ -36,7 +38,6 @@ componentDidMount() {
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
-        console.log("response", data)
         this.setState({
           active_charities: data.totals.active_charities,
           active_drives: data.totals.active_drives,
@@ -56,9 +57,13 @@ componentDidMount() {
   render() {
     return(
       <View style={styles.container}>
-      <CurrentAmountCard month_total={this.state.month_total}/>
-      <Carousel active_charities={this.state.active_charities}
-      active_drives={this.state.active_drives} lifetime_total={this.state.lifetime_total}/>
+        <View style={styles.currencyCardContainer}>
+          <CurrentAmountCard month_total={this.state.month_total}/>
+        </View>
+        <View style={styles.carouselContainer}>
+          <Carousel active_charities={this.state.active_charities}
+          active_drives={this.state.active_drives} lifetime_total={this.state.lifetime_total}/>
+        </View>
       </View>
     );
   }
@@ -69,8 +74,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: "pink"
+    backgroundColor: "#D3E3E6",
+    //marginTop: -15,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
+  currencyCardContainer: {
+    width: imageWidth,
+    paddingTop: 74.5,
+    shadowOffset:{  width: 2,  height: 2,  },
+    shadowColor: 'black',
+    shadowOpacity: .3,
+    height: 250,
+  },
+  carouselContainer: {
+    width: imageWidth,
+    backgroundColor: 'white',
+    marginTop: 22.5,
+    height: 280,
+    shadowOffset:{  width: 2,  height: 2,  },
+    shadowColor: 'black',
+    shadowOpacity: .3,
+  }
 });
 
 

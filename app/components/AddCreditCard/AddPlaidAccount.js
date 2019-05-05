@@ -127,7 +127,15 @@ class Item extends Component {
 class AddCreditCard extends Component {
   constructor() {
      super();
-     this.state = { isVisible: true, valueArray: [], disabled: false, isVisible: true, textVisible: false, text: ''}
+     this.state =
+     { isVisible: true,
+       valueArray: [],
+       disabled: false,
+       isVisible: true,
+       textVisible: false,
+       text: '',
+       success: false,
+     }
      this.addNewEle = false;
      this.index = 0;
    };
@@ -190,6 +198,50 @@ class AddCreditCard extends Component {
     //console.log(this.state);
   }
 
+  handleFinishButton = () => {
+    //console.log(this.state);
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://0.0.0.0:5000/set_ptoken', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      //user_id: this.state.user_id,
+      user_id: this.props.user_id,
+      public_token: this.state.data.metadata.public_token,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        this.setState({
+          success: true,
+        })
+        //console.log("public_token", this.state.data.metadata.public_token);
+        //console.log("user id", this.props.user_id);
+      } else {
+        this.setState({
+          success: false,
+        })
+        alert(data.message); //TODO: Network error component
+      }
+    })
+    .catch((error) => {
+      alert(error)
+    });
+    this.setState({ isVisible: false });
+  }
+
   render() {
     //const {navigate} = this.props.navigation;
     return(
@@ -227,8 +279,8 @@ class AddCreditCard extends Component {
                    {this.state.data && this.state.data.metadata &&
                      this.state.data.metadata.public_token ?
                      <View style={{justifyContent:'center', marginBottom: 300, alignItems:'center'}}>
-                        <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution_name} Account added!</Text>
-                        <Button containerStyle={{}} key={index} title="Finish" titleStlye={{color:'white'}} onPress={this.handlePressBackdrop}/>
+                        <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution_name} Account added! {this.state.data.metadata.public_token}</Text>
+                        <Button containerStyle={{}} key={index} title="Finish" titleStlye={{color:'white'}} onPress={this.handleFinishButton}/>
                      </View>: null }
                    </View>
                   </Overlay>

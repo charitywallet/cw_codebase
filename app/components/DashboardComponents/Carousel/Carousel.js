@@ -18,32 +18,32 @@ const Carousel = ({
       id: "1",
       cardTitle: "Your lifetime donations through the app are",
       cardAmount: lifetime_total,
-      cardMessage: "Congrats! Way to go..."
+      cardMessage: "Congrats! Way to go!"
     },
     {
       id: "2",
-      cardTitle: "Drives Supported",
+      cardTitle: "For making a difference in the world by supporting so many drives!",
       cardAmount: active_drives,
-      cardMessage: "You da MVP!"
+      cardMessage: "Thank you!"
     },
     {
       id: "3",
-      cardTitle: "Charities Supported",
+      cardTitle: "The number of charities supported by you are",
       cardAmount: active_charities,
-      cardMessage: "You da MVP!"
+      cardMessage: "Amazing work!"
     },
-    {
-      id: "4",
-      cardTitle: "Charities Supported",
-      cardAmount: "12",
-      cardMessage: "You da MVP!"
-    },
-    {
-      id: "5",
-      cardTitle: "Charities Supported",
-      cardAmount: "12",
-      cardMessage: "You da MVP!"
-    },
+    // {
+    //   id: "4",
+    //   cardTitle: "Charities Supported",
+    //   cardAmount: "12",
+    //   cardMessage: "You da MVP!"
+    // },
+    // {
+    //   id: "5",
+    //   cardTitle: "Charities Supported",
+    //   cardAmount: "12",
+    //   cardMessage: "You da MVP!"
+    // },
   ];
 
     return(
@@ -84,3 +84,14 @@ export default Carousel;
 //     <Text style={styles.cardTitle}>{info.item.cardTitle}</Text>
 // </View>
 // </ImageBackground>
+
+// <LinearGradient
+// colors={['rgba(69,150,160,0.9)', 'rgba(40,140,90,0.7)']}
+// style={{
+// position: 'absolute',
+// left: 0,
+// right: 0,
+// top: 0,
+// height: 350,
+// }}
+// />

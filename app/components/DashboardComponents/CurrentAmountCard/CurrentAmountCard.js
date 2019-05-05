@@ -17,14 +17,14 @@ const CurrentAmountCard = ({ month_total }) => {
     <View style={styles.container}>
       <Text style={styles.date}>{ formattedDate }</Text>
       <Text style={styles.amount}>${ month_total }</Text>
-      <Text style={styles.bottomText}>collected till now...</Text>
+      <Text style={styles.bottomText}>collected this month</Text>
       <View style={styles.buttonContainer}>
-          <Button
+          <Button raised
           title= 'Donate Now'
-          buttonStyle= {styles.buttonStyle}/>
-          <Button
+          buttonStyle= {styles.buttonStyle} titleStyle={styles.buttonTextStyle}/>
+          <Button raised
           title= 'Donate Custom Amount'
-          buttonStyle= {styles.buttonStyle}/>
+          buttonStyle= {styles.buttonStyle} titleStyle={styles.buttonTextStyle}/>
       </View>
     </View>
   )

@@ -45,7 +45,7 @@ class Signup2 extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const { navigation } = this.props;
-    const user_id = JSON.stringify(navigation.getParam('userId', 'NO-ID'));
+    const user_id = JSON.stringify(navigation.getParam('userId', 3));
 
     return(
       <View style={{flex: 1,}}>
@@ -59,7 +59,7 @@ class Signup2 extends Component {
 
           <LoginInput text='First Name'/>
           <LoginInput text='Last Name'/>
-          <AddPlaidAccount navigation={this.props.navigation}/>
+          <AddPlaidAccount navigation={this.props.navigation} user_id={user_id}/>
           <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
                   This is the account we will use to calculate the change from each transaction.</Text>}
@@ -68,7 +68,7 @@ class Signup2 extends Component {
             </Tooltip>
           </View>
 
-          <AddPlaidAccount navigation={this.props.navigation}/>
+          <AddPlaidAccount navigation={this.props.navigation} user_id={user_id}/>
           <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
                   This is the account we will use to calculate the change from each transaction.</Text>}

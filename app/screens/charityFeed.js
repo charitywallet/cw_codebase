@@ -8,7 +8,7 @@ class CharityFeed extends Component {
 
   render() {
     return(
-      <View>
+      <View style={{backgroundColor: "#D3E3E6", paddingTop: 5,}}>
       <FlatList
             data={[{charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
             , charityName: 'ABSforTheWin', updateDate: 'April 27, 2019'
