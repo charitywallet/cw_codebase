@@ -24,9 +24,13 @@ class SqlConn(object):
 
     def get_query(self,query,data):
         """Saves user profile details"""
-        self.cursor.execute(query,data)
-        data = self.cursor.fetchall()
-        return data
+        if data is not None:
+            self.cursor.execute(query,data)
+            result = self.cursor.fetchall()
+        else:
+            self.cursor.execute(query)
+            result = self.cursor.fetchall()
+        return result
 
     # def user_exists(self,username):
     #     query="Select * from donor where username = %s"
