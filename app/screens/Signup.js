@@ -90,9 +90,9 @@ class Signup extends Component {
       <Container>
         <Logo/>
         <LoginInput text='Email' onChangeText={email => this.setState({ email })}
-              value={this.state.email}/>
+              value={this.state.email} autoCapitalize='none'/>
         <LoginInput text='Password' onChangeText={password => this.setState({ password })}
-              value={this.state.password}/>
+              value={this.state.password} autoCapitalize='none'/>
         <View style={styles.signUp}>
           <LoginButton text='Sign Up' onPress={ () => this.onPressSignIn() } disabled={!isEnabled}/>
         </View>

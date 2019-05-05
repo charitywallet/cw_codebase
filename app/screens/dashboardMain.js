@@ -5,6 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import CharityFeed from './CharityFeed';
 import CharityInformation from './CharityInformation'
 import DriveInformation from './DriveInformation'
+import ReactNativeAnimatedIcons from './ChangingIcon'
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
@@ -43,10 +44,10 @@ export default class TabsAdvancedExample extends Component {
             <CharityFeed />
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
-            <Dashboard_1 user_id={user_id}/>
+            <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>Charity Information</Text></TabHeading>}>
-            <DriveInformation/>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Trial Page</Text></TabHeading>}>
+            <ReactNativeAnimatedIcons/>
           </Tab>
         </Tabs>
         </Container>

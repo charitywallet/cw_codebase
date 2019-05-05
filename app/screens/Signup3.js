@@ -21,7 +21,7 @@ class Signup3 extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
-    const title = this.props.navigation.getParam('title', 'NO-title');
+    const firstName = this.props.navigation.getParam('firstName', 'User');
 
     return(
       <View style={{flex: 1,
@@ -30,7 +30,7 @@ class Signup3 extends Component {
         <Text style={styles.skip}> SKIP</Text>
 
 
-          <Text style={styles.introText}>{title} Almost done! To help us recommend more personalized drives and charities to you,
+          <Text style={styles.introText}>Thanks for signing up, {firstName}! You are almost done. To help us recommend more personalized drives and charities to you,
           please select the causes you really care about.</Text>
 
           <View style={styles.list}>
@@ -41,24 +41,32 @@ class Signup3 extends Component {
                   , causeName: 'Animals'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/children.svg')
+                  , causeName: 'Children'},
+                  {causeImageURL: require('../components/Login_SignUp/images/civil-rights.svg')
+                  , causeName: 'Civil Rights'},
+                  {causeImageURL: require('../components/Login_SignUp/images/drug.svg')
+                  , causeName: 'Drug & Alcohol Abuse'},
+                  {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
+                  , causeName: 'Environment'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
+                  {causeImageURL: require('../components/Login_SignUp/images/health.svg')
+                  , causeName: 'Health'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
+                  , causeName: 'Homelessness'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
+                  , causeName: 'Hunger'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
+                  , causeName: 'LGBTQ'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'},
+                  , causeName: 'Mental Health'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
+                  , causeName: 'Public Policy'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
+                  , causeName: 'Senior Citizens'},
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'}
+                  , causeName: 'Women'}
               ]}
 
                 numColumns = {3}
@@ -123,14 +131,3 @@ const styles = EStyleSheet.create({
 
 
 export default Signup3;
-
-
-// <View style={{flex: 1,}}>
-// <FlatList
-//   data={[{title: 'Title Text', id: 'item1'}, {title: 'Title Text123', id: 'item2'}]}
-//   extraData={this.state}
-//   keyExtractor={this._keyExtractor}
-//   renderItem={this._renderItem}
-// />
-// </View>
-// <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>

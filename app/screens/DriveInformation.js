@@ -10,19 +10,19 @@ import {DriveInfoHeader} from 'app/components/CharityTabComponents/DriveInfoHead
 
 const imageWidth = (Dimensions.get('window').width);
 
-const driveInfo =
-      {
-        driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-      , driveCity: 'Berkeley'
-      , driveState: 'CA'
-      , driveTitle: 'Help Detective Pikachu'
-      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-      , currentMoney: '450'
-      , targetMoney: '2000'
-      , percentCompleted: 0.8
-      , charityName: 'Pokemon Squad'
-      , numDonations: '30'
-      }
+// const driveInfo =
+//       {
+//         driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
+//       , driveCity: 'Berkeley'
+//       , driveState: 'CA'
+//       , driveTitle: 'Help Detective Pikachu'
+//       , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
+//       , currentMoney: '450'
+//       , targetMoney: '2000'
+//       , percentCompleted: 0.8
+//       , charityName: 'Pokemon Squad'
+//       , numDonations: '30'
+//       }
 
 const driveFeedUpdate =
       [
@@ -39,6 +39,7 @@ const driveFeedUpdate =
 
 export default class DriveInformation extends Component {
   render() {
+    const drives = this.props.navigation.getParam('drive', 'No-Drive');
     return (
         <View style={styles.Container}>
           <FlatList
@@ -48,7 +49,7 @@ export default class DriveInformation extends Component {
                   charity= {item}/>
               )}
               keyExtractor={(item, index) => index.toString()}
-              ListHeaderComponent={<DriveInfoHeader drive={driveInfo} />}
+              ListHeaderComponent={<DriveInfoHeader drive={drives} />}
               ListFooterComponent={<DefaultCharityFeedCard />}
           />
         </View>

@@ -10,9 +10,9 @@ const imageWidth = (Dimensions.get('window').width -20)/2;
 export default class DrivesCard extends Component {
 
   onPressDrive = (text) => {
-    console.log(text,' is pressed');
-    console.log("title", this.props.drive.driveTitle);
-    this.props.navigation.navigate('DriveInformation', {title: this.props.drive.driveTitle});
+    //console.log(text,' is pressed');
+    //console.log("title", this.props.drive.driveTitle);
+    this.props.navigation.navigate('DriveInformation', {drive: this.props.drive, navigation:this.props.navigation,});
     //TODO: Navigate to DriveInfo, send props to display data
     //TODO: fetch props through the following code:
     // const title = this.props.navigation.getParam('title', 'NO-title');
