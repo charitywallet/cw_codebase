@@ -28,28 +28,29 @@ class SqlConn(object):
         data = self.cursor.fetchall()
         return data
 
-    def user_exists(self,username):
-        query="Select * from donor where username = %s"
-        data = (username,)
-        result=self.get_query(query,data)
-        if len(result)>0:
-            return True
-        return False
+    # def user_exists(self,username):
+    #     query="Select * from donor where username = %s"
+    #     data = (username,)
+    #     result=self.get_query(query,data)
+    #     if len(result)>0:
+    #         return True
+    #     return False
 
-    def create_user(self,username,password):
-        query="Insert into donor (username, password, name, activation_date) values(%s,%s,%s,%s)"
-        data = (username,password,"Donor",datetime.datetime.now(),)
-        self.set_query(query,data)
-        result= self.get_query("Select donor_id from donor where username = %s",(username,))
+    # def create_user(self,username,password):
+    #     query="Insert into donor (username, password, name, activation_date, account_status) values(%s,%s,%s,%s,%s)"
+    #     data = (username,password,"Donor",datetime.datetime.now(),True,)
+    #     self.set_query(query,data)
+    #     result= self.get_query("Select donor_id from donor where username = %s",(username,))
+    #
+    #     return result[0][0]
 
-        return result[0][0]
-
-    def check_user(self,username,password):
-        query="Select * from donor where username = %s and password= %s"
-        data = (username,password,)
-        result=self.get_query(query,data)
-        uid=0
-        if len(result)>0:
-            uid=result[0][0]
-            return uid,True
-        return uid, False
+    # def check_user(self,username,password):
+    #     query="Select * from donor where username = %s and password= %s"
+    #     data = (username,password,)
+    #     result=self.get_query(query,data)
+    #     uid=0
+    #     print(result)
+    #     if len(result)>0 and result[0][-1]==1 :
+    #         uid=result[0][0]
+    #         return uid,True
+    #     return uid, False

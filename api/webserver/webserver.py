@@ -6,19 +6,22 @@ from classes.auth import Auth
 from classes.donor import Donor
 from utils.session import start_session, check_session, end_session
 from utils.plaid import get_access_token
+from utils.listing import *
 import datetime
 
+print("App load")
+
 app = Flask(__name__)
-app.debug = True
 
 # working endpoints
-# 1. /signup - new user signup
-# 2. /login - user login
-# 3. /get_drives - fetch all drive
-# 4. /get_charities - fetch all charities
-# 5. /get_user_totals - user totals for dashboard
-# 6. /set_ptoken - send plaid public token to backend for plaid setup
-# 7. /drive_selection - save drives
+# 1. /signup - new user signup - unput username and password
+# 2. /login - user login - unput username and password
+# 3. /get_drives - fetch all drive - input none
+# 4. /get_charities - fetch all charities - input none
+# 5. /get_user_totals - user totals for dashboard - input user_id
+# 6. /set_ptoken - send plaid public token to backend for plaid setup - input user_id and public_token
+# 7. /drive_selection - save drives - input user_id and drive_id
+# 8. /drive_selection - save drives - input user_id and charity_id
 
 
 @app.route('/signup', methods=["POST"])
@@ -36,7 +39,7 @@ def signup():
             if success:
                 user_id=user.get_id()
                 status_code = 200
-                start_session(user_id,datetime.datetime)
+                start_session(user_id,datetime.datetime.now())
                 response['user_id']=user_id
                 logging.info("New User {} created".format(user_id))
             else:
@@ -76,7 +79,7 @@ def signin():
                 status_code = 200
                 user_id=user.get_id()
                 response['user_id']=user_id
-                start_session(user_id,datetime.datetime)
+                start_session(user_id,datetime.datetime.now())
                 logging.info("New User {} created".format(user_id))
             else:
                 status_code = 400
@@ -141,34 +144,33 @@ def reset_password():
     return Response(result, status=status_code, mimetype='application/json')
 
 
-@app.route('/get_user_totals', methods=["GET"])
+@app.route('/get_user_totals', methods=["POST"])
 def user_totals():
     response={}
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         user_id = arguments.get("user_id")
+        print("user_id",user_id)
         status=""
         try:
             #check session
-            session_flag= True
-
+            session_flag= check_session(int(user_id))
             if session_flag:
                 current_user=Donor(user_id)
-                #get totals from user class - current_user.get_totals()
-                response["totals"]= {'user_id':user_id,'month_total':20,'lifetime_total':200,'active_drives':3,'active_charities':1}
+                response["totals"]= current_user.get_user_totals()
                 status_code = 200
                 logging.info(response)
             else:
                 status_code = 400
                 message="Session Inactive, Login Again"
-                logging.info(message)
+                logging.warning(message)
                 response['message']=message
 
         except Exception as e:
             status_code = 400
             status = e
             message="Error:{}".format(status)
-            logging.info(message)
+            logging.warning(message)
             response['message']=message
 
     else:
@@ -224,32 +226,7 @@ def charity_list():
     response={}
     try:
         #get all listed charities from
-        response["charities"]= [
-        {'charity_id':1,'name':'The Pollination Project Foundation',
-        'description': 'The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
-        'address':'15 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':5,
-        'causes':['Community Foundations', 'Philanthropy', 'Charity & Voluntarism Promotion', 'Voluntarism & Grantmaking Foundations']
-        },
-        {'charity_id':2,'name':'The Ama Foundation',
-        'description': ' The Ama Foundation was created to provide a home, family environment and education for the most underprivileged children of Nepal.  we rescue children from trafficking, drugs and malnutrition and help them to grow up to be productive, happy and healthy citizens of Nepal',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/AmaLogoDarkRedWords.jpg',
-        'address':'25 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':1,
-        'causes':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief']
-        },
-        {'charity_id':3,'name':'Chaparral Foundation',
-        'description': 'Chaparral House provides care for frail elders in a dynamic, life-affirming, homelike environment where privacy and self-esteem are respected, freedom of choice and freedom of expression are encouraged, and participation and contribution are appreciated.',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
-        'address':'35 Berkeley Way, Berkeley',
-        'location':'Berkeley',
-        'active_drives':2,
-        'causes':['Health', 'Nursing Facilities', 'Philanthropy', 'Private Operating Foundations', 'Seniors']
-        }
-        ]
+        response["charities"]= get_charities()
         status_code = 200
         logging.info(response)
 
@@ -355,43 +332,8 @@ def drive_list():
     response={}
     try:
         #get all listed charities from
-        response["drives"]= [
-        {'drive_id':1,'name':'Save the pollens',
-        'description': 'The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg',
-        'target_amt':1000, 'collected_amt':200,
-        'location':'Berkeley',
-        'state':"California",
-        'causes':['Community Foundations'],
-        'precent_complete':20
-        },
-        {
-        'drive_id':2,'name':'Support Unlocking Silent',
-        'description': 'Support Unlocking Silent Histories in its startup phase and later with an impact grant. With the support of TPP, we have been able to many Indigenous youth both providing them with leadership jobs and inspiring young people to tell their stories from their perspectives',
-        'image_url':'https://greatnonprofits.org/images/uploads/reviews/ush.jpg',
-        'target_amt':5000, 'collected_amt':2000,
-        'location':'Global',
-        'causes':['Charity & Voluntarism Promotion','Nature'],
-        'precent_complete':40
-        },
-        {'drive_id':3,'name':'Renovating Chaparral House',
-        'description': 'Renovations to  Chaparral House for providing a safe home like atmosphere with engaging and stimulating activities',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
-        'target_amt':200, 'collected_amt':90,
-        'location':'Berkeley',
-        'causes':['Health', 'Nursing Facilities', 'Seniors'],
-        'precent_complete':45
-        },
-        {'drive_id':4,'name':'The Ama Foundation',
-        'description': 'The ama food drive',
-        'image_url':'https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg',
-        'target_amt':270, 'collected_amt':90,
-        'location':'Berkeley',
-        'causes':[ 'Children & Youth', 'Education', 'Homeless & Housing', 'International Relief'],
-        'precent_complete':33
-        }
+        response["drives"]= get_drives()
 
-        ]
         status_code = 200
         logging.info(response)
 
@@ -503,4 +445,13 @@ def user_charity_list():
 
     result=json.dumps(response)
 
+    return Response(result, status=status_code, mimetype='application/json')
+
+@app.route('/bir_test', methods=["POST"])
+def bir_test():
+    session_flag= check_session(1)
+    response={}
+    print(session_flag)
+    status_code = 200
+    result=json.dumps(response)
     return Response(result, status=status_code, mimetype='application/json')

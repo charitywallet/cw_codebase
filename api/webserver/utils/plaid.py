@@ -1,4 +1,5 @@
 import plaid
+from classes.donor import Donor
 
 PLAID_CLIENT_ID = '5cb0ce482db15200120fb445'
 PLAID_SECRET = '8b33b5d685f70591320f566ad87901'
@@ -19,12 +20,18 @@ def get_access_token(uid,public_token):
     try:
         exchange_response = client.Item.public_token.exchange(public_token)
         access_token = exchange_response['access_token']
-        item = exchange_response['access_token']
-        return True
+        item = exchange_response['item_id']
+        current_user = Donor(uid)
+        # current_user.set_access_token(item,access_token)
+        return current_user.set_access_token(item,access_token)
         logging.info(e)
     except plaid.errors.PlaidError as e:
         raise
         logging.info(e)
+
+def get_transactions():
+    #
+    pass
 
 
 
