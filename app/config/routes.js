@@ -17,11 +17,17 @@ import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
-import DriveInfo from '../components/CharityTabComponents/DriveInfo/DriveInfo'
+import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
 
 const AppContainer1 = createBottomTabNavigator(
   {
-    Charities: {screen: Drives},
+    Charities: {
+      screen: Drives,
+      navigationOptions: {
+        style:{fontSize: 30}
+
+        }
+      },
     Home: { screen: Dashboard },
     Settings: { screen: Drives },
   },
@@ -39,13 +45,21 @@ const AppContainer1 = createBottomTabNavigator(
         } else if (routeName === 'Charities') {
           iconName = `settings${focused ? '' : ''}`;
         }
-        return <Icon name={iconName} size={5} color={tintColor} />;
+        return <Icon name={iconName} size={5} color={'#4B97A1'} style={{color: '#4B97A1'}}/>;
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: '#4B97A1',
       inactiveTintColor: 'gray',
-      style: {marginBottom: -20, paddingTop: 5,}
+      style: {
+        marginBottom: -20,
+        paddingTop: 5,
+        //backgroundColor: '#92C7C7',
+      },
+      labelStyle: {
+        fontSize: 11,
+        fontWeight: '600'
+      }
     },
     initialRouteName: 'Home',
   },
@@ -82,8 +96,13 @@ const RootStack = createStackNavigator(
       screen: AppContainer1,
       navigationOptions: {
         title: "Dashboard",
-        initialRouteName: 'Home'
+        initialRouteName: 'Home',
         //headerLeft: null, //TODO: Uncomment this.
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+          //backgroundColor: '#3D96A1',
+        },
       },
     },
     UserDrives: {
@@ -92,8 +111,8 @@ const RootStack = createStackNavigator(
         title: "Drives",
       },
     },
-    DriveInfo: {
-      screen: DriveInfo,
+    DriveInfoHeader: {
+      screen: DriveInfoHeader,
       navigationOptions: {
         //title: "Drives",
       },

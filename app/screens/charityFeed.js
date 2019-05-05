@@ -8,21 +8,24 @@ class CharityFeed extends Component {
 
   render() {
     return(
-      <View>
+      <View style={{backgroundColor: "#D3E3E6", paddingTop: 5,}}>
       <FlatList
-            data={[{charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
+            data={[{charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
             , charityName: 'ABSforTheWin', updateDate: 'April 27, 2019'
-            , feedImageURL: require('../components/DashboardComponents/Carousel/image/homeless.jpg')
+            , feedImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
             , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
-            , numDonations: '25'},
-            {charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
+            , numDonations: '25'
+            , driveName: 'Help Detective Pikachu'},
+            {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
             , charityName: 'BASforTheWin', updateDate: 'April 27, 2019'
-            , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
-            , feedMessage: 'Thank you so much guys!!', numDonations: '25'},
-            {charityImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
+            , feedImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
+            , feedMessage: 'Thank you so much guys!!', numDonations: '25'
+            , driveName: 'Help Detective Pikachu'},
+            {charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
             , charityName: 'SABforTheWin', updateDate: 'April 27, 2019'
-            , feedImageURL: require('../components/DashboardComponents/Carousel/image/background.jpg')
-            , feedMessage: 'Thank you so much guys!!', numDonations: '25'}]}
+            , feedImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
+            , feedMessage: 'Thank you so much guys!!', numDonations: '25'
+            , driveName: 'Help Detective Pikachu'}]}
             renderItem={({item}) => (
             <CharityFeedCard2
               charity= {item}/>

@@ -3,6 +3,8 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right
 import Dashboard_1 from './Dashboard_1';
 import {MyFooter} from '../components/MyFooter';
 import CharityFeed from './CharityFeed';
+import CharityInformation from './CharityInformation'
+import DriveInformation from './DriveInformation'
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
@@ -17,19 +19,22 @@ const data=
 , charityName: 'Pokemon Squad', numDonations: '30'}
 
 export default class TabsAdvancedExample extends Component {
+
   render() {
+    const { navigation } = this.props;
+    const user_id = navigation.getParam('userId', '3');
     return (
       <Container>
-        <Tabs initialPage={0}
+        <Tabs initialPage={1}
         tabBarUnderlineStyle={{backgroundColor:'#6FACB4', borderRadius : .1, borderStyle: 'dashed', borderWidth: .1, height: 2,}}>
           <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Feed</Text></TabHeading>}>
             <CharityFeed />
           </Tab>
           <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Overview</Text></TabHeading>}>
-            <Dashboard_1 />
+            <Dashboard_1 user_id={user_id}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Awards</Text></TabHeading>}>
-            <Dashboard_1/>
+          <Tab heading={ <TabHeading><Text style={{color:'#6FACB4'}}>Charity Information</Text></TabHeading>}>
+            <DriveInformation/>
           </Tab>
         </Tabs>
         </Container>

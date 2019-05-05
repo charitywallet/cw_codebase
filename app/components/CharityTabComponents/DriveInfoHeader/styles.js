@@ -19,6 +19,9 @@ export default EStyleSheet.create({
     height: imageWidth/2,
     width: imageWidth,
   },
+  locationContainer:{
+    flexDirection:'row',
+  },
   location:{
     paddingTop: 3,
     paddingLeft:4,
