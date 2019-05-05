@@ -29,7 +29,11 @@ class Signup2 extends Component {
 
   constructor() {
      super();
-     this.state = { isVisible: true }
+     this.state = {
+       isVisible: true,
+       firstName: '',
+       lastName: '',
+     }
    };
 
    handlePressBackdrop = () => {
@@ -40,7 +44,9 @@ class Signup2 extends Component {
      this.setState({ isVisible: false });
    };
 
-   handleCC = form => console.log(form);
+   onPressNext = (navigate, user_id) => {
+     navigate('UserSignup3', {user_id: user_id, firstName: this.state.firstName, lastName: this.state.lastName})
+   }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -57,8 +63,10 @@ class Signup2 extends Component {
          handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard', {user_id: user_id})}}
          button1="Fill Now" button2="Later"/>
 
-          <LoginInput text='First Name'/>
-          <LoginInput text='Last Name'/>
+          <LoginInput text='First Name' onChangeText={firstName => this.setState({ firstName })}
+                value={this.state.firstName}/>
+          <LoginInput text='Last Name' onChangeText={lastName => this.setState({ lastName })}
+                value={this.state.lastName}/>
           <AddPlaidAccount navigation={this.props.navigation} user_id={user_id}/>
           <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
@@ -77,7 +85,7 @@ class Signup2 extends Component {
             </Tooltip>
           </View>
           <View style={{paddingTop:10,}}>
-          <LoginButton text='Next' onPress = {() => navigate('UserSignup3', {user_id: user_id})}/>
+          <LoginButton text='Next' onPress = {() => this.onPressNext(navigate, user_id)}/>
           </View>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot active={true}/>

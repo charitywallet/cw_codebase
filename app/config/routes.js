@@ -24,7 +24,7 @@ import CharityInformation from '../screens/CharityInformation'
 
 const AppContainer1 = createBottomTabNavigator(
   {
-    Charities: {
+    Drives: {
       screen: Drives,
       navigationOptions: {
         style:{fontSize: 30}
@@ -45,7 +45,7 @@ const AppContainer1 = createBottomTabNavigator(
           //iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Settings') {
           iconName = `settings`;
-        } else if (routeName === 'Charities') {
+        } else if (routeName === 'Drives') {
           iconName = `public`;
         }
         return <Icon name={iconName} size={30} color={tintColor}/>;

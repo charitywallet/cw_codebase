@@ -13,6 +13,7 @@ class Dashboard_1 extends Component {
     active_drives: '',
     month_total: '',
     lifetime_total: '',
+    drives_supported: true,
   }
 
 componentDidMount() {
@@ -44,7 +45,11 @@ componentDidMount() {
           month_total: data.totals.month_total,
           lifetime_total: data.totals.lifetime_total,
         })
-        //console.log("data", this.state.data);
+        if (data.totals.active_drives < 1) {
+          this.setState({
+            drives_supported: false,
+          })
+        }
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -57,14 +62,22 @@ componentDidMount() {
   render() {
     return(
       <View style={styles.container}>
-        <View style={styles.currencyCardContainer}>
-          <CurrentAmountCard month_total={this.state.month_total}/>
+      {this.state.drives_supported ?
+        <View>
+          <View style={styles.currencyCardContainer}>
+            <CurrentAmountCard month_total={this.state.month_total}/>
+          </View>
+          <View style={styles.carouselContainer}>
+            <Carousel active_charities={this.state.active_charities}
+            active_drives={this.state.active_drives} lifetime_total={this.state.lifetime_total}/>
+          </View>
         </View>
-        <View style={styles.carouselContainer}>
-          <Carousel active_charities={this.state.active_charities}
-          active_drives={this.state.active_drives} lifetime_total={this.state.lifetime_total}/>
+        : <View style={styles.container}>
+          <Text style={{fontSize: 20,}}>Please select drives to start donating. </Text>
+          <Text onPress = {() => this.props.navigation.navigate('UserDrives')}>Select Drives</Text>
+        </View>}
         </View>
-      </View>
+
     );
   }
 };
