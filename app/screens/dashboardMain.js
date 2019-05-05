@@ -5,7 +5,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import CharityFeed from './CharityFeed';
 import CharityInformation from './CharityInformation'
 import DriveInformation from './DriveInformation'
-import ReactNativeAnimatedIcons from './ChangingIcon'
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
@@ -39,15 +38,15 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3');
     return (
       <Container>
-        <Tabs initialPage={1} tabBarUnderlineStyle={styles.tabHeading}>
+        <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Charity Feed</Text></TabHeading>}>
             <CharityFeed />
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
             <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>Trial Page</Text></TabHeading>}>
-            <ReactNativeAnimatedIcons/>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>My Drives</Text></TabHeading>}>
+            <CharityFeed/>
           </Tab>
         </Tabs>
         </Container>
