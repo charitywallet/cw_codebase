@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StackNavigator, createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Icon } from 'native-base';
+//import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from '../screens/Login'
@@ -18,6 +19,8 @@ import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
 import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
+import DriveInformation from '../screens/DriveInformation'
+import CharityInformation from '../screens/CharityInformation'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -34,18 +37,18 @@ const AppContainer1 = createBottomTabNavigator(
 
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
+      tabBarIcon: ({tintColor}) => {
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = `ios-home${focused ? '' : ''}`;
+          iconName = `home`;
           //iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Settings') {
-          iconName = `settings${focused ? '' : ''}`;
+          iconName = `settings`;
         } else if (routeName === 'Charities') {
-          iconName = `settings${focused ? '' : ''}`;
+          iconName = `public`;
         }
-        return <Icon name={iconName} size={5} color={'#4B97A1'} style={{color: '#4B97A1'}}/>;
+        return <Icon name={iconName} size={30} color={tintColor}/>;
       },
     }),
     tabBarOptions: {
@@ -58,7 +61,7 @@ const AppContainer1 = createBottomTabNavigator(
       },
       labelStyle: {
         fontSize: 11,
-        fontWeight: '600'
+        fontWeight: '500'
       }
     },
     initialRouteName: 'Home',
@@ -115,6 +118,28 @@ const RootStack = createStackNavigator(
       screen: DriveInfoHeader,
       navigationOptions: {
         //title: "Drives",
+      },
+    },
+    DriveInformation: {
+      screen: DriveInformation,
+      navigationOptions: {
+        //title: "Dashboard",
+        //initialRouteName: 'Drives',
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
+      },
+    },
+    CharityInformation: {
+      screen: CharityInformation,
+      navigationOptions: {
+        //title: "Dashboard",
+        //initialRouteName: 'Drives',
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
       },
     },
     // AddAccount: {
