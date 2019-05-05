@@ -17,7 +17,7 @@ import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
-import DriveInfo from '../components/CharityTabComponents/DriveInfo/DriveInfo'
+import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -111,8 +111,8 @@ const RootStack = createStackNavigator(
         title: "Drives",
       },
     },
-    DriveInfo: {
-      screen: DriveInfo,
+    DriveInfoHeader: {
+      screen: DriveInfoHeader,
       navigationOptions: {
         //title: "Drives",
       },

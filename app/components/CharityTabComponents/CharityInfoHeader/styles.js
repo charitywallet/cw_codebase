@@ -15,9 +15,11 @@ export default EStyleSheet.create({
     textTransform: 'capitalize',
     paddingBottom: 5,
   },
-  driveImage:{
-    height: imageWidth/2,
-    width: imageWidth,
+  locationContainer:{
+    flexDirection:'row',
+  },
+  locationPreText:{
+
   },
   location:{
     paddingTop: 3,
@@ -27,25 +29,14 @@ export default EStyleSheet.create({
     fontWeight:'bold',
     color: '$primaryBlue',
   },
-  driveTitle:{
-    paddingLeft:4,
-    fontWeight: 'bold',
-    fontSize:18,
-    textTransform: 'capitalize',
-    paddingBottom: 5,
+  charityImage:{
+    height: imageWidth/2,
+    width: imageWidth,
   },
-  moneyRaised:{
-    flexDirection:'row'
+  aboutHolderText:{
+
   },
-  currentMoney:{
-    paddingLeft:4,
-    paddingTop: 5,
-    fontWeight: 'bold',
-  },
-  targetMoney:{
-    paddingTop: 5,
-  },
-  driveAbout:{
+  charityAbout:{
     paddingLeft:4,
     paddingTop: 8,
 
@@ -55,7 +46,7 @@ export default EStyleSheet.create({
     paddingTop: 8,
     fontWeight: 'bold',
   },
-  driveUpdatesHeader:{
+  driveListHeader:{
 
   },
 });
