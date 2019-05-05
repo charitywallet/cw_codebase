@@ -55,9 +55,10 @@ class Auth(object):
             query="Select * from donor where username = %s and password= %s"
             data = (username,password,)
             result=db_obj.get_query(query,data)
+            print(result)
             uid=0
             user=None
-            if len(result)>0 and result[0][-1]==1 :
+            if len(result)>0 and result[0][-3]==1 :
                 uid=result[0][0]
                 user=Donor(uid)
                 print (uid,user)

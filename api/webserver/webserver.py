@@ -21,7 +21,6 @@ app = Flask(__name__)
 # 5. /get_user_totals - user totals for dashboard - input user_id
 # 6. /set_ptoken - send plaid public token to backend for plaid setup - input user_id and public_token
 # 7. /drive_selection - save drives - input user_id and drive_id
-# 8. /drive_selection - save drives - input user_id and charity_id
 
 
 @app.route('/signup', methods=["POST"])
@@ -300,6 +299,8 @@ def set_user_drive():
             if session_flag:
                 current_user=Donor(user_id)
                 #save drive to user
+                current_user.select_drive()
+
                 status_code = 200
                 message="Drive Selected Successfully"
                 logging.info(message)
