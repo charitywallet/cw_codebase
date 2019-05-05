@@ -3,6 +3,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon,Text , Left, Body, Right
 import EStyleSheet from 'react-native-extended-stylesheet';
 import CharityFeed from './CharityFeed';
 import Drives from './Drives';
+import SupportedDrives from './SupportedDrives';
 import {CharityList} from '../components/CharityTabComponents/CharityList';
 
 
@@ -25,12 +26,15 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3'); //TODO: Change the default user id
     return (
       <Container>
-      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>Drives</Text></TabHeading>}>
+      <Tabs initialPage={2} tabBarUnderlineStyle={styles.tabHeading}>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>All Drives</Text></TabHeading>}>
             <Drives navigation={this.props.navigation} user_id={user_id}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>Charities</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>All Charities</Text></TabHeading>}>
             <CharityList navigation={this.props.navigation} user_id={user_id}/>
+          </Tab>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>My Drives</Text></TabHeading>}>
+            <SupportedDrives navigation={this.props.navigation} user_id={user_id}/>
           </Tab>
         </Tabs>
       </Container>

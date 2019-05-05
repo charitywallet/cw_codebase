@@ -1,29 +1,105 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import { Text, View, Image, TouchableOpacity, TouchableHighlight, Dimensions} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
 import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
-import { Dimensions } from 'react-native';
+import Icon from 'react-native-animated-icons';
 
 const imageWidth = (Dimensions.get('window').width -20)/2;
 
 export default class DrivesCard extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      triggerAnimationId:null,
+      // triggerAnimationId:1,
+      hearts:[{isActive:false,"id":this.props.drive.drive_id}],
+      // hearts:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}],
+      // tweets:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}]
+    };
+
+  }
+
+  onPressHearts = (item) => {
+
+    if(!item)return
+    // item.isActive!=item.isActive
+    let {hearts} = this.state
+    let updatedlist=hearts.map(o => o.id === item.id
+                          ?{ ...o, isActive: o.isActive?false:true}
+                        :o)
+    this.setState({
+      triggerAnimationId:hearts.find(x => x.id === item.id).id,
+      hearts: updatedlist})
+    //console.log(" onPress:item ",this.state);
+
+  }
+
   onPressDrive = (text) => {
-    //console.log(text,' is pressed');
-    //console.log("title", this.props.drive.driveTitle);
-    this.props.navigation.navigate('DriveInformation', {drive: this.props.drive, navigation:this.props.navigation,});
-    //TODO: Navigate to DriveInfo, send props to display data
-    //TODO: fetch props through the following code:
-    // const title = this.props.navigation.getParam('title', 'NO-title');
+    this.props.navigation.navigate('DriveInformation',
+        {drive: this.props.drive, navigation:this.props.navigation,});
   }
 
   render() {
+    const {hearts} = this.state
+    let red="rgba(245,60,60,0.8)"
+
     return (
         <TouchableOpacity onPress= {() => this.onPressDrive(this.props.drive.driveTitle)}>
         <View style={styles.Container}>
           <Image resizeMode= 'contain' source={{uri:this.props.drive.driveImageURL}} style={styles.driveImage} />
-          <Text style={styles.location}>{this.props.drive.driveCity}</Text>
+
+          {this.props.drive.driveState ?
+            <View style={styles.textHeartContainer}>
+              <Text style={styles.location}>{this.props.drive.driveCity}, {this.props.drive.driveState}</Text>
+              {hearts.map((o,i) => {
+
+                return   (
+                  <TouchableOpacity style={{height:25,}} key={i} onPress={()=>this.onPressHearts(o)}>
+                    <Icon
+                      item={o}
+                      fontSize={25}
+                      name={o.isActive?"heart":"heart-outline"}
+                      // name={"heart"}
+                      isActive={o.isActive}
+                      colorOutputRange={[
+                      "red",
+                      "pink",
+                       o.isActive?red:"red",
+                    ]}
+                    // animateAllActive
+                    colorInputRange={[0, 0.56, 1]}
+                  />
+                  </TouchableOpacity>)
+              })}
+              </View>
+            :
+            <View style={styles.textHeartContainer}>
+              <Text style={styles.location}>{this.props.drive.driveCity}</Text>
+              {hearts.map((o,i) => {
+
+                return   (
+                  <TouchableOpacity style={{height:25,}} key={i} onPress={()=>this.onPressHearts(o)}>
+                    <Icon
+                      item={o}
+                      fontSize={25}
+                      name={o.isActive?"heart":"heart-outline"}
+                      // name={"heart"}
+                      isActive={o.isActive}
+                      colorOutputRange={[
+                      "red",
+                      "pink",
+                       o.isActive?red:"red",
+                    ]}
+                    colorInputRange={[0, 0.56, 1]}
+                  />
+                  </TouchableOpacity>)
+                })}
+            </View>
+          }
+
+
           <Text numberOfLines={2} style={styles.driveTitle}>{this.props.drive.driveTitle}</Text>
           {/*<Text numberOfLines={2} style={styles.driveAbout}>{this.props.drive.driveAbout}</Text>*/}
           {/*ProgressBar component goes here*/}

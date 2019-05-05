@@ -38,29 +38,33 @@ class Signup3 extends Component {
                 data=
                 {[
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'AIDS'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                   , causeName: 'Animals'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
+                  {causeImageURL: require('../components/Login_SignUp/images/child.svg')
+                  , causeName: 'Children'},
+                  {causeImageURL: require('../components/Login_SignUp/images/civil.svg')
+                  , causeName: 'Civil Rights'},
+                  {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
+                  , causeName: 'Environment'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Poverty'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Animals'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Cancer'},
-                  {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
-                  , causeName: 'Education'}
+                  {causeImageURL: require('../components/Login_SignUp/images/health.svg')
+                  , causeName: 'Health'},
+                  {causeImageURL: require('../components/Login_SignUp/images/homeless.svg')
+                  , causeName: 'Homeless'},
+                  {causeImageURL: require('../components/Login_SignUp/images/food.svg')
+                  , causeName: 'Hunger'},
+                  {causeImageURL: require('../components/Login_SignUp/images/flag.svg')
+                  , causeName: 'LGBTQ'},
+                  {causeImageURL: require('../components/Login_SignUp/images/world.svg')
+                  , causeName: 'International'},
+                  {causeImageURL: require('../components/Login_SignUp/images/policy.svg')
+                  , causeName: 'Public Policy'},
+                  {causeImageURL: require('../components/Login_SignUp/images/religion.svg')
+                  , causeName: 'Religion'},
+                  {causeImageURL: require('../components/Login_SignUp/images/women.svg')
+                  , causeName: 'Women'}
               ]}
 
                 numColumns = {3}
