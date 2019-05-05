@@ -105,3 +105,17 @@ class Donor(object):
             raise
         finally:
             db_obj.close_conn()
+
+
+    def select_drive(self,drive_id,charity_id):
+        print("sel drive")
+        try:
+            db_obj=SqlConn()
+            query="Insert into donor_drive values(%s,%s,%s,%s,%s) "
+            data = (drive_id,self.uid,charity_id, datetime.datetime.now(),True,)
+            db_obj.set_query(query,data)
+        except Exception as e:
+            logging.info(e)
+            raise
+        finally:
+            db_obj.close_conn()

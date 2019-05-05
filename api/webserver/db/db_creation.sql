@@ -90,6 +90,17 @@ CREATE TABLE IF NOT EXISTS plaid_Setup (
     status BOOLEAN NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS donation (
+    donation_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    donor_id INTEGER REFERENCES donor(donor_id),
+    drive_id INTEGER REFERENCES donor(drive_id),
+    charity_id INTEGER REFERENCES charity(char_id),
+    donation_date DATETIME NOT NULL,
+    donation_amt FLOAT NOT NULL,
+    donation_type VARCHAR(3) NOT NULL
+);
+
+
 
 -- Insert Statements -------------------------------------------------------------------
 Insert into charity (
@@ -153,9 +164,31 @@ drive_state
 ,is_default)
 
 values (
-1,"Save the pollens",
+1,"Save the pollens - Non deafult",
 "The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.",
 "https://cdn.greatnonprofits.org/images/logos/Logo_Square_ORANGE0.jpg",
-1000.00,200.00,SYSDATE(),NULL,True,
-"Berkeley","CA","Community Foundations, Nature", SYSDATE(),True
+600.00,10.00,SYSDATE(),NULL,True,
+"Berkeley","CA","Community Foundations, Nature", SYSDATE(),False
+),
+(
+1,"Support Unlocking Silent",
+"Support Unlocking Silent Histories in its startup phase and later with an impact grant. With the support of TPP, we have been able to many Indigenous youth both providing them with leadership jobs and inspiring young people to tell their stories from their perspectives",
+"https://greatnonprofits.org/images/uploads/reviews/ush.jpg",
+5000.00,2000.00,SYSDATE(),NULL,True,
+"Berkeley","CA","Charity & Voluntarism Promotion", SYSDATE(),False
+),
+(
+3,"Renovating Chaparral House",
+"The Pollination Project is a foundation that makes seed grants, 365 days a year, to individual social change agents who seek to spread compassion in their communities and in the world for the benefit of all.",
+"https://cdn.greatnonprofits.org/images/logos/CHAPARRAL_LOGO_JPG_small72.jpg",
+200.00,90.00,SYSDATE(),NULL,True,
+"Berkeley","CA","Health, Nursing Facilities, Seniors", SYSDATE(),True
+)
+
+
+Insert into donor_drive values (
+  1,1,1,SYSDATE(),True
+)
+Insert into donor_drive values (
+  2,1,1,SYSDATE(),True
 )
