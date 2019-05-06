@@ -48,11 +48,14 @@ componentDidMount() {
     }
 
     fetch('http://0.0.0.0:5000/get_charities', {
-    method: 'GET',
+    method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({
+     //user_id: 1,
+   }),
   }).then(processResponse)
     .then(response => {
       const { statusCode, data } = response;

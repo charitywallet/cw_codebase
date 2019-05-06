@@ -12,25 +12,25 @@ export default EStyleSheet.create({
     width: '97.25%',
     alignSelf: 'center',
   },
-  charityName:{
-    paddingLeft:5,
+  driveTitle:{
+    paddingLeft:10,
+    paddingRight:5,
     fontWeight: 'bold',
     fontSize:25,
     textTransform: 'capitalize',
-    paddingBottom: 5,
+    paddingBottom: 10,
     paddingTop: 5,
   },
   driveImage:{
     height: imageWidth/2,
     width: imageWidth,
   },
-  driveTitle:{
+  charityName:{
     paddingLeft:10,
-    fontWeight: 'bold',
-    fontSize:20,
+    fontSize:16,
     textTransform: 'capitalize',
     paddingBottom: 5,
-    paddingTop: 10,
+    // paddingTop: 5,
   },
   location:{
     paddingLeft:10,
@@ -41,12 +41,18 @@ export default EStyleSheet.create({
   },
   progressBar:{
     paddingLeft:10,
+    paddingTop:10,
+    paddingBottom:10,
+  },
+  driveProgressText:{
+    paddingTop: 10,
+    paddingBottom: 5,
+    fontWeight: 'bold',
   },
   moneyRaised:{
     flexDirection:'row'
   },
   currentMoney:{
-    paddingLeft:10,
     paddingTop: 5,
     fontWeight: 'bold',
   },

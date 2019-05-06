@@ -10,21 +10,22 @@ export default class DriveInfoHeader extends Component {
   render() {
     return (
             <View style={styles.Container}>
-              <Text style={styles.charityName}>{this.props.drive.charityName}</Text>
-              <Image resizeMode= 'contain' source={{uri:this.props.drive.driveImageURL}} style={styles.driveImage} />
-              <Text numberOfLines={2} style={styles.driveTitle}>{this.props.drive.driveTitle}</Text>
+              <Text style={styles.driveTitle}>{this.props.drive.driveTitle}</Text>
+              <Text style={styles.charityName}>by: {this.props.drive.charityName}</Text>
               <Text style={styles.location}>{this.props.drive.driveCity}, {this.props.drive.driveState}</Text>
+              <Image resizeMode= 'contain' source={{uri:this.props.drive.driveImageURL}} style={styles.driveImage} />
               <View style={styles.progressBar}>
+                <Text style={styles.driveProgressText}>Drive Progress:</Text>
                 <ProgressBar
                   progress={this.props.drive.percentCompleted}
-                  width= {imageWidth - imageWidth/4}
+                  width= {imageWidth - imageWidth/10}
                   color= '#92C7C7'
                   borderColor= '#92C7C7'
                 />
-              </View>
-              <View style={styles.moneyRaised}>
-                <Text style={styles.currentMoney}>${this.props.drive.currentMoney} raised</Text>
-                <Text style={styles.targetMoney}> of ${this.props.drive.targetMoney}</Text>
+                <View style={styles.moneyRaised}>
+                  <Text style={styles.currentMoney}>${this.props.drive.currentMoney} raised</Text>
+                  <Text style={styles.targetMoney}> of ${this.props.drive.targetMoney}</Text>
+                </View>
               </View>
               <Text style={styles.driveAboutTitle}>About:</Text>
               <Text style={styles.driveAbout}>{this.props.drive.driveAbout}</Text>
