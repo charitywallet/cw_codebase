@@ -12,15 +12,18 @@ import { Input, Button } from 'react-native-elements';
 
 const styles = EStyleSheet.create({
   forgotPassword: {
+    width: 30,
     color: '$LoginScreenText',
     paddingLeft: 130,
     paddingTop: 5,
+    fontFamily: '$textFont'
   },
   newUser:{
     color: '$LoginScreenText',
     alignItems: 'center',
     paddingTop: 20,
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: '$textFont'
   }
 });
 
@@ -35,13 +38,19 @@ class Login extends Component {
 
   onPressSignIn() {
     if (this.state.email == ''){
-      alert("Please enter a valid Email ID")
+      alert("Please enter a valid Email ID.")
       return
     }
     if (this.state.password == ''){
-      alert("Please enter a valid Password")
+      alert("Please enter a valid Password.")
       return
     }
+    // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    // if(reg.test(this.state.email) === false) {
+    //   alert("Please enter a valid Email ID.");
+    //   return
+    // }
+
     this.setState({
      authenticating: true,
     });

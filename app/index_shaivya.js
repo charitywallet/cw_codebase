@@ -26,8 +26,9 @@ EStyleSheet.build({
    $textColor: '#3D96A1',
    $textFont: 'Avenir',
    $headingFont: 'Avenir',
+   $logoFont: 'Avenir',
 
-   // $outline: 1, //Use this to outline containers
+   //$outline: 1, //Use this to outline containers
 });
 
 export default () => <Navigator />;

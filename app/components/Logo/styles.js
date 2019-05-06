@@ -24,5 +24,6 @@ export default EStyleSheet.create({
     letterSpacing: -0.5,
     marginTop: 15,
     color: '$primaryBlue',
+    fontFamily: '$logoFont',
   }
 });

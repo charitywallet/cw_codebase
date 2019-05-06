@@ -44,6 +44,12 @@ class Signup extends Component {
       return
     }
 
+    // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    // if(reg.test(this.state.email) === false) {
+    //   alert("Please enter a valid Email ID.");
+    //   return
+    // }
+
     const { email, password } = this.state;
 
     // Function to process the response we get from API - done to retrieve status code

@@ -30,7 +30,7 @@ class Signup3 extends Component {
         <Text style={styles.skip}> SKIP</Text>
 
 
-          <Text style={styles.introText}>Thanks for signing up, {firstName}! You are almost done. To help us recommend more personalized drives and charities to you,
+          <Text style={styles.introText}>Thanks for signing up, {firstName}! You are almost done. In order to help us recommend more personalized drives and charities to you,
           please select the causes you really care about.</Text>
 
           <View style={styles.list}>
