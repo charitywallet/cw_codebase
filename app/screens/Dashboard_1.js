@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   currencyCardContainer: {
     width: imageWidth,
-    paddingTop: 74.5,
+    paddingTop:73.5,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',
     shadowOpacity: .3,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   carouselContainer: {
     width: imageWidth,
     backgroundColor: 'white',
-    marginTop: 22.5,
+    marginTop: 40,
     height: 280,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',

@@ -65,7 +65,9 @@ export default class CharityInfo extends Component {
 
 const styles= EStyleSheet.create({
   Container:{
-    flex:1
+    backgroundColor: '$blueBackground',
+    flex:1,
+    paddingTop:5,
   },
   row: {
   flex: 1,

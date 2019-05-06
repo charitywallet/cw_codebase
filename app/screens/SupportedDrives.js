@@ -67,11 +67,14 @@ componentDidMount() {
     }
 
     fetch('http://0.0.0.0:5000/get_drives', {
-    method: 'GET',
+    method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({
+      user_id: this.props.user_id,
+    }),
   }).then(processResponse)
     .then(response => {
       const { statusCode, data } = response;

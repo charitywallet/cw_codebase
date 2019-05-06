@@ -6,59 +6,90 @@ const imageWidth = (Dimensions.get('window').width);
 
 export default EStyleSheet.create({
   Container:{
-    flex:1
+    flex:1,
+    backgroundColor: '$white',
+    paddingVertical: 10,
+    width: '97.25%',
+    alignSelf: 'center',
   },
-  charityName:{
-    paddingLeft:4,
+  driveTitle:{
+    paddingLeft:10,
+    paddingRight:5,
     fontWeight: 'bold',
     fontSize:25,
     textTransform: 'capitalize',
-    paddingBottom: 5,
+    paddingBottom: 10,
+    paddingTop: 5,
   },
   driveImage:{
     height: imageWidth/2,
     width: imageWidth,
   },
-  locationContainer:{
-    flexDirection:'row',
+  charityName:{
+    paddingLeft:10,
+    fontSize:16,
+    textTransform: 'capitalize',
+    paddingBottom: 5,
+    // paddingTop: 5,
   },
   location:{
-    paddingTop: 3,
-    paddingLeft:4,
-    paddingBottom: 5,
+    paddingLeft:10,
+    paddingBottom: 10,
     textTransform: 'uppercase',
     fontWeight:'bold',
     color: '$primaryBlue',
   },
-  driveTitle:{
-    paddingLeft:4,
-    fontWeight: 'bold',
-    fontSize:18,
-    textTransform: 'capitalize',
+  progressBar:{
+    paddingLeft:10,
+    paddingTop:10,
+    paddingBottom:10,
+  },
+  driveProgressText:{
+    paddingTop: 10,
     paddingBottom: 5,
+    fontWeight: 'bold',
   },
   moneyRaised:{
     flexDirection:'row'
   },
   currentMoney:{
-    paddingLeft:4,
     paddingTop: 5,
     fontWeight: 'bold',
   },
   targetMoney:{
     paddingTop: 5,
   },
-  driveAbout:{
-    paddingLeft:4,
-    paddingTop: 8,
-
-  },
-  numDonations:{
-    paddingLeft:4,
+  driveAboutTitle:{
+    paddingLeft:10,
+    paddingRight:10,
     paddingTop: 8,
     fontWeight: 'bold',
   },
+  driveAbout:{
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+    textAlign: 'auto',
+
+  },
+  numDonations:{
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+    paddingBottom: 10,
+    fontWeight: 'bold',
+    fontStyle:'italic',
+  },
+  updateSeparator:{
+    height: 10,
+    width: "100%",
+    backgroundColor: "$blueBackground",
+  },
   driveUpdatesHeader:{
+    paddingTop: 15,
+    paddingLeft:10,
+    fontWeight: 'bold',
+    fontSize: 16,
 
   },
 });

@@ -26,7 +26,7 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3'); //TODO: Change the default user id
     return (
       <Container>
-      <Tabs initialPage={2} tabBarUnderlineStyle={styles.tabHeading}>
+      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>All Drives</Text></TabHeading>}>
             <Drives navigation={this.props.navigation} user_id={user_id}/>
           </Tab>
