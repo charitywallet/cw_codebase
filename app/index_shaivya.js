@@ -7,12 +7,14 @@ import Dashboard from './screens/dashboardMain';
 import PlaidTry from './screens/PlaidTry';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Navigator from './config/routes';
+import DrivesMain from './screens/DrivesMain';
 
 EStyleSheet.build({
    //$primaryBlue: '#92C7C7',
    //$primaryBlue: '#4B97A1',
    $primaryBlue: '#258895',
    //$primaryBlue: '#3D96A1',
+   $blueBackground: '#D3E3E6',
    $teal: '#6FACB4',
    $white: '#fff',
    $border: '#E2E2E2',
@@ -25,7 +27,7 @@ EStyleSheet.build({
    $textFont: 'Avenir',
    $headingFont: 'Avenir',
 
-   //$outline: 1, //Use this to outline containers
+   // $outline: 1, //Use this to outline containers
 });
 
 export default () => <Navigator />;
