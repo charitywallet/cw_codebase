@@ -111,9 +111,11 @@ class Donor(object):
         print("sel drive")
         try:
             db_obj=SqlConn()
-            query="Insert into donor_drive values(%s,%s,%s,%s,%s) "
+            query="Insert into donor_drive values(%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE \
+            status=IF(status, 0, 1)"
             data = (drive_id,self.uid,charity_id, datetime.datetime.now(),True,)
             db_obj.set_query(query,data)
+            return "Drive Toggle Sel/Unsel successful"
         except Exception as e:
             logging.info(e)
             raise
