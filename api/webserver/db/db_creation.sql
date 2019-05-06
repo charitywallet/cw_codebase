@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS donor_drive (
     status BOOLEAN NOT NULL
 );
 
+ ALTER TABLE donor_drive ADD CONSTRAINT PRIMARY KEY (drive_id, donor_id, charity_id);
 
 
 CREATE TABLE IF NOT EXISTS transactions (

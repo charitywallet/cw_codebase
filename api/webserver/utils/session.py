@@ -14,14 +14,17 @@ def check_session(uid):
     """check active session"""
     global user_session
     # if (datetime.datetime.now()- user_session[uid]["start"])> 30:
-    duration=datetime.datetime.now()- user_session[uid]["start"]
-    duration_in_min=divmod(duration.total_seconds(), 60)[0]
-    if duration_in_min>30:
-        end_session(uid,datetime.datetime.now())
-        return False
+    if uid in user_session.keys():
+        duration=datetime.datetime.now()- user_session[uid]["start"]
+        duration_in_min=divmod(duration.total_seconds(), 60)[0]
+        if duration_in_min>30:
+            end_session(uid,datetime.datetime.now())
+            return False
+        else:
+            start_session(uid,datetime.datetime.now())
+            return True
     else:
-        start_session(uid,datetime.datetime.now())
-        return True
+        return False
 
 
 

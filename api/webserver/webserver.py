@@ -310,9 +310,9 @@ def set_user_drive():
             if session_flag:
                 current_user=Donor(user_id)
                 #save drive to user
-                current_user.select_drive(drive_id,charity_id)
+                message = current_user.select_drive(drive_id,charity_id)
                 status_code = 200
-                message="Drive Selected Successfully"
+                # message="Drive Selected Successfully"
                 logging.info(message)
                 response['message']=message
             else:
@@ -340,7 +340,6 @@ def set_user_drive():
 
 @app.route('/get_drives', methods=["POST"])
 def drive_list():
-
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         user_id = arguments.get("user_id")
@@ -365,7 +364,7 @@ def drive_list():
             try:
                 #get all listed charities from
                 print(charity_id)
-                response["drives"]= get_charity_drives(charity_id,user_id)
+                response["drives"] = get_charity_drives(charity_id,user_id)
                 status_code = 200
                 logging.info(response)
 
