@@ -74,6 +74,7 @@ componentDidMount() {
     },
     body: JSON.stringify({
       user_id: this.props.user_id,
+      my_drives: 1,
     }),
   }).then(processResponse)
     .then(response => {
@@ -88,7 +89,7 @@ componentDidMount() {
           this.arrayholder = data.drives;
         }
       )
-        //console.log("data", this.state.drives);
+        //console.log("data", this.state.dataSource);
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -98,8 +99,59 @@ componentDidMount() {
     });
   };
 
+  // shouldComponentUpdate(){
+  //   console.log("Should update");
+  //   return false;
+  // }
+
+  componentDidUpdate() {
+    //console.log("Inside component update");
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://0.0.0.0:5000/get_drives', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: this.props.user_id,
+      my_drives: 1,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        this.setState({
+          drives: data.drives,
+          isLoading: false,
+          dataSource: data.drives,
+        },
+        function() {
+          this.arrayholder = data.drives;
+        }
+      )
+        //console.log("data", this.state.dataSource);
+      } else {
+        alert(data.message); //TODO: Network error component
+      }
+    })
+    .catch((error) => {
+      alert(error)
+    });
+  }
+
+
+
   search = text => {
-    console.log(text);
+    //console.log(text);
   };
   clear = () => {
     this.search.clear();
