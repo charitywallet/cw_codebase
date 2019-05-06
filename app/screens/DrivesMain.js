@@ -21,12 +21,23 @@ const styles = EStyleSheet.create({
 });
 
 export default class TabsAdvancedExample extends Component {
+  state = {
+    dummy: false
+    //user_id = this.props.navigation.getParam('userId', '3');
+  }
+  onChangeTab() {
+    //console.log("On change tab");
+    // this.setState({
+    //   dummy: false,
+    // })
+  }
+
   render() {
     const { navigation } = this.props;
     const user_id = navigation.getParam('userId', '3'); //TODO: Change the default user id
     return (
       <Container>
-      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
+      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading} onChangeTab={() => this.onChangeTab()}>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>All Drives</Text></TabHeading>}>
             <Drives navigation={this.props.navigation} user_id={user_id}/>
           </Tab>

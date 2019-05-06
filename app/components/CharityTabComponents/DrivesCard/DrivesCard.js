@@ -14,7 +14,7 @@ export default class DrivesCard extends Component {
     this.state = {
       triggerAnimationId:null,
       // triggerAnimationId:1,
-      hearts:[{isActive:this.props.drive.drive_id,"id":this.props.drive.drive_id}],
+      hearts:[{isActive:this.props.drive.userSelected,"id":this.props.drive.drive_id}],
       //user_id: this.props.user_id,
       // hearts:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}],
       // tweets:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}]
@@ -33,7 +33,7 @@ export default class DrivesCard extends Component {
     this.setState({
       triggerAnimationId:hearts.find(x => x.id === item.id).id,
       hearts: updatedlist})
-    console.log(" onPress:item ",this.state);
+    //console.log(" onPress:item ",this.state);
 
     function processResponse(response) {
       const statusCode = response.status;
@@ -55,7 +55,7 @@ export default class DrivesCard extends Component {
       user_id: this.props.user_id,
       drive_id: this.props.drive.drive_id,
       charity_id: this.props.drive.charity_id,
-      my_drives: false,
+      my_drives: 0,
     }),
   }).then(processResponse)
     .then(response => {
@@ -67,7 +67,6 @@ export default class DrivesCard extends Component {
       //     dataSource: data.drives,
       //   }
       // )
-        console.log("Backend call successful. User selected-", this.props.drive.userSelected);
       } else {
         alert(data.message); //TODO: Network error component
       }

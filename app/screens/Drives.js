@@ -74,6 +74,8 @@ componentDidMount() {
     },
     body: JSON.stringify({
       //user_id: 1,
+      my_drives: 0,
+      user_id: this.props.user_id,
     }),
   }).then(processResponse)
     .then(response => {
@@ -99,7 +101,7 @@ componentDidMount() {
   };
 
   search = text => {
-    console.log(text);
+    //console.log(text);
   };
   clear = () => {
     this.search.clear();
