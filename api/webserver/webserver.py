@@ -344,23 +344,41 @@ def drive_list():
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         user_id = arguments.get("user_id")
+        charity_id = arguments.get("charity_id")
+        source_page = arguments.get("my_drives")
         response={}
-        if user_id is None:
-            user_id=0
+        if charity_id is None:
+            try:
+                #get all listed charities from
+                response["drives"]= get_drives(user_id,int(source_page))
 
-        try:
-            #get all listed charities from
-            response["drives"]= get_drives(user_id)
+                status_code = 200
+                logging.info(response)
 
-            status_code = 200
-            logging.info(response)
+            except Exception as e:
+                status_code = 400
+                status = e
+                message="Error:{}".format(status)
+                logging.info(message)
+                response['message']=message
+        else:
+            try:
+                #get all listed charities from
+                print(charity_id)
+                response["drives"]= get_charity_drives(charity_id,user_id)
+                status_code = 200
+                logging.info(response)
 
-        except Exception as e:
-            status_code = 400
-            status = e
-            message="Error:{}".format(status)
-            logging.info(message)
-            response['message']=message
+            except Exception as e:
+                status_code = 400
+                status = e
+                message="Error:{}".format(status)
+                logging.info(message)
+                response['message']=message
+        # else:
+        #     status_code = 400
+        #     logging.warning("Something wierd has happened - Contact Bir")
+        #     response['message']="Something wierd has happened - Contact Bir"
 
     else:
         status_code = 400
