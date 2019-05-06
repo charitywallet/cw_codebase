@@ -14,7 +14,8 @@ export default class DrivesCard extends Component {
     this.state = {
       triggerAnimationId:null,
       // triggerAnimationId:1,
-      hearts:[{isActive:false,"id":this.props.drive.drive_id}],
+      hearts:[{isActive:this.props.drive.drive_id,"id":this.props.drive.drive_id}],
+      //user_id: this.props.user_id,
       // hearts:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}],
       // tweets:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}]
     };
@@ -32,7 +33,48 @@ export default class DrivesCard extends Component {
     this.setState({
       triggerAnimationId:hearts.find(x => x.id === item.id).id,
       hearts: updatedlist})
-    //console.log(" onPress:item ",this.state);
+    console.log(" onPress:item ",this.state);
+
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+
+    fetch('http://0.0.0.0:5000/drive_selection', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: this.props.user_id,
+      drive_id: this.props.drive.drive_id,
+      charity_id: this.props.drive.charity_id,
+      my_drives: false,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+      //   this.setState({
+      //     drives: data.drives,
+      //     isLoading: false,
+      //     dataSource: data.drives,
+      //   }
+      // )
+        console.log("Backend call successful. User selected-", this.props.drive.userSelected);
+      } else {
+        alert(data.message); //TODO: Network error component
+      }
+    })
+    .catch((error) => {
+      alert(error)
+    });
 
   }
 
