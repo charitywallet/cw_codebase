@@ -18,6 +18,7 @@ import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
+import Settings from '../screens/SettingsMain'
 import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
 import DriveInformation from '../screens/DriveInformation'
 import CharityInformation from '../screens/CharityInformation'
@@ -32,7 +33,7 @@ const AppContainer1 = createBottomTabNavigator(
         }
       },
     Home: { screen: Dashboard },
-    Settings: { screen: Drives },
+    Settings: { screen: Settings },
   },
 
   {

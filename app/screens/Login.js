@@ -12,7 +12,6 @@ import { Input, Button } from 'react-native-elements';
 
 const styles = EStyleSheet.create({
   forgotPassword: {
-    width: 30,
     color: '$LoginScreenText',
     paddingLeft: 130,
     paddingTop: 5,

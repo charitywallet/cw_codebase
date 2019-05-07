@@ -27,9 +27,9 @@ export default class TabsAdvancedExample extends Component {
   }
   onChangeTab() {
     //console.log("On change tab");
-    // this.setState({
-    //   dummy: false,
-    // })
+    this.setState({
+      dummy: false,
+    })
   }
 
   render() {
@@ -45,7 +45,7 @@ export default class TabsAdvancedExample extends Component {
             <CharityList navigation={this.props.navigation} user_id={user_id}/>
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>My Drives</Text></TabHeading>}>
-            <SupportedDrives navigation={this.props.navigation} user_id={user_id}/>
+            <SupportedDrives navigation={this.props.navigation} user_id={user_id} dummy={this.state.dummy}/>
           </Tab>
         </Tabs>
       </Container>

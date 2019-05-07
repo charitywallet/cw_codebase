@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
@@ -52,6 +52,7 @@ constructor(props) {
     isLoading: true,
     search: '',
     user_id: this.props.user_id,
+    drives_added: true,
   };
   this.arrayholder = [];
 }
@@ -84,6 +85,7 @@ componentDidMount() {
           drives: data.drives,
           isLoading: false,
           dataSource: data.drives,
+          drives_added: true,
         },
         function() {
           this.arrayholder = data.drives;
@@ -91,7 +93,20 @@ componentDidMount() {
       )
         //console.log("data", this.state.dataSource);
       } else {
-        alert(data.message); //TODO: Network error component
+        if (data.message == "Error:No Drives Found") {
+          this.setState({
+            drives: data.drives,
+            isLoading: false,
+            dataSource: data.drives,
+            drives_added: false,
+          },
+          function() {
+            this.arrayholder = data.drives;
+          }
+          )
+        } else {
+          alert(data.message); //TODO: Network error component
+        }
       }
     })
     .catch((error) => {
@@ -133,6 +148,7 @@ componentDidMount() {
           drives: data.drives,
           isLoading: false,
           dataSource: data.drives,
+          drives_added: true,
         },
         function() {
           this.arrayholder = data.drives;
@@ -140,7 +156,20 @@ componentDidMount() {
       )
         //console.log("data", this.state.dataSource);
       } else {
-        alert(data.message); //TODO: Network error component
+        if (data.message == "Error:No Drives Found") {
+          this.setState({
+            drives: data.drives,
+            isLoading: false,
+            dataSource: data.drives,
+            drives_added: false,
+          },
+          function() {
+            this.arrayholder = data.drives;
+          }
+          )
+        } else {
+          alert(data.message); //TODO: Network error component
+        }
       }
     })
     .catch((error) => {
@@ -186,6 +215,7 @@ componentDidMount() {
         autoCorrect={false}
         platform="ios"
       />
+      {!this.state.drives_added ? <Text style={{}}> Please select drives to view your drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
             data={this.state.dataSource}

@@ -69,7 +69,6 @@ componentDidMount() {
           this.arrayholder = data.charities;
         }
       )
-      console.log("charities", this.state.dataSource[0]);
       } else {
         alert(data.message); //TODO: Network error component
       }
