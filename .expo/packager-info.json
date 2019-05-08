@@ -1,1 +1,9 @@
-{}
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://dc-458.anonymous.cw-codebase.exp.direct",
+  "packagerNgrokUrl": "https://packager.dc-458.anonymous.cw-codebase.exp.direct",
+  "ngrokPid": 30850,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 30828
+}

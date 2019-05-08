@@ -7,6 +7,7 @@ import Dashboard from './screens/dashboardMain';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Navigator from './config/routes';
 import DrivesMain from './screens/DrivesMain';
+import AppIntro from './screens/GettingStarted';
 
 EStyleSheet.build({
    //$primaryBlue: '#92C7C7',
@@ -27,15 +28,7 @@ EStyleSheet.build({
    $headingFont: 'Avenir',
    $logoFont: 'Avenir',
 
-   //$outline: 1, //Use this to outline containers
+   $outline: 1, //Use this to outline containers
 });
-
 export default () => <Navigator/>;
-
-// const store = createStore(reducerApp);
-// export default () => (
-//   <Provider store={store}>
-//     <Navigator />
-//   </Provider>
-// )
-//export default () => <Dashboard/>;
+// export default () => <AppIntro/>;
