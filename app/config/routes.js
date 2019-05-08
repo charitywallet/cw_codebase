@@ -22,6 +22,7 @@ import Settings from '../screens/SettingsMain'
 import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
 import DriveInformation from '../screens/DriveInformation'
 import CharityInformation from '../screens/CharityInformation'
+import PlaidPage from '../screens/PlaidPage'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -96,6 +97,16 @@ const RootStack = createStackNavigator(
         title: "Signup",
       },
     },
+    PlaidPage: {
+      screen: PlaidPage,
+      navigationOptions: {
+        title: "Link account",
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
+      },
+    },
     UserDashboard: {
       screen: AppContainer1,
       navigationOptions: {
@@ -135,20 +146,12 @@ const RootStack = createStackNavigator(
     CharityInformation: {
       screen: CharityInformation,
       navigationOptions: {
-        //title: "Dashboard",
-        //initialRouteName: 'Drives',
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
         },
       },
     },
-    // AddAccount: {
-    //   screen: AddAccount,
-    //   navigationOptions: {
-    //     title: "Add Account",
-    //   },
-    // },
   },
 );
 

@@ -18,7 +18,7 @@ import {Container} from '../components/Container';
 import {Logo} from '../components/Logo';
 import {LoginInput, LoginButton} from '../components/Login_SignUp'
 import {OverlaySignup} from '../components/OverlaySignup'
-import {AddPlaidAccount} from '../components/AddCreditCard'
+import {AddPlaidAccountExternal} from '../components/AddCreditCard'
 
 import { Input, Button, SocialIcon, Tooltip } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -67,23 +67,23 @@ class Signup2 extends Component {
                 value={this.state.firstName}/>
           <LoginInput text='Last Name' onChangeText={lastName => this.setState({ lastName })}
                 value={this.state.lastName}/>
-          <AddPlaidAccount navigation={this.props.navigation} user_id={user_id}/>
-          <View style={styles.tooltip1}>
+          <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Spending Account"/>
+            {/*<View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
                   This is the account we will use to calculate the change from each transaction.</Text>}
                  backgroundColor="#F0F0F0" height={100} width={200}>
               <Ionicons name='ios-information-circle' size={30} color='grey' />
             </Tooltip>
-          </View>
+          </View>*/}
 
-          <AddPlaidAccount navigation={this.props.navigation} user_id={user_id}/>
-          <View style={styles.tooltip1}>
+          <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Checking Account"/>
+          {/*<View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
                   This is the account we will use to calculate the change from each transaction.</Text>}
                  backgroundColor="#F0F0F0" height={100} width={200}>
               <Ionicons name='ios-information-circle' size={30} color='grey' />
             </Tooltip>
-          </View>
+          </View>*/}
           <View style={{paddingTop:10,}}>
           <LoginButton text='Next' onPress = {() => this.onPressNext(navigate, user_id)}/>
           </View>
