@@ -6,18 +6,19 @@ import CharityFeed from './CharityFeed';
 import CharityInformation from './CharityInformation'
 import DriveInformation from './DriveInformation'
 import DrivesMain from './DrivesMain';
+import AnimationTry from './AnimationTry';
 import Drives from './Drives';
 import {View} from 'react-native';
 //import {DriveInfo} from '../components/CharityTabComponents/DriveInfo';
 
-const data=
-  {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-, driveLocation: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
-, driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-, currentMoney: '450'
-, targetMoney: '2000'
-, percentCompleted: 0.8
-, charityName: 'Pokemon Squad', numDonations: '30'}
+// const data=
+//   {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
+// , driveLocation: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
+// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
+// , currentMoney: '450'
+// , targetMoney: '2000'
+// , percentCompleted: 0.8
+// , charityName: 'Pokemon Squad', numDonations: '30'}
 
 const styles = EStyleSheet.create({
   tabHeading: {
@@ -40,6 +41,9 @@ export default class TabsAdvancedExample extends Component {
     return (
       <Container>
         <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
+        <Tab heading={ <TabHeading><Text style={styles.tabText}>Animation</Text></TabHeading>}>
+          <AnimationTry />
+        </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
             <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>

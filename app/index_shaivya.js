@@ -30,5 +30,12 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 
-export default () => <Navigator />;
+export default () => <Navigator/>;
+
+// const store = createStore(reducerApp);
+// export default () => (
+//   <Provider store={store}>
+//     <Navigator />
+//   </Provider>
+// )
 //export default () => <Dashboard/>;

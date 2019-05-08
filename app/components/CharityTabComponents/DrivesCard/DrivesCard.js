@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, TouchableHighlight, Dimensions} from 'react-native';
+import { Text, View, Image, TouchableOpacity, TouchableHighlight, Dimensions, Animated} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
 import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
@@ -13,11 +13,7 @@ export default class DrivesCard extends Component {
     super(props);
     this.state = {
       triggerAnimationId:null,
-      // triggerAnimationId:1,
       hearts:[{isActive:this.props.drive.userSelected,"id":this.props.drive.drive_id}],
-      //user_id: this.props.user_id,
-      // hearts:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}],
-      // tweets:[{isActive:false,"id":1},{isActive:false,"id":2},{isActive:false,"id":3},{isActive:false,"id":4}]
     };
 
   }
@@ -34,6 +30,7 @@ export default class DrivesCard extends Component {
       triggerAnimationId:hearts.find(x => x.id === item.id).id,
       hearts: updatedlist})
     //console.log(" onPress:item ",this.state);
+    this.props.func(this.props.drive.userSelected, this.props.drive.drive_id);
 
     function processResponse(response) {
       const statusCode = response.status;
@@ -84,7 +81,7 @@ export default class DrivesCard extends Component {
 
   render() {
     const {hearts} = this.state
-    let red="rgba(245,60,60,0.8)"
+    let red="rgba(245,60,60,0.85)"
 
     return (
         <TouchableOpacity onPress= {() => this.onPressDrive(this.props.drive.driveTitle)}>
@@ -105,9 +102,9 @@ export default class DrivesCard extends Component {
                       // name={"heart"}
                       isActive={o.isActive}
                       colorOutputRange={[
-                      "red",
-                      "pink",
-                       o.isActive?red:"red",
+                      red,
+                      red,
+                       o.isActive?red:red,
                     ]}
                     // animateAllActive
                     colorInputRange={[0, 0.56, 1]}
@@ -129,9 +126,9 @@ export default class DrivesCard extends Component {
                       // name={"heart"}
                       isActive={o.isActive}
                       colorOutputRange={[
-                      "red",
-                      "pink",
-                       o.isActive?red:"red",
+                        red,
+                        red,
+                       o.isActive?red:red,
                     ]}
                     colorInputRange={[0, 0.56, 1]}
                   />
