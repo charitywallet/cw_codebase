@@ -51,5 +51,4 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
 });
