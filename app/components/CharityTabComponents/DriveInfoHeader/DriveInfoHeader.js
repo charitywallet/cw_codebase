@@ -29,6 +29,12 @@ export default class DriveInfoHeader extends Component {
               </View>
               <Text style={styles.driveAboutTitle}>About:</Text>
               <Text style={styles.driveAbout}>{this.props.drive.driveAbout}</Text>
+              <View style={styles.charityNavigatorDetails}>
+                <Text style={styles.charityNavigatorDetailsHeader}>Additional Information about the charity:</Text>
+                <Text style={styles.charityNavigator1}>Type: {this.props.drive.charityType}</Text>
+                <Text style={styles.charityNavigator2}>Charity Navigator Overall Score: {this.props.drive.charityNavigatorScore}</Text>
+                <Text style={styles.charityNavigator3}>Tax Deductibility: {this.props.drive.deductibility}</Text>
+              </View>
               <Text style={styles.numDonations}>{this.props.drive.numDonations} donors have contributed to this drive</Text>
               <View style={styles.updateSeparator} />
               <Text style={styles.driveUpdatesHeader}>Drive Updates</Text>
