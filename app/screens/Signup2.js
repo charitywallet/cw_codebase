@@ -51,11 +51,11 @@ class Signup2 extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const { navigation } = this.props;
-    const user_id = JSON.stringify(navigation.getParam('userId', 3));
+    const user_id = this.props.navigation.getParam('user_id', 1);
 
     return(
       <View style={{flex: 1,}}>
-        <Text style={styles.skip} onPress = {() => navigate('UserDashboard')}> SKIP</Text>
+        <Text style={styles.skip} onPress = {() => navigate('UserDashboard', {user_id: user_id})}> SKIP</Text>
         <Container>
         <OverlaySignup userId = {JSON.stringify(user_id)}
          stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
