@@ -186,10 +186,3 @@ values (
 "Berkeley","CA","Health, Nursing Facilities, Seniors", SYSDATE(),True
 )
 ;
-
-Insert into donor_drive values (
-  1,1,1,SYSDATE(),True
-)
-Insert into donor_drive values (
-  2,1,1,SYSDATE(),True
-)
