@@ -158,7 +158,7 @@ class AddPlaidAccountExternal extends Component {
     });
   }
 
-  returnData = (data, text, error, inst_name) => {
+  returnData(data, text, error, inst_name){
   this.setState({
     data: data,
     textVisible: text,

@@ -28,7 +28,7 @@ EStyleSheet.build({
    $headingFont: 'Avenir',
    $logoFont: 'Avenir',
 
-   $outline: 1, //Use this to outline containers
+   //$outline: 1, //Use this to outline containers
 });
 export default () => <Navigator/>;
-// export default () => <AppIntro/>;
+//export default () => <AppIntro/>;

@@ -123,7 +123,7 @@ class PlaidPage extends Component {
   render() {
 
     return(
-
+      <View style={{flex:1,}}>
        <PlaidAuthenticator
         onMessage={this.onMessage}
         publicKey="0cfea3b8cf3611b374aecb1a215a39"
@@ -132,6 +132,13 @@ class PlaidPage extends Component {
         clientName="CharityWallet"
         selectAccount={false}
       />
+      {this.state.data && this.state.data.metadata &&
+        this.state.data.metadata.public_token ?
+        <View style={{justifyContent:'center', marginBottom: 300, alignItems:'center'}}>
+           <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution.name} account added! Please go back to the Sign up screen.</Text>
+           <Button containerStyle={{}} title="Finish" titleStlye={{color:'white'}} onPress={() => this.handleFinishButton(this.props.navigation)}/>
+        </View>: null }
+      </View>
 
 
     );
