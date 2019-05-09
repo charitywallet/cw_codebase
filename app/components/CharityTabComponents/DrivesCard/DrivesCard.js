@@ -14,9 +14,30 @@ export default class DrivesCard extends Component {
     this.state = {
       triggerAnimationId:null,
       hearts:[{isActive:this.props.drive.userSelected,"id":this.props.drive.drive_id}],
+      changed: false,
     };
 
   }
+
+  returnData(state){
+    if (state.changed === true){
+      this.setState({
+        hearts:[{isActive:state.isActive,"id":this.state.hearts[0].id}],
+        changed: true,
+      });
+    }
+  }
+
+  // componentWillUpdate(nextProps, nextState){
+  //   //console.log("comp will update state", this.state)
+  //   // console.log("nest state", nextState); //will show the new state
+  //   // console.log("prev state", this.state); //will show the previous state
+  //   if (nextState.initial === true || (nextState.changed === true)){
+  //     return true;
+  //   }
+  //   return false;
+  //   //console.log( "comp will update");
+  // }
 
   onPressHearts = (item) => {
 
@@ -29,7 +50,6 @@ export default class DrivesCard extends Component {
     this.setState({
       triggerAnimationId:hearts.find(x => x.id === item.id).id,
       hearts: updatedlist})
-    //console.log(" onPress:item ",this.state);
     this.props.func(this.props.drive.userSelected, this.props.drive.drive_id);
 
     function processResponse(response) {
@@ -71,12 +91,12 @@ export default class DrivesCard extends Component {
     .catch((error) => {
       alert(error)
     });
-
+    this.props.drive.userSelected = !this.props.drive.userSelected;
   }
 
   onPressDrive = (text) => {
     this.props.navigation.navigate('DriveInformation',
-        {drive: this.props.drive, navigation:this.props.navigation,});
+        {drive: this.props.drive, navigation:this.props.navigation, user_id:this.props.user_id, returnData: this.returnData.bind(this)});
   }
 
   render() {
@@ -106,7 +126,7 @@ export default class DrivesCard extends Component {
                       red,
                        o.isActive?red:red,
                     ]}
-                    // animateAllActive
+                    animation={{toValue: 1,duration: 300}}
                     colorInputRange={[0, 0.56, 1]}
                   />
                   </TouchableOpacity>)

@@ -101,6 +101,7 @@ const RootStack = createStackNavigator(
       screen: PlaidPage,
       navigationOptions: {
         title: "Link account",
+        //headerLeft: null,
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
