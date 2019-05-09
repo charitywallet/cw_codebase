@@ -13,14 +13,9 @@ export default EStyleSheet.create({
     },
 
     viewHolder: {
+      color: 'black',
       paddingVertical: 10,
-      width: '90%',
-    },
-
-    text: {
-      color: 'white',
-      fontSize: 25,
-      paddingRight: 17
+      //width: '90%',
     },
 
     btn: {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
@@ -52,8 +52,11 @@ constructor(props) {
     isLoading: true,
     search: '',
     user_id: this.props.user_id,
+    animation: new Animated.Value(0),
+
   };
   this.arrayholder = [];
+  this.drives_selected = {};
 }
 
 componentDidMount() {
@@ -100,6 +103,46 @@ componentDidMount() {
     });
   };
 
+objectsAreSame(x, y) {
+   var objectsAreSame = false;
+   for(var propertyName in x) {
+      if(x[propertyName] !== y[propertyName]) {
+         //objectsAreSame = false;
+         return false
+         //break;
+      }
+   }
+   return true;
+}
+
+  func = (user_selected, drive_id) => {
+    console.log("inside func")
+    this.props.funcDrivesMain(true);
+    var already_selected = this.drives_selected[drive_id];
+    // console.log("drives", Object.keys(this.drives_selected));
+    // console.log("drives", this.objectsAreSame(Object.keys(this.drives_selected), ["1", "2"]));
+    // console.log("drives", Object.keys(this.drives_selected) === [1, 2]);
+    if (((already_selected === undefined) && !user_selected) || already_selected === false) {
+      this.drives_selected[drive_id] = true;
+      Animated.sequence([
+        	Animated.timing(this.state.animation, {
+        		toValue: 1,
+        		duration: 1000,
+            useNativeDriver: true,
+        	}),
+          Animated.delay(3000),
+          Animated.timing(this.state.animation, {
+            toValue: 0,
+            duration: 1000,
+            useNativeDriver: true,
+          })
+        ]).start()
+    } else {
+      this.drives_selected[drive_id] = false;
+    }
+    //this.props.funcDrivesMainDisable();
+  }
+
   search = text => {
     //console.log(text);
   };
@@ -126,6 +169,36 @@ componentDidMount() {
 
 
   render() {
+    const screenHeight = Dimensions.get("window").height;
+
+    const backdrop = {
+      transform: [
+        {
+          translateY: this.state.animation.interpolate({
+            inputRange: [0, 0.01],
+            outputRange: [screenHeight, 0],
+            extrapolate: "clamp",
+          }),
+        },
+      ],
+      opacity: this.state.animation.interpolate({
+        inputRange: [0.01, 0.5],
+        outputRange: [0, 1],
+        extrapolate: "clamp",
+      }),
+    };
+
+    const slideUp = {
+      transform: [
+        {
+          translateY: this.state.animation.interpolate({
+            inputRange: [0.01, 1],
+            outputRange: [0, -1 * screenHeight],
+            extrapolate: "clamp",
+          }),
+        },
+      ],
+    };
     return(
       <View>
       <SearchBar
@@ -141,11 +214,20 @@ componentDidMount() {
             data={this.state.dataSource}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}/>
+              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id} func={this.func}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
       />
+      <Animated.View style={[styles.cover, backdrop]}>
+        <View style={[styles.sheet]}>
+          <Animated.View style={[styles.popup, slideUp]}>
+            <TouchableOpacity>
+              <Text style={{color: '#f0f0f0', fontFamily: 'Avenir',}}>The drive has been added to your Supported Drives.</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+      </Animated.View>
       </View>
     );
   }
@@ -156,7 +238,32 @@ export default Drives;
 
 const styles= EStyleSheet.create({
   row: {
-  flex: 1,
-  justifyContent: 'space-between'
-  }
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cover: {
+    //backgroundColor: "rgba(0,0,0,.5)",
+  },
+  sheet: {
+    position: "absolute",
+    top: Dimensions.get("window").height,
+    left: 0,
+    right: 0,
+    height: "100%",
+    justifyContent: "flex-end",
+  },
+  popup: {
+    backgroundColor: "$primaryBlue",
+    marginHorizontal: 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 80,
+  },
 });

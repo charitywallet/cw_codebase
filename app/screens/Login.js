@@ -15,12 +15,14 @@ const styles = EStyleSheet.create({
     color: '$LoginScreenText',
     paddingLeft: 130,
     paddingTop: 5,
+    fontFamily: '$textFont'
   },
   newUser:{
     color: '$LoginScreenText',
     alignItems: 'center',
     paddingTop: 20,
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: '$textFont'
   }
 });
 
@@ -35,13 +37,19 @@ class Login extends Component {
 
   onPressSignIn() {
     if (this.state.email == ''){
-      alert("Please enter a valid Email ID")
+      alert("Please enter a valid Email ID.")
       return
     }
     if (this.state.password == ''){
-      alert("Please enter a valid Password")
+      alert("Please enter a valid Password.")
       return
     }
+    // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    // if(reg.test(this.state.email) === false) {
+    //   alert("Please enter a valid Email ID.");
+    //   return
+    // }
+
     this.setState({
      authenticating: true,
     });
@@ -72,7 +80,7 @@ class Login extends Component {
       const { statusCode, data } = response;
       if (statusCode == 200) {
         console.log("data",data.user_id);
-        this.props.navigation.navigate('UserDashboard', {userId: data.user_id})
+        this.props.navigation.navigate('UserDashboard', {user_id: data.user_id})
       } else {
         alert(data.message);
       }

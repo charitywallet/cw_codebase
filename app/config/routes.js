@@ -18,9 +18,11 @@ import Signup2 from '../screens/Signup2'
 import Signup3 from '../screens/Signup3'
 import Dashboard from '../screens/dashboardMain'
 import Drives from '../screens/DrivesMain'
+import Settings from '../screens/SettingsMain'
 import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/DriveInfoHeader'
 import DriveInformation from '../screens/DriveInformation'
 import CharityInformation from '../screens/CharityInformation'
+import PlaidPage from '../screens/PlaidPage'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -32,7 +34,7 @@ const AppContainer1 = createBottomTabNavigator(
         }
       },
     Home: { screen: Dashboard },
-    Settings: { screen: Drives },
+    Settings: { screen: Settings },
   },
 
   {
@@ -81,18 +83,31 @@ const RootStack = createStackNavigator(
       screen: Signup,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
       },
     },
     UserSignup2: {
       screen: Signup2,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
       },
     },
     UserSignup3: {
       screen: Signup3,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
+      },
+    },
+    PlaidPage: {
+      screen: PlaidPage,
+      navigationOptions: {
+        title: "Link account",
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
       },
     },
     UserDashboard: {
@@ -100,7 +115,7 @@ const RootStack = createStackNavigator(
       navigationOptions: {
         title: "Dashboard",
         initialRouteName: 'Home',
-        //headerLeft: null, //TODO: Uncomment this.
+        // headerLeft: null, //TODO: Uncomment this.
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
@@ -134,20 +149,12 @@ const RootStack = createStackNavigator(
     CharityInformation: {
       screen: CharityInformation,
       navigationOptions: {
-        //title: "Dashboard",
-        //initialRouteName: 'Drives',
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
         },
       },
     },
-    // AddAccount: {
-    //   screen: AddAccount,
-    //   navigationOptions: {
-    //     title: "Add Account",
-    //   },
-    // },
   },
 );
 

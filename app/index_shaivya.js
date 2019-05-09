@@ -4,10 +4,10 @@ import Signup from './screens/Signup';
 import Signup2 from './screens/Signup2';
 import Signup3 from './screens/Signup3';
 import Dashboard from './screens/dashboardMain';
-import PlaidTry from './screens/PlaidTry';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Navigator from './config/routes';
 import DrivesMain from './screens/DrivesMain';
+import AppIntro from './screens/GettingStarted';
 
 EStyleSheet.build({
    //$primaryBlue: '#92C7C7',
@@ -26,9 +26,9 @@ EStyleSheet.build({
    $textColor: '#3D96A1',
    $textFont: 'Avenir',
    $headingFont: 'Avenir',
+   $logoFont: 'Avenir',
 
-   // $outline: 1, //Use this to outline containers
+   //$outline: 1, //Use this to outline containers
 });
-
-export default () => <Navigator />;
-//export default () => <Dashboard/>;
+export default () => <Navigator/>;
+//export default () => <AppIntro/>;

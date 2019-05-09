@@ -44,6 +44,12 @@ class Signup extends Component {
       return
     }
 
+    // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    // if(reg.test(this.state.email) === false) {
+    //   alert("Please enter a valid Email ID.");
+    //   return
+    // }
+
     const { email, password } = this.state;
 
     // Function to process the response we get from API - done to retrieve status code
@@ -70,15 +76,15 @@ class Signup extends Component {
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
-        console.log("data",data.user_id);
-        this.props.navigation.navigate('UserSignup2', {userId: data.user_id})
+        //console.log("data",data.user_id);
+        this.props.navigation.navigate('UserSignup2', {user_id: data.user_id})
       } else {
         alert();
       }
     })
     .catch((error) => {
-      console.error(error);
-      console.log(message)
+      // console.error(error);
+      // console.log(message)
     });;
   }
 

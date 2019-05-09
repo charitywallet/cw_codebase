@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
 import {Carousel} from '../components/DashboardComponents/Carousel'
 import {CurrentAmountCard} from '../components/DashboardComponents/CurrentAmountCard';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const imageWidth = Dimensions.get('window').width;
 
@@ -62,7 +63,7 @@ componentDidMount() {
   render() {
     return(
       <View style={styles.container}>
-      {this.state.drives_supported ?
+      {this.state.drives_supported || this.state.lifetime_total ?
         <View>
           <View style={styles.currencyCardContainer}>
             <CurrentAmountCard month_total={this.state.month_total}/>
@@ -72,9 +73,9 @@ componentDidMount() {
             active_drives={this.state.active_drives} lifetime_total={this.state.lifetime_total}/>
           </View>
         </View>
-        : <View style={styles.container}>
-          <Text style={{fontSize: 20,}}>Please select drives to start donating. </Text>
-          <Text onPress = {() => this.props.navigation.navigate('UserDrives')}>Select Drives</Text>
+        : <View style={styles.containerNoSelection}>
+          <Text style={styles.textNoSelection}>Congrats on taking the first step towards changing the world! {"\n"}{"\n"}
+          Please select drives to start donating and make a difference. </Text>
         </View>}
         </View>
 
@@ -82,7 +83,7 @@ componentDidMount() {
   }
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -91,6 +92,21 @@ const styles = StyleSheet.create({
     //marginTop: -15,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+  },
+  containerNoSelection: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    //marginTop: -15,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    padding: 30,
+  },
+  textNoSelection: {
+    fontSize: 20,
+    color: '$primaryBlue',
+    textAlign: 'center'
   },
   currencyCardContainer: {
     width: imageWidth,

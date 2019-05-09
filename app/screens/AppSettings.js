@@ -6,7 +6,7 @@ import PlaidAuthenticator from 'react-native-plaid-link'
 import {Overlay} from 'react-native-elements';
 
 
-class PlaidTry extends Component {
+class AppSettings extends Component {
   constructor() {
      super();
      this.state = { isVisible: true }
@@ -23,7 +23,6 @@ class PlaidTry extends Component {
   render() {
 
     return(
-      <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
        <PlaidAuthenticator
         onMessage={this.onMessage}
         publicKey="0cfea3b8cf3611b374aecb1a215a39"
@@ -32,9 +31,8 @@ class PlaidTry extends Component {
         clientName="CharityWallet"
         selectAccount={false}
       />
-      </Overlay>
     );
   }
 }
 
-export default PlaidTry;
+export default AppSettings;

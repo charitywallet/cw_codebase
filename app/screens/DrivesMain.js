@@ -21,15 +21,41 @@ const styles = EStyleSheet.create({
 });
 
 export default class TabsAdvancedExample extends Component {
-  state = {
-    dummy: false
-    //user_id = this.props.navigation.getParam('userId', '3');
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      // isLoading: true,
+      // search: '',
+      // user_id: this.props.user_id,
+      drives_added_by_user: false,
+      // dummy: false
+    };
   }
+
   onChangeTab() {
     //console.log("On change tab");
-    // this.setState({
-    //   dummy: false,
-    // })
+    this.setState({
+      dummy: false,
+    })
+  }
+
+  funcDrivesMain = (drivesAdded) => {
+    // if (drivesAdded === true) {
+    //
+    // }
+    console.log("drives added", drivesAdded);
+    this.setState({
+      drives_added_by_user: true,
+    }, () => console.log("func drives main", this.state.drives_added_by_user))
+
+  }
+
+  funcDrivesMainDisable = (drivesAdded) => {
+    this.setState({
+      drives_added_by_user: false,
+    }, () => console.log("func dtives main disable", this.state.drives_added_by_user))
+
   }
 
   render() {
@@ -37,15 +63,16 @@ export default class TabsAdvancedExample extends Component {
     const user_id = navigation.getParam('userId', '3'); //TODO: Change the default user id
     return (
       <Container>
-      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading} onChangeTab={() => this.onChangeTab()}>
+      <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>All Drives</Text></TabHeading>}>
-            <Drives navigation={this.props.navigation} user_id={user_id}/>
+            <Drives navigation={this.props.navigation} user_id={user_id} funcDrivesMain={this.funcDrivesMain}/>
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>All Charities</Text></TabHeading>}>
             <CharityList navigation={this.props.navigation} user_id={user_id}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>My Drives</Text></TabHeading>}>
-            <SupportedDrives navigation={this.props.navigation} user_id={user_id}/>
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Supported Drives</Text></TabHeading>}>
+            <SupportedDrives navigation={this.props.navigation} user_id={user_id}
+            drives_added_by_user = {this.state.drives_added_by_user} funcDrivesMainDisable={this.funcDrivesMainDisable}/>
           </Tab>
         </Tabs>
       </Container>
