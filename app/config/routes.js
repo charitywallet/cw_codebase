@@ -83,18 +83,21 @@ const RootStack = createStackNavigator(
       screen: Signup,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
       },
     },
     UserSignup2: {
       screen: Signup2,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
       },
     },
     UserSignup3: {
       screen: Signup3,
       navigationOptions: {
         title: "Signup",
+        headerBackTitle: 'Back',
       },
     },
     PlaidPage: {
@@ -112,7 +115,7 @@ const RootStack = createStackNavigator(
       navigationOptions: {
         title: "Dashboard",
         initialRouteName: 'Home',
-        //headerLeft: null, //TODO: Uncomment this.
+        // headerLeft: null, //TODO: Uncomment this.
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
