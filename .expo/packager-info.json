@@ -1,10 +1,1 @@
-{
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://dc-458.anonymous.cw-codebase.exp.direct",
-  "packagerNgrokUrl": "https://packager.dc-458.anonymous.cw-codebase.exp.direct",
-  "ngrokPid": 35536,
-  "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 35519,
-  "webpackServerPort": null
-}
+{}
