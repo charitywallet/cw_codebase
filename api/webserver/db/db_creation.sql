@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS donor (
     name VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE,
     activation_date DATETIME NOT NULL,
+    donation_cycle_start_date DATETIME,
     last_logged_in DATETIME,
     password VARCHAR(255) NOT NULL,
     lifetime_donation FLOAT NOT NULL DEFAULT '0.00',
@@ -69,27 +70,30 @@ CREATE TABLE IF NOT EXISTS donor_drive (
     status BOOLEAN NOT NULL
 );
 
- ALTER TABLE donor_drive ADD CONSTRAINT PRIMARY KEY (drive_id, donor_id, charity_id);
+ALTER TABLE donor_drive ADD CONSTRAINT PRIMARY KEY (drive_id, donor_id, charity_id);
 
 
-CREATE TABLE IF NOT EXISTS transactions (
+CREATE TABLE IF NOT EXISTS plaid_transaction (
     transaction_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    donor_id INTEGER REFERENCES donor(donor_id),
+    donor_id INTEGER NOT NULL REFERENCES donor(donor_id),
     entry_date DATETIME NOT NULL,
-    place VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    plaid_transaction_id VARCHAR(255) NOT NULL,
-    transaction_date DATETIME NOT NULL,
-    transaction_amt FLOAT NOT NULL,
+    plaid_transaction_id VARCHAR(255) NOT NULL UNIQUE,
+    plaid_transaction_name VARCHAR(255) NOT NULL,
+    plaid_transaction_city VARCHAR(255),
+    plaid_transaction_type VARCHAR(255) NOT NULL,
+    plaid_transaction_date DATETIME NOT NULL,
+    plaid_transaction_amt FLOAT NOT NULL,
+    plaid_account_id VARCHAR(255) NOT NULL,
+    plaid_account_owner VARCHAR(255),
     donation_amt FLOAT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS plaid_Setup (
-    donor_id INTEGER REFERENCES donor(donor_id),
-    entry_date DATETIME NOT NULL,
-    plaid_access_token VARCHAR(255) NOT NULL,
-    status BOOLEAN NOT NULL
-);
+-- CREATE TABLE IF NOT EXISTS plaid_Setup (
+--     donor_id INTEGER REFERENCES donor(donor_id),
+--     entry_date DATETIME NOT NULL,
+--     plaid_access_token VARCHAR(255) NOT NULL,
+--     status BOOLEAN NOT NULL
+-- );
 
 CREATE TABLE IF NOT EXISTS donation (
     donation_id INTEGER AUTO_INCREMENT PRIMARY KEY,

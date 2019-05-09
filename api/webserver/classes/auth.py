@@ -1,5 +1,4 @@
 from classes.donor import Donor
-from db.orm import *
 import logging
 from classes.sql_conn import SqlConn
 import datetime
@@ -28,7 +27,7 @@ class Auth(object):
             data = (username,)
             result=db_obj.get_query(query,data)
             if len(result)>0:
-                raise Exception("Username exists - Mail id already in use")
+                raise Exception("The username has already been registered, pick another username or try Logging In, instead.")
             else:
                 query="Insert into donor (username, password, name, activation_date, account_status) values(%s,%s,%s,%s,%s)"
                 data = (username,password,"Donor",datetime.datetime.now(),True,)

@@ -5,8 +5,9 @@ import time
 from classes.auth import Auth
 from classes.donor import Donor
 from utils.session import start_session, check_session, end_session
-from utils.plaid import get_access_token
+from utils.plaid import *
 from utils.listing import *
+from utils.donation import *
 import datetime
 
 print("App load")
@@ -14,13 +15,13 @@ print("App load")
 app = Flask(__name__)
 
 # working endpoints
-# 1. /signup - new user signup - unput username and password
-# 2. /login - user login - unput username and password
-# 3. /get_drives - fetch all drive - input none
-# 4. /get_charities - fetch all charities - input none
+# 1. /signup - new user signup - input username and password - output user_id
+# 2. /login - user login - input username and password - output user_id
+# 3. /get_drives - fetch all drives - if charity_id then only for that charity, if
+# 4. /get_charities - fetch all charities - input none for all, user_id for user charities
 # 5. /get_user_totals - user totals for dashboard - input user_id
 # 6. /set_ptoken - send plaid public token to backend for plaid setup - input user_id and public_token
-# 7. /drive_selection - save drives - input user_id and drive_id
+# 7. /drive_selection - save drives - input user_id,drive_id, charity_id
 
 
 @app.route('/signup', methods=["POST"])
@@ -50,7 +51,7 @@ def signup():
         except Exception as e:
             status_code = 400
             status = e
-            message="Error:{}".format(status)
+            message="Sign Up Failed: {}".format(status)
             logging.info(message)
             response['message']=message
 
@@ -73,7 +74,7 @@ def signin():
         try:
             auth_obj=Auth()
             user,success=auth_obj.signin_user(username,password)
-
+            print("signing",success)
             if success:
                 status_code = 200
                 user_id=user.get_id()
@@ -82,14 +83,14 @@ def signin():
                 logging.info("New User {} created".format(user_id))
             else:
                 status_code = 400
-                message="login error - invalid credentials"
+                message="Login Failed: Invalid credentials, please check username and/or password, and try again"
                 logging.info(message)
                 response['message']=message
 
         except Exception as e:
             status_code = 400
             status = e
-            message="Error:{}".format(status)
+            message="Login Failed: {}".format(status)
             logging.info(message)
             response['message']=message
 
@@ -392,9 +393,28 @@ def drive_list():
 
 @app.route('/bir_test', methods=["POST"])
 def bir_test():
-    session_flag= check_session(1)
-    response={}
-    print(session_flag)
-    status_code = 200
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        action = int(arguments.get("action"))
+
+        # session_flag= check_session(1)
+        response={}
+        # print(session_flag)
+        if action==1:
+            response["message"]="totals calculated for day"+str(datetime.datetime.today())
+            response["transactions"]=get_transactions_from_plaid()
+            status_code = 200
+        elif action==2:
+            # calculate_donor_month_total()
+            response["message"]="works externally"
+            status_code = 200
+        elif action==0:
+            print(datetime.datetime.now().replace(day=1))
+            status_code = 200
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
     result=json.dumps(response)
     return Response(result, status=status_code, mimetype='application/json')
