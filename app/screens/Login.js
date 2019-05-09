@@ -80,7 +80,7 @@ class Login extends Component {
       const { statusCode, data } = response;
       if (statusCode == 200) {
         console.log("data",data.user_id);
-        this.props.navigation.navigate('UserDashboard', {userId: data.user_id})
+        this.props.navigation.navigate('UserDashboard', {user_id: data.user_id})
       } else {
         alert(data.message);
       }

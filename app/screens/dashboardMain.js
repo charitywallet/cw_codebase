@@ -37,13 +37,10 @@ export default class TabsAdvancedExample extends Component {
 
   render() {
     const { navigation } = this.props;
-    const user_id = navigation.getParam('userId', '3');
+    const user_id = navigation.getParam('user_id', '3');
     return (
       <Container>
         <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
-        <Tab heading={ <TabHeading><Text style={styles.tabText}>Animation</Text></TabHeading>}>
-          <AnimationTry />
-        </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
             <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>

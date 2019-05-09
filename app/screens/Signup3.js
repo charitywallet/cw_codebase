@@ -22,12 +22,13 @@ class Signup3 extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const firstName = this.props.navigation.getParam('firstName', 'User');
+    const user_id = this.props.navigation.getParam('user_id', 1);
 
     return(
       <View style={{flex: 1,
           alignItems: 'center',
           backgroundColor: '$background'}}>
-        <Text style={styles.skip}> SKIP</Text>
+        <Text style={styles.skip} onPress = {() => navigate('UserDashboard', {user_id: user_id})}> SKIP</Text>
 
 
           <Text style={styles.introText}>Thanks for signing up, {firstName}! You are almost done. In order to help us recommend more personalized drives and charities to you,
@@ -75,7 +76,7 @@ class Signup3 extends Component {
           />
 
           </View>
-          <LoginButton text='Finish' onPress={() => {navigate('UserDashboard')}}/>
+          <LoginButton text='Finish' onPress={() => {navigate('UserDashboard', {user_id: user_id})}}/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot/>
             <Dot active={true}/>

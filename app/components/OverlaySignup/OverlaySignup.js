@@ -18,7 +18,7 @@ const OverlaySignup = ({
     <Overlay isVisible={stateInitial} onBackdropPress={onBackdropPress}
     overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
       <View style={styles.overlayContent}>
-        <Text style={styles.overlayText}>Thanks {userId} for signing up! There are a few more details we would like you to fill for a better experience.</Text>
+        <Text style={styles.overlayText}>Thank you for signing up! There are a few more details we would like you to fill for a better experience.</Text>
         <View style={styles.buttonGroup}>
           <Button title={button1} onPress = {handleFillNowButton} containerStyle = {styles.buttonContainer1}
           titleStyle={styles.buttonText} buttonStyle={styles.button}/>

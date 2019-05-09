@@ -76,15 +76,15 @@ class Signup extends Component {
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
-        console.log("data",data.user_id);
-        this.props.navigation.navigate('UserSignup2', {userId: data.user_id})
+        //console.log("data",data.user_id);
+        this.props.navigation.navigate('UserSignup2', {user_id: data.user_id})
       } else {
         alert();
       }
     })
     .catch((error) => {
-      console.error(error);
-      console.log(message)
+      // console.error(error);
+      // console.log(message)
     });;
   }
 
