@@ -7,58 +7,74 @@ import {DrivesCard} from 'app/components/CharityTabComponents/DrivesCard';
 import {CharityInfoHeader} from 'app/components/CharityTabComponents/CharityInfoHeader'
 const imageWidth = (Dimensions.get('window').width);
 
-const driveData =
-    [
-      {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-      , driveLocation: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
-      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-      , currentMoney: '450'
-      , targetMoney: '2000'
-      , percentCompleted: 0.8},
-      {driveImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-      , driveLocation: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
-      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-      , currentMoney: '450'
-      , targetMoney: '2000'
-      , percentCompleted: 0.3},
-      {driveImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-      , driveLocation: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
-      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-      , currentMoney: '450'
-      , targetMoney: '2000'
-      , percentCompleted: 0.3},
-      {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-      , driveLocation: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
-      , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-      , currentMoney: '450'
-      , targetMoney: '2000'
-      , percentCompleted: 0.7},
-    ]
-
-// const charityData =
-//     {
-//       charityName: 'Chen Award Foundation'
-//     , charityCity: 'Berkeley'
-//     , charityState: 'CA'
-//     , charityImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-//     , charityAbout: 'This charity was established to give the MIMS students something to work towards in their final semester. It keeps most of the money for itself and pays peanuts to the winners.'
-//     , numDonations: '20'
-//     }
-
 export default class CharityInfo extends Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        dataSource: [],
+        noDrives: false,
+      };
+    }
+
+
+  componentWillMount(){
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://0.0.0.0:5000/get_drives', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: this.props.navigation.getParam('user_id', 0),
+      my_drives: 0,
+      charity_id: this.props.navigation.getParam('charity', 'No-Charity').charity_id,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        this.setState({
+          dataSource: data.drives,
+          noDrives: false,
+        })
+      } else {
+          this.setState({
+            dataSource: [1],
+            noDrives: true
+          })
+          //alert(data.message);
+        }
+      }
+    )
+    .catch((error) => {
+      alert(error)
+    });
+  }
+
   render() {
     const charity = this.props.navigation.getParam('charity', 'No-Charity');
     return (
-        <View style={styles.Container}>
-          <FlatList
-                columnWrapperStyle={styles.row}
-                data={driveData}
-                renderItem={({item}) => (<DrivesCard drive= {item}/>)}
-                keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
-                ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
-          />
-        </View>
+      <View style={styles.Container}>
+        <FlatList
+              columnWrapperStyle={styles.row}
+              data={this.state.dataSource}
+              renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
+              (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
+              keyExtractor={(item, index) => index.toString()}
+              numColumns={2}
+              ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
+        />
+      </View>
     );
   }
 }
@@ -70,7 +86,39 @@ const styles= EStyleSheet.create({
     paddingTop:5,
   },
   row: {
-  flex: 1,
-  justifyContent: 'space-between'
-  }
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  noDrivesFoundContainer: {
+    backgroundColor: '$background',
+    width: imageWidth/1.028,
+    marginHorizontal: 5,
+  },
+  noDrivesFoundText: {
+    paddingLeft: 10,
+    paddingBottom: 10,
+    fontFamily: '$textFont',
+  },
 });
+
+// <View style={styles.Container}>
+//   <FlatList
+//         columnWrapperStyle={styles.row}
+//         data={this.state.dataSource}
+//         renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
+//         (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
+//         keyExtractor={(item, index) => index.toString()}
+//         numColumns={2}
+//         ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
+//   />
+// </View>
+
+// <FlatList
+//       columnWrapperStyle={styles.row}
+//       data={this.state.dataSource}
+//       renderItem={({item}) => (<DrivesCard drive= {item}/>)}
+//       keyExtractor={(item, index) => index.toString()}
+//       numColumns={2}
+//       ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
+// />
+// </View>
