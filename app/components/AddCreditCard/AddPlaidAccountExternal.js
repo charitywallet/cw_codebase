@@ -33,13 +33,14 @@ class Item extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps.item.id !== this.props.item.id) {
+    if((nextProps.item.id !== this.props.item.id) || nextProps.accountName !== this.props.accountName) {
       return true;
     }
     return false;
   }
 
   componentDidMount() {
+    if (this.props.item.inst_name !== "") {
     Animated.timing(
       this.animatedValue,
       {
@@ -50,7 +51,7 @@ class Item extends Component {
     ).start(() => {
       this.props.afterAnimationComplete();
     });
-  }
+  }}
 
   removeItem = () => {
     Animated.timing(
@@ -84,8 +85,9 @@ class Item extends Component {
         }]}
       >
       <View style={{alignItems: 'left', justifyContent: 'center', padding:8,}}>
-
-<Text style={{fontSize: 14, flex:1, textAlign: 'left', color: 'gray'}}>{this.props.item.accountName} Account added.</Text>
+      {this.props.item.inst_name === "" ?
+      <Text style={{fontSize: 14, flex:1, textAlign: 'left', color: 'gray'}}>{this.props.accountName} account added.</Text>
+      :<Text style={{fontSize: 14, flex:1, textAlign: 'left', color: 'gray'}}>{this.props.item.inst_name} account added.</Text> }
 
         <View style={{marginTop: -45, paddingLeft: 230, paddingVertical: 10,}}>
           <TouchableOpacity
@@ -129,20 +131,40 @@ class AddPlaidAccountExternal extends Component {
 
   addMore = (navigation) => {
     this.addNewEle = true;
-    const newlyAddedValue = { id: "id_" + this.index, text: this.index + 1 };
+
     //alert("added");
     //console.log("before", this.state.showPlaid);
-    navigation.navigate('PlaidPage', {user_id: this.props.user_id, returnData: this.returnData.bind(this)});
+    const newlyAddedValue = { id: "id_" + this.index, text: this.index + 1, inst_name: this.state.inst_name };
+    navigation.navigate('PlaidPage', {user_id: this.props.user_id, idx: newlyAddedValue.id, returnData: this.returnData.bind(this)});
     this.setState({
       //disabled: true,
       valueArray: [...this.state.valueArray, newlyAddedValue],
       //showPlaid: true,
       isVisible: true,
     });
-  //  console.log("after", this.state.showPlaid);
-
-    //navigate('AddAccount');
   }
+
+  returnData = (data, text, error, inst_name, idx) => {
+    // var itemArray = this.state.newlyAddedValue.slice();
+    // itemArray.push("new value");
+    let newArray = this.state.valueArray
+    if (error === true) {
+      var dummy = newArray.pop();
+    }
+    if (newArray.length > 0) {
+      newArray[newArray.length-1].inst_name = inst_name
+    }
+    this.setState((prevState) => ({
+      data: data,
+      textVisible: text,
+      error: error,
+      inst_name: inst_name,
+      updateNow: true,
+      valueArray: newArray,
+      //newlyAddedValue: {...prevState.newlyAddedValue, inst_name: inst_name}
+    }
+    ));
+}
 
   remove(id) {
     this.addNewEle = false;
@@ -158,17 +180,17 @@ class AddPlaidAccountExternal extends Component {
     });
   }
 
-  returnData(data, text, error, inst_name){
-  this.setState({
-    data: data,
-    textVisible: text,
-    error: error,
-    inst_name: inst_name});
-  console.log("Inst name", inst_name);
-  //console.log("data", data);
-  console.log("state", this.state)
-}
 
+componentWillUpdate(){
+  //console.log("will update", this.state)
+  if (this.state.inst_name && this.state.updateNow){
+      //console.log("will update equal");
+      this.setState({
+        inst_name: this.state.inst_name,
+        updateNow: false,
+      })
+  }
+}
   render() {
 
     return(

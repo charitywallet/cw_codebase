@@ -21,6 +21,90 @@ import { Overlay, Button } from 'react-native-elements';
 import styles from './styles';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+class MyItem extends Component {
+  constructor() {
+    super();
+    this.animatedValue = new Animated.Value(0);
+    this.state = { isVisible: true }
+
+    if( Platform.OS === 'android' ) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("update nextstate", nextState);
+    console.log("update thisstate", this.state);
+    if((nextProps.item.id !== this.props.item.id) || nextState.isVisible === false) {
+      return true;
+    }
+    return false;
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 0.5,
+        duration: 500,
+        useNativeDriver: true
+      }
+    ).start(() => {
+      this.props.afterAnimationComplete();
+    });
+  }
+
+  removeItem = () => {
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true
+      }
+    ).start(() => {
+      this.props.removeItem(this.props.item.id);
+    });
+  }
+
+  handlePressBackdrop = () => {
+    this.setState({ isVisible: false });
+  }
+  onMessage = (data) => {
+    console.log("data", data);
+    this.setState({data})
+  }
+
+  render() {
+    const translateAnimation = this.animatedValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [-width, 0, width]
+    });
+
+    const opacityAnimation = this.animatedValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, 1, 0]
+    });
+
+    return (
+      <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
+      containerStyle={{flex:1}} overlayStyle={{height: height/1.1, width: width/1.1}}>
+      <Text>{this.props.item.id}</Text>
+        <PlaidAuthenticator
+         onMessage={this.onMessage}
+         publicKey="0cfea3b8cf3611b374aecb1a215a39"
+         env="sandbox"
+         product="transactions"
+         clientName="CharityWallet"
+         selectAccount={false}
+       />
+       <Button title="adasd" onPress={() => this.handlePressBackdrop}/>
+      </Overlay>
+    );
+  }
+}
 
 class Item extends Component {
   constructor() {
@@ -158,7 +242,8 @@ class AddCreditCard extends Component {
       //showPlaid: true,
       isVisible: true,
     });
-  //  console.log("after", this.state.showPlaid);
+    console.log("after", this.state);
+    console.log("after newlyAddedValue", newlyAddedValue);
 
     //navigate('AddAccount');
   }
@@ -260,31 +345,17 @@ class AddCreditCard extends Component {
             onPress={() => this.addMore()}
           >
             <Image source = { require('./images/add_icon.png') } style = { styles.btnImage }/>
-            <Text style={styles.textStyle}> Add Spending Account </Text>
+            <Text style={styles.textStyle}>{this.props.title}</Text>
           </TouchableOpacity>
 
-            {this.state.valueArray.map((ele, index) => {
+            {this.state.valueArray.map((ele) => {
               return (
-                <View key={index}>
-                  <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}>
-                    <PlaidAuthenticator
-                     onMessage={this.onMessage}
-                     publicKey="0cfea3b8cf3611b374aecb1a215a39"
-                     env="sandbox"
-                     product="transactions"
-                     clientName="CharityWallet"
-                     selectAccount={false}
-                   />
-                   <View>
-                   {this.state.data && this.state.data.metadata &&
-                     this.state.data.metadata.public_token ?
-                     <View style={{justifyContent:'center', marginBottom: 300, alignItems:'center'}}>
-                        <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution_name} Account added! {this.state.data.metadata.public_token}</Text>
-                        <Button containerStyle={{}} key={index} title="Finish" titleStlye={{color:'white'}} onPress={this.handleFinishButton}/>
-                     </View>: null }
-                   </View>
-                  </Overlay>
-                </View>
+                <MyItem
+                  key={ele.id}
+                  item={ele}
+                  removeItem={(id) => this.remove(id)}
+                  afterAnimationComplete={this.afterAnimationComplete}
+                />
               )
             })}
           </View>
@@ -297,10 +368,23 @@ class AddCreditCard extends Component {
 
 export default AddCreditCard;
 
-// <Item
-//   key={ele.id}
-//   item={ele}
-//   removeItem={(id) => this.remove(id)}
-//   afterAnimationComplete={this.afterAnimationComplete}
-// />
-// {this.state.data && <Text>{this.state.data.institution.name}</Text>}
+// <Overlay isVisible={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
+// containerStyle={{flex:1}} overlayStyle={{height: height/1.1, width: width/1.1}}>
+// <Text>{ele.id}</Text>
+//   <PlaidAuthenticator
+//    onMessage={this.onMessage}
+//    publicKey="0cfea3b8cf3611b374aecb1a215a39"
+//    env="sandbox"
+//    product="transactions"
+//    clientName="CharityWallet"
+//    selectAccount={false}
+//  />
+//  <View>
+//  {this.state.data && this.state.data.metadata &&
+//    this.state.data.metadata.public_token ?
+//    <View style={{justifyContent:'center', marginBottom: 300, alignItems:'center'}}>
+//       <Text style={{paddingBottom: 50,}}>{this.state.data.metadata.institution_name} Account added! {this.state.data.metadata.public_token}</Text>
+//       <Button containerStyle={{}}  title="Finish" titleStlye={{color:'white'}} onPress={this.handleFinishButton}/>
+//    </View>: null }
+//  </View>
+// </Overlay>

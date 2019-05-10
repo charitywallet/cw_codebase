@@ -19,6 +19,7 @@ export default EStyleSheet.create({
     textTransform: 'capitalize',
     paddingBottom: 5,
     paddingTop: 5,
+    fontFamily: '$headingFont',
   },
   locationContainer:{
     flexDirection:'row',
@@ -27,6 +28,7 @@ export default EStyleSheet.create({
   locationPreText:{
     paddingLeft:4,
     paddingBottom: 5,
+    fontFamily: '$textFont',
   },
   location:{
     paddingLeft:4,
@@ -34,6 +36,7 @@ export default EStyleSheet.create({
     textTransform: 'uppercase',
     fontWeight:'bold',
     color: '$primaryBlue',
+    fontFamily: '$headingFont',
   },
   charityImage:{
     height: imageWidth/2,
@@ -44,6 +47,7 @@ export default EStyleSheet.create({
     paddingRight:10,
     paddingTop: 8,
     fontWeight: 'bold',
+    fontFamily: '$headingFont',
   },
   charityAbout:{
     paddingLeft:10,
@@ -51,6 +55,7 @@ export default EStyleSheet.create({
     paddingTop: 8,
     paddingBottom: 10,
     textAlign: 'auto',
+    fontFamily: '$textFont',
   },
   numDonations:{
     paddingLeft:10,
@@ -59,6 +64,7 @@ export default EStyleSheet.create({
     paddingBottom: 10,
     fontWeight: 'bold',
     fontStyle:'italic',
+    fontFamily: '$headingFont',
   },
   charityNavigatorDetails:{
     width: '95%',
@@ -98,5 +104,6 @@ export default EStyleSheet.create({
     paddingLeft:10,
     fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: '$headingFont',
   },
 });
