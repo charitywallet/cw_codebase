@@ -69,8 +69,37 @@ export default EStyleSheet.create({
     paddingLeft:10,
     paddingRight:10,
     paddingTop: 8,
+    paddingBottom: 8,
     textAlign: 'auto',
 
+  },
+  charityNavigatorDetails:{
+    width: '95%',
+    borderColor: 'black',
+    borderWidth: 0.5,
+    alignSelf: 'center',
+  },
+  charityNavigatorDetailsHeader:{
+    fontWeight: 'bold',
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+  },
+  charityNavigator1:{
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+  },
+  charityNavigator2:{
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+  },
+  charityNavigator3:{
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop: 8,
+    paddingBottom: 8,
   },
   numDonations:{
     paddingLeft:10,

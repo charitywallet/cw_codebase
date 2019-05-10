@@ -14,9 +14,15 @@ export default class CharityInfoHeader extends Component {
               <Image resizeMode= 'contain' source={{uri:this.props.charityData.charityImageURL}} style={styles.charityImage} />
               <Text style={styles.aboutHolderText}>About</Text>
               <Text style={styles.charityAbout}>{this.props.charityData.charityAbout}</Text>
+              <View style={styles.charityNavigatorDetails}>
+                <Text style={styles.charityNavigatorDetailsHeader}>Additional Information about the charity:</Text>
+                <Text style={styles.charityNavigator1}>Type: {this.props.charityData.charityType}</Text>
+                <Text style={styles.charityNavigator2}>Charity Navigator Overall Score: {this.props.charityData.charityNavigatorScore}</Text>
+                <Text style={styles.charityNavigator3}>Tax Deductibility: {this.props.charityData.deductibility}</Text>
+              </View>
               <Text style={styles.numDonations}>{this.props.charityData.numDonations} donors have contributed to this charity</Text>
               <View style={styles.updateSeparator} />
-              <Text style={styles.driveListHeader}>{this.props.charityData.charityName} drives:</Text>
+              <Text style={styles.driveListHeader}>{this.props.charityData.charityName}'s drives:</Text>
             </View>
     );
   }
