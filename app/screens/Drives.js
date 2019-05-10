@@ -103,25 +103,10 @@ componentDidMount() {
     });
   };
 
-objectsAreSame(x, y) {
-   var objectsAreSame = false;
-   for(var propertyName in x) {
-      if(x[propertyName] !== y[propertyName]) {
-         //objectsAreSame = false;
-         return false
-         //break;
-      }
-   }
-   return true;
-}
-
   func = (user_selected, drive_id) => {
-    console.log("inside func")
+    //console.log("inside func")
     this.props.funcDrivesMain(true);
     var already_selected = this.drives_selected[drive_id];
-    // console.log("drives", Object.keys(this.drives_selected));
-    // console.log("drives", this.objectsAreSame(Object.keys(this.drives_selected), ["1", "2"]));
-    // console.log("drives", Object.keys(this.drives_selected) === [1, 2]);
     if (((already_selected === undefined) && !user_selected) || already_selected === false) {
       this.drives_selected[drive_id] = true;
       Animated.sequence([
