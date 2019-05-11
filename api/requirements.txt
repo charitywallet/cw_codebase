@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+mysql-connector-python
+mysqlclient
+plaid-python==3.1.1
+jsonschema==2.6.0

@@ -12,7 +12,9 @@ import datetime
 
 print("App load")
 
-app = Flask(__name__)
+application = Flask(__name__)
+
+app = application
 
 # working endpoints
 # 1. /signup - new user signup - input username and password - output user_id
@@ -418,3 +420,8 @@ def bir_test():
 
     result=json.dumps(response)
     return Response(result, status=status_code, mimetype='application/json')
+
+
+
+if __name__ == '__main__':
+    app.run()
