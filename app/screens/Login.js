@@ -65,7 +65,7 @@ class Login extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/login', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/login', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

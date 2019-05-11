@@ -9,7 +9,7 @@ export default EStyleSheet.create({
     flex:1,
     backgroundColor: '$white',
     paddingVertical: 10,
-    width: '97.25%',
+    // width: '97.25%',
     alignSelf: 'center',
   },
   charityName:{
@@ -52,7 +52,7 @@ export default EStyleSheet.create({
   charityAbout:{
     paddingLeft:10,
     paddingRight:10,
-    paddingTop: 8,
+    paddingTop: 6,
     paddingBottom: 10,
     textAlign: 'auto',
     fontFamily: '$textFont',
@@ -67,36 +67,36 @@ export default EStyleSheet.create({
     fontFamily: '$headingFont',
   },
   charityNavigatorDetails:{
-    width: '95%',
-    borderColor: 'black',
-    borderWidth: 0.5,
-    alignSelf: 'center',
+
   },
   charityNavigatorDetailsHeader:{
     fontWeight: 'bold',
     paddingLeft:10,
     paddingRight:10,
     paddingTop: 8,
+    fontFamily: '$headingFont',
   },
   charityNavigator1:{
     paddingLeft:10,
     paddingRight:10,
-    paddingTop: 8,
+    paddingTop: 6,
+    fontFamily: '$textFont',
   },
   charityNavigator2:{
     paddingLeft:10,
     paddingRight:10,
-    paddingTop: 8,
+    fontFamily: '$textFont',
+
   },
   charityNavigator3:{
     paddingLeft:10,
     paddingRight:10,
-    paddingTop: 8,
     paddingBottom: 8,
+    fontFamily: '$textFont',
   },
   updateSeparator:{
     height: 10,
-    width: "100%",
+    // width: "100%",
     backgroundColor: "$blueBackground",
   },
   driveListHeader:{

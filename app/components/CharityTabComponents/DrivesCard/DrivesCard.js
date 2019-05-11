@@ -5,7 +5,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
 import Icon from 'react-native-animated-icons';
 
-const imageWidth = (Dimensions.get('window').width -20)/2;
+const imageWidth = (Dimensions.get('window').width -25)/2;
 
 export default class DrivesCard extends Component {
 
