@@ -27,7 +27,7 @@ componentDidMount() {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/get_user_totals', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_user_totals', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

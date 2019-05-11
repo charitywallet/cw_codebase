@@ -65,7 +65,7 @@ class Login extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/login', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/login', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -101,6 +101,8 @@ class Login extends Component {
   }
 
   render() {
+    const isEnabled = this.state.email.length > 0 && this.state.password.length > 0;
+
     if(this.state.authenticating){
       return(
         <View style={{flex: 1, padding: 20}}>
@@ -118,7 +120,7 @@ class Login extends Component {
         <LoginInput text='Password' onChangeText={password => this.setState({ password })}
               value={this.state.password} autoCapitalize='none'secureTextEntry={true}/>
         <Text style={styles.forgotPassword} onPress={() => this.onPressForgotPassword()}> Forgot Password</Text>
-        <LoginButton text='Login' onPress={() => this.onPressSignIn()}/>
+        <LoginButton text='Login' onPress={() => this.onPressSignIn()} disabled={!isEnabled}/>
         <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
         <Text style={styles.newUser} onPress={() => navigate('UserDashboard', {user_id: 1})}>Developer Sign in.</Text>
       </Container>

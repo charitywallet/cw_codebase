@@ -28,7 +28,7 @@ export default class CharityInfo extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/get_drives', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_drives', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -65,15 +65,19 @@ export default class CharityInfo extends Component {
     const charity = this.props.navigation.getParam('charity', 'No-Charity');
     return (
       <View style={styles.Container}>
-        <FlatList
-              columnWrapperStyle={styles.row}
-              data={this.state.dataSource}
-              renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
-              (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
-              keyExtractor={(item, index) => index.toString()}
-              numColumns={2}
-              ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
-        />
+
+        <View style={styles.flatListContainer}>
+          <FlatList
+                columnWrapperStyle={styles.row}
+                data={this.state.dataSource}
+                renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
+                (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+                ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
+                ListFooterComponent={<View style={styles.footer}/>}
+          />
+        </View>
       </View>
     );
   }
@@ -84,10 +88,17 @@ const styles= EStyleSheet.create({
     backgroundColor: '$blueBackground',
     flex:1,
     paddingTop:5,
+
   },
   row: {
     flex: 1,
     justifyContent: 'space-between'
+  },
+  flatListContainer:{
+    backgroundColor: 'white',
+    // width: '98%',
+    alignSelf: 'center',
+    // paddingBottom: 10,
   },
   noDrivesFoundContainer: {
     backgroundColor: '$background',
@@ -99,6 +110,10 @@ const styles= EStyleSheet.create({
     paddingBottom: 10,
     fontFamily: '$textFont',
   },
+  footer:{
+    backgroundColor: '$blueBackground',
+    height:30,
+  }
 });
 
 // <View style={styles.Container}>

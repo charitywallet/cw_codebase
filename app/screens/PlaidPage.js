@@ -36,7 +36,7 @@ componentWillUpdate(){
       }));
     }
 
-    fetch('http://0.0.0.0:5000/set_ptoken', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/set_ptoken', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -54,7 +54,7 @@ componentWillUpdate(){
         // this.setState({
         //   success: true,
         // })
-        //console.log("public_token", this.state.data.metadata.public_token);
+        console.log("public_token", this.state.data.metadata.public_token);
         //console.log("user id", this.props.user_id);
       } else {
         // this.setState({
@@ -116,7 +116,7 @@ componentWillUpdate(){
     //   })
     //   .catch((error) => {
     //     alert(error)
-
+      console.log("public_token", this.state.data.metadata.public_token);
       this.props.navigation.state.params.returnData(this.state.data, true, false, this.state.data.metadata.institution.name,
         this.props.navigation.state.params.idx);
       //console.log("Inst name1", this.state.data.metadata.institution.name)
@@ -142,7 +142,7 @@ componentWillUpdate(){
       {this.state.data && this.state.data.metadata &&
         this.state.data.metadata.public_token ?
         <View style={styles.container}>
-           <Text style={styles.messageText}>{this.state.data.metadata.institution.name} account added successfully. Please go back to continue with the Sign Up.</Text>
+           <Text style={styles.messageText}>{this.state.data.metadata.institution.name} account added successfully. Please go back to continue with the Sign Up. {this.state.data.metadata.public_token}</Text>
            {/*<LoginButton text="Done" onPress={() => this.handleFinishButton(this.props.navigation)}/>*/}
         </View>: null }
         {(this.state.errorMessageVisible) ?

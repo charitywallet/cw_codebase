@@ -5,7 +5,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
 import Icon from 'react-native-animated-icons';
 
-const imageWidth = (Dimensions.get('window').width -20)/2;
+const imageWidth = (Dimensions.get('window').width -25)/2;
 
 export default class DrivesCard extends Component {
 
@@ -62,7 +62,7 @@ export default class DrivesCard extends Component {
     }
 
 
-    fetch('http://0.0.0.0:5000/drive_selection', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/drive_selection', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

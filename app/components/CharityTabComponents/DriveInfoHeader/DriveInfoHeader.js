@@ -39,7 +39,7 @@ export default class DriveInfoHeader extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/drive_selection', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/drive_selection', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
