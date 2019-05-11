@@ -38,8 +38,30 @@ const driveFeedUpdate =
       ]
 
 export default class DriveInformation extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      isActive: false,
+      changed: false,
+    };
+  }
+
+// Using to change state of heart in Drives Card
+  funcDrivesInfoHeader = (state, changed) => {
+    this.setState({
+      isActive: !state.hearts[0].isActive,
+      changed: changed,
+    })
+  }
+
+  componentWillUnmount() {
+    this.props.navigation.state.params.returnData(this.state);
+  }
+
   render() {
     const drives = this.props.navigation.getParam('drive', 'No-Drive');
+    const user_id = this.props.navigation.getParam('user_id', 0);
     return (
         <View style={styles.Container}>
           <FlatList
@@ -49,7 +71,8 @@ export default class DriveInformation extends Component {
                   charity= {item}/>
               )}
               keyExtractor={(item, index) => index.toString()}
-              ListHeaderComponent={<DriveInfoHeader drive={drives} />}
+              ListHeaderComponent={<DriveInfoHeader drive={drives} user_id={user_id}
+              funcDrivesInfoHeader={this.funcDrivesInfoHeader}/>}
               ListFooterComponent={<DefaultCharityFeedCard />}
           />
         </View>

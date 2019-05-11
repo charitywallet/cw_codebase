@@ -60,7 +60,7 @@ export default class TabsAdvancedExample extends Component {
 
   render() {
     const { navigation } = this.props;
-    const user_id = navigation.getParam('userId', '3'); //TODO: Change the default user id
+    const user_id = navigation.getParam('user_id', '1'); //TODO: Change the default user id
     return (
       <Container>
       <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
