@@ -8,7 +8,7 @@ class SqlConn(object):
     def __init__(self):
         """Class to connect with MYSQL db"""
 
-        self.db = MySQLdb.connect("localhost", "root", "capstone", "charity_wallet")
+        self.db = MySQLdb.connect("charitywallet.ckjkftdengvx.us-west-1.rds.amazonaws.com", "root", "capstone", "charity_wallet")
         self.cursor = self.db.cursor()
 
 
@@ -58,3 +58,16 @@ class SqlConn(object):
     #         uid=result[0][0]
     #         return uid,True
     #     return uid, False
+
+
+# +---[RSA 2048]----+
+# | o*Bo.  .        |
+# | +*==.+o o       |
+# |..+ooB+.+.       |
+# |+o .+++++        |
+# |+o. +o.=S        |
+# |E. ... +.        |
+# |.      o+.       |
+# |      . ...      |
+# |         .o.     |
+# +----[SHA256]-----+
