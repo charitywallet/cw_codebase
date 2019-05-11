@@ -65,7 +65,7 @@ class Login extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/login', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/login', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -102,7 +102,7 @@ class Login extends Component {
 
   render() {
     const isEnabled = this.state.email.length > 0 && this.state.password.length > 0;
-    
+
     if(this.state.authenticating){
       return(
         <View style={{flex: 1, padding: 20}}>

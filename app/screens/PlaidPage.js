@@ -36,7 +36,7 @@ componentWillUpdate(){
       }));
     }
 
-    fetch('http://0.0.0.0:5000/set_ptoken', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/set_ptoken', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
