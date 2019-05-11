@@ -21,7 +21,25 @@ def get_charities(uid):
         if len(result)>0:
             print("db queried")
             for record in result:
-                print(record)
+                logging.info(record)
+
+                if record[14]==0.0:
+                    score="Not Available"
+                else:
+                    score=record[14]
+
+                if record[13] is None:
+                    ctype="Not Available"
+                else:
+                    ctype=record[13]
+
+                if record[15]==0:
+                    td="No"
+                else:
+                    td="Yes"
+
+
+
                 result2=db_obj.get_query(query,data)
                 r={'charity_id':record[0],'charityName':record[1],
                 'charityAbout': record[2],
@@ -30,7 +48,10 @@ def get_charities(uid):
                 'charityCity':record[5],
                 'charityState':record[6],
                 'charityActiveDrives':record[11],
-                'charityCauses':record[12].split(",")
+                'charityCauses':record[12].split(","),
+                'charityType':ctype,
+                'charityNavigatorScore':score,
+                'deductibility ':td
                 }
                 charities.append(r)
         else:

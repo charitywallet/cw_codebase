@@ -79,7 +79,7 @@ class Signup extends Component {
         //console.log("data",data.user_id);
         this.props.navigation.navigate('UserSignup2', {user_id: data.user_id})
       } else {
-        alert();
+        alert(data.message);
       }
     })
     .catch((error) => {
@@ -96,9 +96,9 @@ class Signup extends Component {
       <Container>
         <Logo/>
         <LoginInput text='Email' onChangeText={email => this.setState({ email })}
-              value={this.state.email} autoCapitalize='none'/>
+              value={this.state.email} autoCapitalize='none'secureTextEntry={false}/>
         <LoginInput text='Password' onChangeText={password => this.setState({ password })}
-              value={this.state.password} autoCapitalize='none'/>
+              value={this.state.password} autoCapitalize='none' secureTextEntry={true}/>
         <View style={styles.signUp}>
           <LoginButton text='Sign Up' onPress={ () => this.onPressSignIn() } disabled={!isEnabled}/>
         </View>

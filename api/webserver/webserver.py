@@ -391,7 +391,7 @@ def drive_list():
 
 
 
-@app.route('/bir_test', methods=["POST"])
+@app.route('/admin_job_trigger', methods=["POST"])
 def bir_test():
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()

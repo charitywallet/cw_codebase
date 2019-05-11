@@ -31,7 +31,10 @@ CREATE TABLE IF NOT EXISTS charity (
     charity_login VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     active_drives INTEGER,
-    causes VARCHAR(255) NOT NULL
+    causes VARCHAR(255) NOT NULL,
+    charity_type VARCHAR(255) NOT NULL,
+    charity_nav_score FLOAT,
+    tax_deductible BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS drive (
@@ -116,7 +119,10 @@ Insert into charity (
   charity_login,
   password,
   active_drives,
-  causes
+  causes,
+  charity_type,
+  charity_nav_score,
+  tax_deductible
 )
 values (
   "The Pollination Project Foundation",
@@ -125,7 +131,9 @@ values (
   "15 Berkeley Way, Berkeley","Berkeley", "CA",
   SYSDATE(), SYSDATE(),
   "charity1","charity1",
-  5,"Community Foundations, Philanthropy, Charity & Voluntarism Promotion, Voluntarism \& Grantmaking Foundations"
+  5,"Community Foundations, Philanthropy, Charity & Voluntarism Promotion, Voluntarism \& Grantmaking Foundations",
+  "Charity Nav Type",0.0,True
+
 ),(
   "The Ama Foundation",
   "The Ama Foundation was created to provide a home, family environment and education for the most underprivileged children of Nepal.  we rescue children from trafficking, drugs and malnutrition and help them to grow up to be productive, happy and healthy citizens of Nepal",
@@ -133,7 +141,8 @@ values (
   "25 Berkeley Way, Berkeley","Berkeley", "CA",
   SYSDATE(), SYSDATE(),
   "charity2","charity2",
-  3,"Children & Youth, Education, Homeless & Housing, International Relief"
+  3,"Children & Youth, Education, Homeless & Housing, International Relief",
+  "Charity Nav Type",6.4,True
 ),
 (
   "Chaparral Foundation",
@@ -142,7 +151,8 @@ values (
   "35 Berkeley Way, Berkeley","Berkeley", "CA",
   SYSDATE(), SYSDATE(),
   "charity3","charity3",
-  2,"Health, Nursing Facilities, Philanthropy, Private Operating Foundations, Seniors"
+  2,"Health, Nursing Facilities, Philanthropy, Private Operating Foundations, Seniors",
+  "Charity Nav Type",7.5,False
 );
 
 
