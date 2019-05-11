@@ -11,8 +11,8 @@ import AppIntro from './screens/GettingStarted';
 
 EStyleSheet.build({
    //$primaryBlue: '#92C7C7',
-   //$primaryBlue: '#4B97A1',
-   $primaryBlue: '#258895',
+   $primaryBlue: '#4B97A1',
+   //$primaryBlue: '#258895',
    //$primaryBlue: '#3D96A1',
    $blueBackground: '#D3E3E6',
    $teal: '#6FACB4',
@@ -28,7 +28,7 @@ EStyleSheet.build({
    $headingFont: 'Avenir',
    $logoFont: 'Avenir',
 
-   // $outline: 1, //Use this to outline containers
+   //$outline: 1, //Use this to outline containers
 });
 export default () => <Navigator/>;
 //export default () => <AppIntro/>;

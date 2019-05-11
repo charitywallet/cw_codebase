@@ -22,8 +22,6 @@ const OverlaySignup = ({
         <View style={styles.buttonGroup}>
           <Button title={button1} onPress = {handleFillNowButton} containerStyle = {styles.buttonContainer1}
           titleStyle={styles.buttonText} buttonStyle={styles.button}/>
-          <Button title={button2} onPress = {handleLaterButton} containerStyle = {styles.buttonContainer2}
-          titleStyle={styles.buttonText} buttonStyle={styles.button}/>
         </View>
       </View>
     </Overlay>
@@ -35,7 +33,6 @@ OverlaySignup.propTypes = {
   stateInitial: PropTypes.any,
   onBackdropPress: PropTypes.func,
   handleFillNowButton: PropTypes.func,
-  handleLaterButton: PropTypes.func,
   button1: PropTypes.any,
   button2: PropTypes.any,
 }

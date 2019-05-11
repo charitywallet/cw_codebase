@@ -6,6 +6,51 @@ import {DefaultCharityFeedCard} from '../components/DashboardComponents/DefaultC
 
 class CharityFeed extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: []
+    };
+  }
+
+  componentDidMount() {
+      function processResponse(response) {
+        const statusCode = response.status;
+        const data = response.json();
+        return Promise.all([statusCode, data]).then(res => ({
+          statusCode: res[0],
+          data: res[1]
+        }));
+      }
+
+      fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/drive_engagement_feed', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: this.props.user_id,
+      }),
+    }).then(processResponse)
+      .then(response => {
+        const { statusCode, data } = response;
+        if (statusCode == 200) {
+          console.log("data", data)
+          this.setState({
+            dataSource: data,
+          }
+        )
+        } else {
+          alert(data.message); //TODO: Network error component
+        }
+      })
+      .catch((error) => {
+        alert(error)
+      });
+    };
+
+
   render() {
     return(
       <View style={{backgroundColor: "#D3E3E6", paddingTop: 5,}}>
