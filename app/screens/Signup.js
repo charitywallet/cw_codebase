@@ -62,7 +62,7 @@ class Signup extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/signup', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/signup', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

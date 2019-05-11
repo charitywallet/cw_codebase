@@ -129,6 +129,9 @@ class Donor(object):
             month_total=db_obj.get_query(query2,data2)
             print(data2,month_total)
 
+            if month_total is None:
+                month_total=0.0
+
             query3="Update donor set monthly_collected = %s where \
             donor_id=%s"
             data3 = (month_total,self.uid,)

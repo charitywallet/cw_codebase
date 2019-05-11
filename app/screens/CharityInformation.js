@@ -28,7 +28,7 @@ export default class CharityInfo extends Component {
       }));
     }
 
-    fetch('http://0.0.0.0:5000/get_drives', {
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_drives', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

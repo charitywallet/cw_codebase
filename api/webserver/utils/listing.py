@@ -34,9 +34,9 @@ def get_charities(uid):
                     ctype=record[13]
 
                 if record[15]==0:
-                    td=False
+                    td="No"
                 else:
-                    td=True
+                    td="Yes"
 
 
 
@@ -51,7 +51,7 @@ def get_charities(uid):
                 'charityCauses':record[12].split(","),
                 'charityType':ctype,
                 'charityNavigatorScore':score,
-                'deductibility ':record[15]
+                'deductibility ':td
                 }
                 charities.append(r)
         else:

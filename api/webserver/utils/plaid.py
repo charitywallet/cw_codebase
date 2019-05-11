@@ -44,7 +44,7 @@ def get_transactions_from_plaid():
         and plaid_access_token is not NULL"
         data=(True,)
         result=db_obj.get_query(query,data)
-        transactions=[]
+        transactions={}
         if len(result)==0:
             return "no plaid linked users"
         for row in result:
@@ -64,12 +64,13 @@ def get_transactions_from_plaid():
                     transaction["account_owner"]
                 )
                 pt_obj.save_tran()
+                transactions[row[0]]=transactions_response["transactions"]
                 # print("whts that",transaction)
             for row in result:
                 donor_obj=Donor(row[0])
                 donor_obj.set_month_total()
 
-            return transactions_response["transactions"]
+        return transactions
                 # return True,transactions_response
     except Exception as e:
         logging.info(e)
