@@ -169,3 +169,48 @@ class Donor(object):
             raise
         finally:
             db_obj.close_conn()
+
+    def make_donation(self,amount=0):
+        print("sel drive")
+        try:
+            db_obj=SqlConn()
+            if amount == 0:
+                query="Select monthly_collected from donor where donor_id = %s"
+                data=(self.uid,)
+                result1=db_obj.get_query(query,data)
+
+                query2= "Select distinct drive_id,charity_id from donor_drive where donor_id=%s and status=%s"
+                data2=(self.uid,True,)
+                result2=db_obj.get_query(query2,data2)
+
+                print(result1[0][0])
+                print(result2, len(result2))
+
+                if len(result2)>0:
+
+                    donation_amt_per_drive = result1[0][0]/len(result2)
+
+                    for drive in result2:
+                        query3= "Insert into donation (donor_id, drive_id,charity_id, donation_date, donation_amt, donation_type)\
+                         values(%s,%s,%s,%s,%s,%s)"
+                        data3=(self.uid,drive[0],drive[1],datetime.datetime.now(),donation_amt_per_drive,"OTD",)
+                        print(query3, data3)
+                        db_obj.set_query(query3,data3)
+
+                    query4= "Update donor set monthly_collected = %s, donation_cycle_start_date =%s, \
+                     lifetime_donation=lifetime_donation+%s where donor_id=%s"
+                    data4=(0,datetime.datetime.now(),result1[0][0],self.uid,)
+                    db_obj.set_query(query4,data4)
+                    print(query4, data4)
+                    return True, "Donation Successfull"
+                else:
+                    return False, "No selected drive"
+
+            else:
+                return False, "Donation amount needs to be greater than 0"
+
+        except Exception as e:
+            logging.info(e)
+            raise
+        finally:
+            db_obj.close_conn()
