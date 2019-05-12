@@ -33,6 +33,7 @@ class Signup2 extends Component {
        isVisible: true,
        firstName: '',
        lastName: '',
+       maxDonation: '',
      }
    };
 
@@ -45,6 +46,10 @@ class Signup2 extends Component {
    };
 
    onPressNext = (navigate, user_id) => {
+     if (this.state.firstName == ''){
+       alert("Please enter a valid First Name")
+       return
+     }
      navigate('UserSignup3', {user_id: user_id, firstName: this.state.firstName, lastName: this.state.lastName})
    }
 
@@ -54,37 +59,48 @@ class Signup2 extends Component {
     const user_id = this.props.navigation.getParam('user_id', 1);
 
     return(
-      <View style={{flex: 1,}}>
-        <Text style={styles.skip} onPress = {() => navigate('UserDashboard', {user_id: user_id})}> SKIP</Text>
         <Container>
         <OverlaySignup userId = {JSON.stringify(user_id)}
          stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
          handleFillNowButton={this.handleFillNowButton}
-         handleLaterButton={() => {this.setState({ isVisible: false }); navigate('UserDashboard', {user_id: user_id})}}
-         button1="Fill Now" button2="Later"/>
+         button1="Fill Now"/>
 
           <LoginInput text='First Name' onChangeText={firstName => this.setState({ firstName })}
                 value={this.state.firstName}/>
+          <Text style={styles.required}>*Required</Text>
           <LoginInput text='Last Name' onChangeText={lastName => this.setState({ lastName })}
                 value={this.state.lastName}/>
-          <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Spending Account"/>
-            {/*<View style={styles.tooltip1}>
-            <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
-                  This is the account we will use to calculate the change from each transaction.</Text>}
-                 backgroundColor="#F0F0F0" height={100} width={200}>
-              <Ionicons name='ios-information-circle' size={30} color='grey' />
-            </Tooltip>
+          <Text style={styles.required}></Text>
+          {/*<View style={{flexDirection: 'row', marginLeft: 110, width: "100%",}}>
+          <LoginInput text='Maximum Monthly Donation' onChangeText={maxDonation => this.setState({ maxDonation })}
+                      value={this.state.maxDonation}/>
+            <View style={{marginTop: 20,}}>
+              <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
+                    This is the maximum amount you would like to be donated from your account in a month.</Text>}
+                   backgroundColor="#F0F0F0" height={100} width={200}>
+                <Ionicons name='ios-information-circle' size={30} color='grey' />
+              </Tooltip>
+            </View>
           </View>*/}
-
+            <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Spending Account"/>
+            <View style={styles.tooltip1}>
+              <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
+                    This is the account we will use to calculate the change from each transaction.</Text>}
+                   backgroundColor="#F0F0F0" height={100} width={200}>
+                <Ionicons name='ios-information-circle' size={30} color='grey' />
+              </Tooltip>
+            </View>
+          <Text style={styles.required}></Text>
           <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Checking Account"/>
-          {/*<View style={styles.tooltip1}>
+          <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
                   This is the account we will use to calculate the change from each transaction.</Text>}
                  backgroundColor="#F0F0F0" height={100} width={200}>
               <Ionicons name='ios-information-circle' size={30} color='grey' />
             </Tooltip>
-          </View>*/}
-          <View style={{paddingTop:10,}}>
+          </View>
+          <Text style={styles.required}></Text>
+          <View style={{paddingTop:20,}}>
           <LoginButton text='Next' onPress = {() => this.onPressNext(navigate, user_id)}/>
           </View>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
@@ -93,7 +109,7 @@ class Signup2 extends Component {
           </View>
 
         </Container>
-      </View>
+
     );
   }
 }
@@ -127,10 +143,20 @@ const styles = EStyleSheet.create({
     },
     tooltip1: {
       //paddingLeft: 270,
-      marginLeft: 310,
-      marginTop: -139,
+      marginLeft: 300,
+      marginTop: -95,
       width:30,
+      height: 100,
+      justifyContent: 'flex-start',
     },
+    required: {
+      color: '$inputText',
+      fontFamily: '$textFont',
+      fontSize: 12,
+      paddingLeft: 180,
+      paddingTop: 5,
+      marginBottom: -19,
+    }
 });
 
 

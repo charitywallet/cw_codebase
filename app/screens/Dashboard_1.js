@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, ImageBackground, Dimensions} from 'react-native'
 import {Carousel} from '../components/DashboardComponents/Carousel'
 import {CurrentAmountCard} from '../components/DashboardComponents/CurrentAmountCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { NavigationEvents } from 'react-navigation';
 
 const imageWidth = Dimensions.get('window').width;
 
@@ -14,56 +15,102 @@ class Dashboard_1 extends Component {
     active_drives: '',
     month_total: '',
     lifetime_total: '',
-    drives_supported: true,
+    drives_supported: false,
+    update: false,
   }
 
-componentDidMount() {
-    function processResponse(response) {
-      const statusCode = response.status;
-      const data = response.json();
-      return Promise.all([statusCode, data]).then(res => ({
-        statusCode: res[0],
-        data: res[1]
-      }));
-    }
+componentWillMount() {
+  //console.log("mount")
+    this.getUserDetails();
+    //this.load()
+    //this.props.navigation.addListener('willFocus', this.load)
+    //console.log("state", this.state)
+  }
 
-    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_user_totals', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      user_id: this.state.user_id,
-    }),
-  }).then(processResponse)
-    .then(response => {
-      const { statusCode, data } = response;
-      if (statusCode == 200) {
+// componentWillUpdate() {
+//   console.log("inside update")
+//   this.getUserDetails();
+//   //this.load()
+//   console.log("state update", this.state)
+// }
+
+getUserDetails() {
+  //console.log("details")
+  function processResponse(response) {
+    const statusCode = response.status;
+    const data = response.json();
+    return Promise.all([statusCode, data]).then(res => ({
+      statusCode: res[0],
+      data: res[1]
+    }));
+  }
+
+  fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_user_totals', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    user_id: this.state.user_id,
+  }),
+}).then(processResponse)
+  .then(response => {
+    const { statusCode, data } = response;
+    if (statusCode == 200) {
+      this.setState((prevState, props) => ({
+        active_charities: data.totals.active_charities,
+        active_drives: data.totals.active_drives,
+        month_total: data.totals.month_total,
+        lifetime_total: data.totals.lifetime_total,
+        update: false,
+      }))
+      if (data.totals.active_drives >= 1) {
         this.setState({
-          active_charities: data.totals.active_charities,
-          active_drives: data.totals.active_drives,
-          month_total: data.totals.month_total,
-          lifetime_total: data.totals.lifetime_total,
+          drives_supported: true,
+          //update: false,
         })
-        if (data.totals.active_drives < 1) {
-          this.setState({
-            drives_supported: false,
-          })
-        }
       } else {
-        alert(data.message); //TODO: Network error component
+        this.setState({
+          drives_supported: false,
+          //update: false,
+        })
       }
-    })
-    .catch((error) => {
-      alert(error)
-    });
-  }
+    } else {
+      alert(data.message); //TODO: Network error component
+    }
+  })
+  .catch((error) => {
+    alert(error)
+  });
+}
+
+  // load = () => {
+  //     console.log("inside load");
+  //     this.setState({
+  //       update: true,
+  //     })
+  //   }
+
+// shouldComponentUpdate(nextProp, nextState){
+//   //console.log("update", this.state)
+//   // if ((this.state.active_drives !== nextState.active_drives) ||
+//   // (this.state.drives_supported === false && this.state.update === true)){
+//   //   console.log("should update")
+//   //   return true;
+//   // }
+//   // console.log("should not update")
+//   // return false;
+//   if (this.state.update === true) {
+//     return true
+//   }
+//   return false
+// }
 
   render() {
     return(
       <View style={styles.container}>
-      {this.state.drives_supported || this.state.lifetime_total ?
+      {this.state.drives_supported ?
         <View>
           <View style={styles.currencyCardContainer}>
             <CurrentAmountCard month_total={this.state.month_total}/>
@@ -129,3 +176,11 @@ const styles = EStyleSheet.create({
 
 
 export default Dashboard_1;
+
+
+// <NavigationEvents
+// onWillFocus={payload => console.log('will focus',payload)}
+// onDidFocus={payload => console.log('did focus',payload)}
+// onWillBlur={payload => console.log('will blur',payload)}
+// onDidBlur={payload => console.log('did blur',payload)}
+// />

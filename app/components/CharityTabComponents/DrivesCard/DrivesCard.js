@@ -50,7 +50,9 @@ export default class DrivesCard extends Component {
     this.setState({
       triggerAnimationId:hearts.find(x => x.id === item.id).id,
       hearts: updatedlist})
-    this.props.func(this.props.drive.userSelected, this.props.drive.drive_id);
+    if (this.props.func) {
+      this.props.func(this.props.drive.userSelected, this.props.drive.drive_id);
+    }
 
     function processResponse(response) {
       const statusCode = response.status;

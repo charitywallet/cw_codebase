@@ -28,9 +28,6 @@ class Signup3 extends Component {
       <View style={{flex: 1,
           alignItems: 'center',
           backgroundColor: '$background'}}>
-        <Text style={styles.skip} onPress = {() => navigate('UserDashboard', {user_id: user_id})}> SKIP</Text>
-
-
           <Text style={styles.introText}>Thanks for signing up, {firstName}! You are almost done. In order to help us recommend more personalized drives and charities to you,
           please select the causes you really care about.</Text>
 
@@ -122,6 +119,7 @@ const styles = EStyleSheet.create({
       //fontWeight: '300',
       color: '$inputText',
       textAlign: 'justify',
+      fontFamily: '$textFont',
     },
     list: {
       flex: .92,
@@ -130,3 +128,5 @@ const styles = EStyleSheet.create({
 
 
 export default Signup3;
+
+// <Text style={styles.skip} onPress = {() => navigate('UserDashboard', {user_id: user_id})}> SKIP</Text>

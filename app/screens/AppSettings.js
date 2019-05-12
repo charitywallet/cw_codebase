@@ -23,14 +23,7 @@ class AppSettings extends Component {
   render() {
 
     return(
-       <PlaidAuthenticator
-        onMessage={this.onMessage}
-        publicKey="0cfea3b8cf3611b374aecb1a215a39"
-        env="sandbox"
-        product="transactions"
-        clientName="CharityWallet"
-        selectAccount={false}
-      />
+      <Text>App settings go here.</Text>
     );
   }
 }

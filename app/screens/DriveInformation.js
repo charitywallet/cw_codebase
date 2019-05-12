@@ -10,20 +10,6 @@ import {DriveInfoHeader} from 'app/components/CharityTabComponents/DriveInfoHead
 
 const imageWidth = (Dimensions.get('window').width);
 
-// const driveInfo =
-//       {
-//         driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-//       , driveCity: 'Berkeley'
-//       , driveState: 'CA'
-//       , driveTitle: 'Help Detective Pikachu'
-//       , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-//       , currentMoney: '450'
-//       , targetMoney: '2000'
-//       , percentCompleted: 0.8
-//       , charityName: 'Pokemon Squad'
-//       , numDonations: '30'
-//       }
-
 const driveFeedUpdate =
       [
         {
@@ -44,6 +30,7 @@ export default class DriveInformation extends Component {
     this.state = {
       isActive: false,
       changed: false,
+      dataSource: [],
     };
   }
 
@@ -55,17 +42,55 @@ export default class DriveInformation extends Component {
     })
   }
 
+  componentWillMount() {
+    const drives = this.props.navigation.getParam('drive', 'No-Drive');
+
+      function processResponse(response) {
+        const statusCode = response.status;
+        const data = response.json();
+        return Promise.all([statusCode, data]).then(res => ({
+          statusCode: res[0],
+          data: res[1]
+        }));
+      }
+
+      fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/drive_engagement_feed', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        drive_id: drives.drive_id,
+      }),
+    }).then(processResponse)
+      .then(response => {
+        const { statusCode, data } = response;
+        if (statusCode == 200) {
+          this.setState({
+            dataSource: data.drive_engagement_feed,
+          }
+        )
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        alert(error)
+      });
+  };
+
   componentWillUnmount() {
     this.props.navigation.state.params.returnData(this.state);
   }
 
   render() {
     const drives = this.props.navigation.getParam('drive', 'No-Drive');
-    const user_id = this.props.navigation.getParam('user_id', 0);
+    const user_id = this.props.navigation.getParam('user_id');
     return (
         <View style={styles.Container}>
           <FlatList
-                data={driveFeedUpdate}
+                data={this.state.dataSource}
                 renderItem={({item}) => (
                 <CharityFeedCard2
                   charity= {item}/>

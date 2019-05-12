@@ -19,6 +19,8 @@ export default EStyleSheet.create({
     paddingRight: 15,
     justifyContent: 'space-evenly',
     textAlign: 'justify',
+    fontFamily: '$textFont',
+    fontSize: 15,
   },
   buttonGroup: {
     flexDirection: 'row',
@@ -38,6 +40,7 @@ export default EStyleSheet.create({
   },
   buttonText : {
     color: 'white',
+    fontFamily: '$textFont',
   },
   button: {
     backgroundColor: '$buttonBackground',
