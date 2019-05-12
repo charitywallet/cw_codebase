@@ -22,7 +22,6 @@ constructor(props) {
 }
 
 componentWillMount() {
-  console.log("componentDidMount")
     function processResponse(response) {
       const statusCode = response.status;
       const data = response.json();
@@ -197,7 +196,7 @@ componentWillMount() {
             refreshing={this.state.isRefreshing}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation}/>
+              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}

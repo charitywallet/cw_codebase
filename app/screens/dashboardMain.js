@@ -44,8 +44,8 @@ export default class TabsAdvancedExample extends Component {
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Overview</Text></TabHeading>}>
             <Dashboard_1 user_id={user_id} navigation={this.props.navigation}/>
           </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText} user_id={user_id}>Charity Feed</Text></TabHeading>}>
-            <CharityFeed />
+          <Tab heading={ <TabHeading><Text style={styles.tabText}>Charity Feed</Text></TabHeading>}>
+            <CharityFeed user_id={user_id} navigation={this.props.navigation}/>
           </Tab>
         </Tabs>
         </Container>

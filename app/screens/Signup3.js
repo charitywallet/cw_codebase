@@ -119,6 +119,7 @@ const styles = EStyleSheet.create({
       //fontWeight: '300',
       color: '$inputText',
       textAlign: 'justify',
+      fontFamily: '$textFont',
     },
     list: {
       flex: .92,

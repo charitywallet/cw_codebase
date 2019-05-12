@@ -52,6 +52,10 @@ const AppContainer1 = createBottomTabNavigator(
         }
         return <Icon name={iconName} size={30} color={tintColor}/>;
       },
+      // tabBarOnPress: ({ navigation, defaultHandler }) => {
+      //   console.log('onPress:', navigation.state.routeName);
+      //   defaultHandler()
+      // },
     }),
     tabBarOptions: {
       activeTintColor: '#4B97A1',
