@@ -7,9 +7,11 @@ import json
 from classes.plaid_transaction import PlaidTransaction
 
 PLAID_CLIENT_ID = '5cb0ce482db15200120fb445'
-PLAID_SECRET = '4c61d2dfdff1021b50b7cd146bcf9a'
+# PLAID_SECRET = '4c61d2dfdff1021b50b7cd146bcf9a' #development
+PLAID_SECRET = '8b33b5d685f70591320f566ad87901' #sandbox
 PLAID_PUBLIC_KEY = '0cfea3b8cf3611b374aecb1a215a39'
-PLAID_ENV =  'development'
+# PLAID_ENV =  'development'
+PLAID_ENV =  'sandbox'
 PLAID_PRODUCTS = 'transactions,auth'
 
 
@@ -71,6 +73,44 @@ def get_transactions_from_plaid():
                 donor_obj.set_month_total()
 
         return transactions
+                # return True,transactions_response
+    except Exception as e:
+        logging.info(e)
+        raise
+
+
+def get_account_info_from_plaid(user_id):
+    """pull account info"""
+    try:
+        db_obj=SqlConn()
+        query="Select donor_id,plaid_access_token,plaid_item_id from donor where account_status = %s \
+        and plaid_access_token is not NULL and donor_id=%s"
+        data=(True,user_id,)
+        result=db_obj.get_query(query,data)
+        # accounts={}
+        if len(result)==0:
+            return "No accounts linked to Plaid - No Spending Accounts"
+        for row in result:
+            accounts_response = client.Accounts.get(row[1])
+            # accounts[row[0]]=accounts_response
+            # print("whts that",accounts)
+
+                # for account in accounts_response["transactions"]:
+                # pt_obj=PlaidTransaction(
+                #     row[0],
+                #     transaction["name"],
+                #     transaction["amount"],
+                #     transaction["date"],
+                #     transaction["location"]["city"],
+                #     transaction["transaction_id"],
+                #     transaction["transaction_type"],
+                #     transaction["account_id"],
+                #     transaction["account_owner"]
+                # )
+                # pt_obj.save_tran()
+
+
+        return accounts_response["accounts"]
                 # return True,transactions_response
     except Exception as e:
         logging.info(e)
