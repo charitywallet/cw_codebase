@@ -4,10 +4,11 @@ import logging
 import time
 from classes.auth import Auth
 from classes.donor import Donor
-from utils.session import start_session, check_session, end_session
+from utils.session import *
 from utils.plaid import *
 from utils.listing import *
 from utils.donation import *
+
 import datetime
 
 print("App load")
@@ -185,6 +186,45 @@ def user_totals():
     return Response(result, status=status_code, mimetype='application/json')
 
 
+@app.route('/select_causes', methods=['POST'])
+def select_user_causes():
+    response={}
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        user_id = arguments.get("user_id")
+        cause_list = arguments.get("causes")
+        status=""
+        try:
+            session_flag= check_session(int(user_id))
+            if session_flag:
+                donor_obj=Donor(user_id)
+                donor_obj.set_causes(cause_list)
+                status_code = 200
+                message="Causes saved successfully"
+                logging.info(message)
+                response['message']=message
+            else:
+                status_code = 400
+                message="Session Inactive, Login Again"
+                logging.info(message)
+                response['message']=message
+
+        except Exception as e:
+            status_code = 400
+            status = e
+            message="Error:{}".format(status)
+            logging.info(message)
+            response['message']=message
+
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
+    result=json.dumps(response)
+
+    return Response(result, status=status_code, mimetype='application/json')
+
 @app.route('/set_ptoken', methods=['POST'])
 def plaid_access_token_gen():
     response={}
@@ -221,6 +261,46 @@ def plaid_access_token_gen():
     result=json.dumps(response)
 
     return Response(result, status=status_code, mimetype='application/json')
+
+
+@app.route('/get_spending_account', methods=['POST'])
+def get_spending_account():
+    response={}
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        user_id = arguments.get("user_id")
+        print("user_id",user_id)
+        status=""
+        try:
+            #check session
+            session_flag= check_session(int(user_id))
+            if session_flag:
+                current_user=Donor(user_id)
+                response["accounts"]= get_account_info_from_plaid(user_id)
+                status_code = 200
+                logging.info(response)
+            else:
+                status_code = 400
+                message="Session Inactive, Login Again"
+                logging.warning(message)
+                response['message']=message
+
+        except Exception as e:
+            status_code = 400
+            status = e
+            message="Error:{}".format(status)
+            logging.warning(message)
+            response['message']=message
+
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
+    result=json.dumps(response)
+
+    return Response(result, status=status_code, mimetype='application/json')
+
 
 
 @app.route('/get_charities', methods=["POST"])
@@ -392,6 +472,42 @@ def drive_list():
     return Response(result, status=status_code, mimetype='application/json')
 
 
+@app.route('/recommended_drives', methods=["POST"])
+def recommended_drives():
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        user_id = arguments.get("user_id")
+
+        response={}
+        try:
+            #get all drives if no user_id
+            if user_id is None or user_id==0:
+                user_id=0
+                response["drives"]= get_drives(user_id,0)
+            else:
+                response["drives"]= get_recommended_drives(user_id)
+
+            status_code = 200
+            logging.info(response)
+
+        except Exception as e:
+            status_code = 400
+            status = e
+            message="{}".format(status)
+            logging.info(message)
+            response['message']=message
+
+
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
+    result=json.dumps(response)
+
+    return Response(result, status=status_code, mimetype='application/json')
+
+
 @app.route('/drive_engagement_feed', methods=["POST"])
 def engagement_feed():
     if request.headers['Content-Type'] == 'application/json':
@@ -431,6 +547,54 @@ def engagement_feed():
     return Response(result, status=status_code, mimetype='application/json')
 
 
+@app.route('/donate_now', methods=['POST'])
+def donate_now():
+    response={}
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        user_id = arguments.get("user_id")
+        amount = arguments.get("amount")
+        status=""
+        try:
+            session_flag= check_session(int(user_id))
+            if session_flag:
+                donor_obj=Donor(user_id)
+                if amount is None:
+                    status, message=donor_obj.make_donation()
+                else:
+                    status, message=donor_obj.make_donation(amount)
+                if status:
+                    status_code = 200
+                    logging.info(message)
+                    response['message']=message
+                else:
+                    status_code = 400
+                    logging.info(message)
+                    response['message']=message
+
+            else:
+                status_code = 400
+                message="Session Inactive, Login Again"
+                logging.info(message)
+                response['message']=message
+
+        except Exception as e:
+            status_code = 400
+            status = e
+            message="Error:{}".format(status)
+            logging.info(message)
+            response['message']=message
+
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
+    result=json.dumps(response)
+
+    return Response(result, status=status_code, mimetype='application/json')
+
+
 @app.route('/admin_job_trigger', methods=["POST"])
 def bir_test():
     if request.headers['Content-Type'] == 'application/json':
@@ -446,7 +610,11 @@ def bir_test():
             status_code = 200
         elif action==2:
             # calculate_donor_month_total()
-            response["message"]="works externally"
+            response["message"]="API works"
+            status_code = 200
+        elif action==3:
+            # calculate_donor_month_total()
+            response["message"]=make_donations()
             status_code = 200
         elif action==0:
             print(datetime.datetime.now().replace(day=1))
