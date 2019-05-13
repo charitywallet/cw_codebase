@@ -20,6 +20,7 @@ export default EStyleSheet.create({
     textTransform: 'capitalize',
     paddingBottom: 10,
     paddingTop: 5,
+    fontFamily: '$headingFont',
   },
   driveImage:{
     height: imageWidth/2,
@@ -30,6 +31,7 @@ export default EStyleSheet.create({
     fontSize:16,
     textTransform: 'capitalize',
     paddingBottom: 5,
+    fontFamily: '$headingFont',
     // paddingTop: 5,
   },
   location:{
@@ -38,6 +40,7 @@ export default EStyleSheet.create({
     textTransform: 'uppercase',
     fontWeight:'bold',
     color: '$primaryBlue',
+    fontFamily: '$headingFont',
   },
   progressBar:{
     paddingLeft:10,
@@ -50,11 +53,13 @@ export default EStyleSheet.create({
     fontWeight: 'bold',
   },
   moneyRaised:{
-    flexDirection:'row'
+    flexDirection:'row',
+    fontFamily: '$headingFont',
   },
   currentMoney:{
     paddingTop: 5,
     fontWeight: 'bold',
+    fontFamily: '$textFont',
   },
   targetMoney:{
     paddingTop: 5,
@@ -64,6 +69,7 @@ export default EStyleSheet.create({
     paddingRight:10,
     paddingTop: 8,
     fontWeight: 'bold',
+    fontFamily: '$headingFont',
   },
   driveAbout:{
     paddingLeft:10,
@@ -71,10 +77,10 @@ export default EStyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
     textAlign: 'auto',
-
+    fontFamily: '$textFont',
   },
   charityNavigatorDetails:{
-
+    fontFamily: '$textFont',
   },
   charityNavigatorDetailsHeader:{
     fontWeight: 'bold',
@@ -108,6 +114,7 @@ export default EStyleSheet.create({
     paddingBottom: 10,
     fontWeight: 'bold',
     fontStyle:'italic',
+    fontFamily: '$textFont',
   },
   updateSeparator:{
     height: 10,
@@ -119,6 +126,7 @@ export default EStyleSheet.create({
     paddingLeft:10,
     fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: '$headingFont',
 
   },
 });

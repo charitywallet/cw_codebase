@@ -17,7 +17,7 @@ const Carousel = ({
     {
       id: "1",
       cardTitle: "Your lifetime donations through the app are",
-      cardAmount: lifetime_total,
+      cardAmount: '$'+lifetime_total,
       cardMessage: "Congrats! Way to go!"
     },
     {
