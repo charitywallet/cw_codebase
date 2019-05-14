@@ -5,6 +5,7 @@ let initialState = {
     monthTotal: 0.0,
     activeCharities: 0,
     activeDrives: 0,
+    allDrivesToggle: false
 }
 
 export default reducer = (state = initialState, action) => {
@@ -17,10 +18,12 @@ export default reducer = (state = initialState, action) => {
               favoriteDrivesInfo: action.initialFav
             }
         case 'SET_INITIAL_ALL':
-              return {
+
+              newState = {
                 ...state,
                 allDrivesInfo: action.initialAll
               }
+              return newState
         case 'UPDATE_LIFETIME_TOTAL':
               return {
                 ...state,
@@ -56,6 +59,7 @@ export default reducer = (state = initialState, action) => {
                 favoriteDrivesInfo: [...state.favoriteDrivesInfo, action.drive],
                 allDrivesInfo: allArray,
                 activeDrives: state.activeDrives + 1,
+                allDrivesToggle: !state.allDrivesToggle,
               }
               //console.log("newstate add", newState)
         			return newState
@@ -84,6 +88,7 @@ export default reducer = (state = initialState, action) => {
               favoriteDrivesInfo: arrayInfo,
               allDrivesInfo: allArray,
               activeDrives: state.activeDrives - 1,
+              allDrivesToggle: !state.allDrivesToggle
             }
         }
         return state

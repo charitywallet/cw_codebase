@@ -14,12 +14,14 @@ constructor(props) {
     search: '',
     user_id: this.props.user_id,
     drives_added: true,
-    isRefreshing: false,
     loading: false,
     shouldUpdate: this.props.drives_added_by_user,
     initial: true,
+    currentlyDisplayed: this.props.favoriteDrivesInfo,
+    dataSource: this.props.favoriteDrivesInfo,
+    refresh: true,
   };
-  this.arrayholder = [];
+  this.arrayholder = this.props.favoriteDrivesInfo;
 }
 
 componentWillMount() {
@@ -49,13 +51,13 @@ componentWillMount() {
         this.setState({
           drives: data.drives,
           isLoading: false,
-          dataSource: data.drives,
+          dataSource: this.props.favoriteDrivesInfo,//data.drives,
           drives_added: true,
           loading: false,
           initial: false,
         },
         function() {
-          this.arrayholder = data.drives;
+          this.arrayholder = this.props.favoriteDrivesInfo//data.drives;
         }
       )
         //console.log("data", this.state.dataSource);
@@ -64,13 +66,13 @@ componentWillMount() {
           this.setState({
             drives: data.drives,
             isLoading: false,
-            dataSource: data.drives,
+            dataSource: this.props.favoriteDrivesInfo,//data.drives,
             drives_added: false,
             loading: false,
             initial: false,
           },
           function() {
-            this.arrayholder = data.drives;
+            this.arrayholder = this.props.favoriteDrivesInfo//data.drives;
           }
           )
         } else {
@@ -84,79 +86,83 @@ componentWillMount() {
   };
 
 
-  onRefresh() {
-    this.setState({ isRefreshing: true }); // true isRefreshing flag for enable pull to refresh indicator
-
-      function processResponse(response) {
-        const statusCode = response.status;
-        const data = response.json();
-        return Promise.all([statusCode, data]).then(res => ({
-          statusCode: res[0],
-          data: res[1]
-        }));
-      }
-
-      fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_drives', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: this.props.user_id,
-        my_drives: 1,
-      }),
-    }).then(processResponse)
-      .then(response => {
-        const { statusCode, data } = response;
-        if (statusCode == 200) {
-          this.setState({
-            drives: data.drives,
-            isLoading: false,
-            dataSource: data.drives,
-            drives_added: true,
-            isRefreshing: false
-          },
-          function() {
-            this.arrayholder = data.drives;
-          }
-        )
-          //console.log("data", this.state.dataSource);
-        } else {
-          if (data.message == "Error:No Drives Found") {
-            this.setState({
-              drives: data.drives,
-              isLoading: false,
-              dataSource: data.drives,
-              drives_added: false,
-              isRefreshing: false,
-            },
-            function() {
-              this.arrayholder = data.drives;
-            }
-            )
-          } else {
-            this.setState({
-              drives: data.drives,
-              isLoading: false,
-              dataSource: data.drives,
-              drives_added: false,
-              isRefreshing: false,
-            })
-            alert(data.message); //TODO: Network error component
-          }
-        }
-      })
-      .catch((error) => {
-        alert(error)
-      });
-
-  }
+  // onRefresh() {
+  //   this.setState({ isRefreshing: true }); // true isRefreshing flag for enable pull to refresh indicator
+  //
+  //     function processResponse(response) {
+  //       const statusCode = response.status;
+  //       const data = response.json();
+  //       return Promise.all([statusCode, data]).then(res => ({
+  //         statusCode: res[0],
+  //         data: res[1]
+  //       }));
+  //     }
+  //
+  //     fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/get_drives', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: this.props.user_id,
+  //       my_drives: 1,
+  //     }),
+  //   }).then(processResponse)
+  //     .then(response => {
+  //       const { statusCode, data } = response;
+  //       if (statusCode == 200) {
+  //         this.setState({
+  //           drives: data.drives,
+  //           isLoading: false,
+  //           dataSource: data.drives,
+  //           drives_added: true,
+  //           isRefreshing: false
+  //         },
+  //         function() {
+  //           this.arrayholder = data.drives;
+  //         }
+  //       )
+  //         //console.log("data", this.state.dataSource);
+  //       } else {
+  //         if (data.message == "Error:No Drives Found") {
+  //           this.setState({
+  //             drives: data.drives,
+  //             isLoading: false,
+  //             dataSource: data.drives,
+  //             drives_added: false,
+  //             isRefreshing: false,
+  //           },
+  //           function() {
+  //             this.arrayholder = data.drives;
+  //           }
+  //           )
+  //         } else {
+  //           this.setState({
+  //             drives: data.drives,
+  //             isLoading: false,
+  //             dataSource: data.drives,
+  //             drives_added: false,
+  //             isRefreshing: false,
+  //           })
+  //           alert(data.message); //TODO: Network error component
+  //         }
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       alert(error)
+  //     });
+  //
+  // }
 
   search = text => {
     //console.log(text);
   };
   clear = () => {
+    this,setState({
+      dataSource: this.props.favoriteDrivesInfo,
+      refresh: !this.state.refresh
+    })
     this.search.clear();
   };
 
@@ -172,8 +178,10 @@ componentWillMount() {
     this.setState({
       //setting the filtered newData on datasource
       //After setting the data it will automatically re-render the view
+      currentlyDisplayed: newData,
       dataSource: newData,
       search: text,
+      refresh: !this.state.refresh
     });
   }
 
@@ -192,9 +200,8 @@ componentWillMount() {
       {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
-            data={this.props.favoriteDrivesInfo}
-            onRefresh={() => this.onRefresh()}
-            refreshing={this.state.isRefreshing}
+            data={this.state.dataSource}
+            extraData={this.state.refresh}
             renderItem={({item}) => (
             <DrivesCard
               drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}

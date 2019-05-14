@@ -32,6 +32,7 @@ componentWillMount() {
         data: res[1]
       }));
     }
+    console.log("user_id", this.props.navigation.getParam('user_id', 0));
 
     fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/recommended_drives', {
     method: 'POST',
@@ -40,12 +41,13 @@ componentWillMount() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      user_id: this.props.user_id,
+      user_id: this.props.navigation.getParam('user_id', 0),
     }),
   }).then(processResponse)
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
+        console.log("response", data)
         this.setState({
           drives: data.drives,
           isLoading: false,
@@ -57,19 +59,7 @@ componentWillMount() {
       )
         //console.log("data", this.state.dataSource);
       } else {
-        if (data.message == "Error:No Drives Found") {
-          this.setState({
-            drives: data.drives,
-            isLoading: false,
-            dataSource: data.drives,
-            drives_added: false,
-            loading: false,
-            initial: false,
-          }
-          )
-        } else {
           alert(data.message); //TODO: Network error component
-        }
       }
     })
     .catch((error) => {
