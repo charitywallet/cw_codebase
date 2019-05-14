@@ -25,6 +25,7 @@ export default class CausesCards extends Component {
     } else {
       CausesChosen.push( name );
     }
+    this.props.func(CausesChosen)
   }
 
   render() {

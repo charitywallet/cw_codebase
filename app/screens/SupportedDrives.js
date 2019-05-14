@@ -3,6 +3,7 @@ import {FlatList, View, Text} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
+import { connect } from 'react-redux'
 
 class SupportedDrives extends Component {
 
@@ -188,15 +189,16 @@ componentWillMount() {
         autoCorrect={false}
         platform="ios"
       />
-      {!this.state.drives_added ? <Text style={{}}> Please select drives to view your drives. </Text> : null}
+      {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
-            data={this.state.dataSource}
+            data={this.props.favoriteDrivesInfo}
             onRefresh={() => this.onRefresh()}
             refreshing={this.state.isRefreshing}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}/>
+              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}
+              sourcePage='Supported'/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
@@ -206,12 +208,31 @@ componentWillMount() {
   }
 };
 
+function mapStateToProps(state) {
+    return {
+        favoriteDrivesInfo: state.favoriteDrivesInfo
+    }
+}
 
-export default SupportedDrives;
+function mapDispatchToProps(dispatch) {
+    return {
+        addToFav: (drive) => dispatch({ type: 'ADD_TO_FAV', drive:drive}),
+        removeFromFav: (drive) => dispatch({ type: 'REMOVE_FROM_FAV', drive:drive}),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SupportedDrives)
+
+//export default SupportedDrives;
 
 const styles= EStyleSheet.create({
   row: {
-  flex: 1,
-  justifyContent: 'space-between'
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  selectDrives: {
+    fontFamily: '$textFont',
+    paddingLeft: 10,
+    paddingTop: 10,
   }
 });

@@ -10,9 +10,8 @@ const formattedDate = moment(currentDate).format("MMMM D, YYYY");
 const day = new Date().getDate();
 const month = new Date().getMonth();
 const year = new Date().getYear();
-const AmountTillNow = '42.42'
 
-const CurrentAmountCard = ({ month_total }) => {
+const CurrentAmountCard = ({ month_total, onPressDonateNow, onPressDonateCustom }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.date}>{ formattedDate }</Text>
@@ -20,10 +19,10 @@ const CurrentAmountCard = ({ month_total }) => {
       <Text style={styles.bottomText}>collected this month</Text>
       <View style={styles.buttonContainer}>
           <Button raised
-          title= 'Donate Now'
+          title= 'Donate Now' onPress={onPressDonateNow}
           buttonStyle= {styles.buttonStyle} titleStyle={styles.buttonTextStyle}/>
           <Button raised
-          title= 'Donate Custom Amount'
+          title= 'Donate Custom Amount' onPress={onPressDonateCustom}
           buttonStyle= {styles.buttonStyle} titleStyle={styles.buttonTextStyle}/>
       </View>
     </View>
@@ -32,6 +31,8 @@ const CurrentAmountCard = ({ month_total }) => {
 
 CurrentAmountCard.propTypes = {
   month_total: PropTypes.any,
+  onPressDonateNow: PropTypes.func,
+  onPressDonateCustom: PropTypes.func,
 };
 
 export default CurrentAmountCard;

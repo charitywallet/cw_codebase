@@ -4,12 +4,30 @@ import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-animated-icons';
+import { connect } from 'react-redux'
 
 const imageWidth = (Dimensions.get('window').width);
 
-export default class DriveInfoHeader extends Component {
+class DriveInfoHeader extends Component {
   constructor(props){
     super(props);
+    //if (this.props.sourcePage === 'Supported'){
+      // var isActive = false;
+      // //console.log("this.props.favoriteDrives", this.props.favoriteDrivesInfo)
+      // for(const i in this.props.allDrivesInfo){
+      //   //console.log("i", i)
+      //   //console.log("this.props.favoriteDrive", this.props.favoriteDrivesInfo[i])
+      //   if(this.props.allDrivesInfo[i].drive_id === this.props.drive.drive_id){
+      //     // console.log("Topic exists in favorite")
+      //     isActive = this.props.allDrivesInfo[i].userSelected;
+      //     console.log("isActive", isActive)
+      //     break;
+      //   }
+      // };
+    //}
+    // else {
+    //   var isActive = this.props.drive.userSelected
+    // }
     this.state = {
       triggerAnimationId:null,
       hearts:[{isActive:this.props.drive.userSelected,"id":this.props.drive.drive_id}],
@@ -17,7 +35,13 @@ export default class DriveInfoHeader extends Component {
 
   }
 
-  onPressHearts = (item) => {
+  onPressHearts = (item, drive) => {
+    if (item.isActive) {
+      this.props.removeFromFav(drive)
+    } else {
+      this.props.addToFav(drive)
+    }
+
 
     if(!item)return
     // item.isActive!=item.isActive
@@ -49,7 +73,6 @@ export default class DriveInfoHeader extends Component {
       user_id: this.props.user_id,
       drive_id: this.props.drive.drive_id,
       charity_id: this.props.drive.charity_id,
-      my_drives: 0,
     }),
   }).then(processResponse)
     .then(response => {
@@ -68,7 +91,7 @@ export default class DriveInfoHeader extends Component {
     .catch((error) => {
       alert(error)
     });
-    this.props.funcDrivesInfoHeader(this.state, true);
+    //this.props.funcDrivesInfoHeader(this.state, true);
 }
 
 
@@ -98,7 +121,6 @@ export default class DriveInfoHeader extends Component {
               <Text style={styles.driveAbout}>{this.props.drive.driveAbout}</Text>
               <View style={styles.charityNavigatorDetails}>
                 <Text style={styles.charityNavigatorDetailsHeader}>Additional Information about the charity:</Text>
-                <Text style={styles.charityNavigator1}>Type: {this.props.drive.charityType}</Text>
                 <Text style={styles.charityNavigator2}>Charity Navigator Overall Score: {this.props.drive.charityNavigatorScore}</Text>
                 <Text style={styles.charityNavigator3}>Tax Deductibility: {this.props.drive.deductibility}</Text>
               </View>
@@ -108,7 +130,7 @@ export default class DriveInfoHeader extends Component {
                  {hearts.map((o,i) => {
 
                   return   (
-                    <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', borderColor: red, borderRadius: 6, borderWidth: 1, padding: 2,}} key={i} onPress={()=>this.onPressHearts(o)}>
+                    <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', borderColor: red, borderRadius: 6, borderWidth: 1, padding: 2,}} key={i} onPress={()=>this.onPressHearts(o, this.props.drive)}>
                     <Text style={{color: red, fontFamily:'Avenir', paddingRight: 3, fontWeight: '700', fontSize: 14}}>Add to Favorites</Text>
                       <Icon
                         item={o}
@@ -134,3 +156,21 @@ export default class DriveInfoHeader extends Component {
           );
         }
       }
+
+function mapStateToProps(state) {
+    return {
+        favoriteDrives: state.favoriteDrives
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToFav: (drive) => dispatch({ type: 'ADD_TO_FAV', drive:drive }),
+        removeFromFav: (drive) => dispatch({ type: 'REMOVE_FROM_FAV', drive:drive }),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DriveInfoHeader)
+
+
+// export default DriveInfoHeader;

@@ -3,46 +3,7 @@ import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated} from 'reac
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
-
-//The data below needs to be called using an API
-// const driveData = [
-//   {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-// , driveCity: 'Berkeley, CA'
-// , driveTitle: 'Help Detective Pikachu'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.8},
-// {driveImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-// , driveCity: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.3},
-// {driveImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-// , driveCity: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.3},
-// {driveImageURL: 'https://media.npr.org/assets/img/2016/10/15/gettyimages-543499144_wide-c7be8ee176c6dabe59ee7a2f2758c4633c6d1c7d-s800-c85.jpg'
-// , driveCity: 'Berkeley, CA', driveTitle: 'Help the Homeless on Telegraph'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.5},
-// {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-// , driveCity: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.8},
-// {driveImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-// , driveCity: 'Berkeley, CA', driveTitle: 'Help Detective Pikachu'
-// , driveAbout: 'There is this homeless guy sitting on Telegraph and Bancroft. We really think that we can help him out.'
-// , currentMoney: '450'
-// , targetMoney: '2000'
-// , percentCompleted: 0.8}]
+import { connect } from 'react-redux'
 
 class Drives extends Component {
 
@@ -53,6 +14,7 @@ constructor(props) {
     search: '',
     user_id: this.props.user_id,
     animation: new Animated.Value(0),
+    localFavDrives: this.props.favoriteDrivesInfo,
 
   };
   this.arrayholder = [];
@@ -103,9 +65,18 @@ componentDidMount() {
     });
   };
 
+shouldComponentUpdate(nextProps, nextState){
+  if (nextProps.favoriteDrivesInfo !== this.props.favoriteDrivesInfo){
+    //console.log("should update")
+    return true
+  }
+  return false
+}
+
   func = (user_selected, drive_id) => {
-    //console.log("inside func")
-    this.props.funcDrivesMain(true);
+    console.log("user_selected", user_selected)
+    console.log("drive_id", drive_id)
+    //this.props.funcDrivesMain(true);
     var already_selected = this.drives_selected[drive_id];
     if (((already_selected === undefined) && !user_selected) || already_selected === false) {
       this.drives_selected[drive_id] = true;
@@ -187,7 +158,7 @@ componentDidMount() {
     return(
       <View>
       <SearchBar
-        placeholder="Type Here..."
+        placeholder='Type here...'
         onChangeText={text => this.SearchFilterFunction(text)}
         onClear={text => this.SearchFilterFunction('')}
         value={this.state.search}
@@ -196,10 +167,11 @@ componentDidMount() {
       />
       <FlatList
             columnWrapperStyle={styles.row}
-            data={this.state.dataSource}
+            data={this.props.allDrivesInfo}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id} func={this.func}/>
+              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}
+              sourcePage='Drives'/> //func={this.func}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
@@ -218,8 +190,23 @@ componentDidMount() {
   }
 };
 
+function mapStateToProps(state) {
+    return {
+        favoriteDrivesInfo: state.favoriteDrivesInfo,
+        allDrivesInfo: state.allDrivesInfo
+    }
+}
 
-export default Drives;
+function mapDispatchToProps(dispatch) {
+    return {
+        addToFav: (drive) => dispatch({ type: 'ADD_TO_FAV', drive:drive}),
+        removeFromFav: (drive) => dispatch({ type: 'REMOVE_FROM_FAV', drive:drive}),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Drives)
+
+//export default Drives;
 
 const styles= EStyleSheet.create({
   row: {

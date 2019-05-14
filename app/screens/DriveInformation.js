@@ -10,20 +10,7 @@ import {DriveInfoHeader} from 'app/components/CharityTabComponents/DriveInfoHead
 
 const imageWidth = (Dimensions.get('window').width);
 
-const driveFeedUpdate =
-      [
-        {
-          charityImageURL: 'https://i.forbesimg.com/media/lists/companies/united-way-worldwide_100x100.jpg'
-        , charityName: 'ABSforTheWin'
-        , updateDate: 'April 27, 2019'
-        , feedImageURL: 'https://mldpyw8anemv.i.optimole.com/w:auto/h:auto/q:auto/https://mk0geekspinexfjuv770.kinstacdn.com/wp-content/uploads/2018/11/detective-pikachu.jpg'
-        , feedMessage: 'Thank you so much guys!! You are amazing. We used your money go give ourselves fat bonus cheques!'
-        , numDonations: '25'
-        , driveName: 'Help Detective Pikachu'
-        }
-      ]
-
-export default class DriveInformation extends Component {
+class DriveInformation extends Component {
 
   constructor(props){
     super(props);
@@ -31,6 +18,7 @@ export default class DriveInformation extends Component {
       isActive: false,
       changed: false,
       dataSource: [],
+      noUpdates: false,
     };
   }
 
@@ -69,10 +57,15 @@ export default class DriveInformation extends Component {
         if (statusCode == 200) {
           this.setState({
             dataSource: data.drive_engagement_feed,
+            noUpdates: false,
           }
         )
         } else {
-          alert(data.message);
+          this.setState({
+            dataSource: [1],
+            noUpdates: true
+          })
+          //alert(data.message);
         }
       })
       .catch((error) => {
@@ -81,7 +74,7 @@ export default class DriveInformation extends Component {
   };
 
   componentWillUnmount() {
-    this.props.navigation.state.params.returnData(this.state);
+    //this.props.navigation.state.params.returnData(this.state);
   }
 
   render() {
@@ -91,24 +84,36 @@ export default class DriveInformation extends Component {
         <View style={styles.Container}>
           <FlatList
                 data={this.state.dataSource}
-                renderItem={({item}) => (
-                <CharityFeedCard2
-                  charity= {item}/>
+                renderItem={({item}) => ( !this.state.noUpdates ? (<CharityFeedCard2 charity= {item}/>) :
+                (<View style={styles.noDrivesFoundContainer}>
+                  <Text style={styles.noDrivesFoundText}>This drive does not have any updates yet. Please check back later.</Text></View>)
+
               )}
               keyExtractor={(item, index) => index.toString()}
-              ListHeaderComponent={<DriveInfoHeader drive={drives} user_id={user_id}
-              funcDrivesInfoHeader={this.funcDrivesInfoHeader}/>}
-              ListFooterComponent={<DefaultCharityFeedCard />}
+              ListHeaderComponent={<DriveInfoHeader drive={drives} user_id={user_id}/>}
           />
         </View>
     );
   }
 }
 
+
+export default DriveInformation;
+
 const styles= EStyleSheet.create({
   Container:{
     backgroundColor: '$blueBackground',
     flex:1,
     paddingTop:5,
+  },
+  noDrivesFoundContainer: {
+    backgroundColor: '$background',
+    width: imageWidth/1.028,
+    marginHorizontal: 5,
+  },
+  noDrivesFoundText: {
+    paddingLeft: 10,
+    paddingBottom: 10,
+    fontFamily: '$textFont',
   },
 });

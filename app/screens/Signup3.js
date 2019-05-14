@@ -17,7 +17,58 @@ import {LoginInput, LoginButton, CausesCards} from '../components/Login_SignUp'
 
 const imageWidth = Dimensions.get('window').width;
 
+var causesChosen = []
+
 class Signup3 extends Component {
+
+  func = (smh) => {
+    causesChosen = smh;
+  }
+
+  onPressFinish = (user_id, navigate) => {
+    //console.log("finish", causesChosen)
+    function processResponse(response) {
+      const statusCode = response.status;
+      const data = response.json();
+      return Promise.all([statusCode, data]).then(res => ({
+        statusCode: res[0],
+        data: res[1]
+      }));
+    }
+
+    fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/select_causes', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: user_id,
+      causes: causesChosen,
+    }),
+  }).then(processResponse)
+    .then(response => {
+      const { statusCode, data } = response;
+      if (statusCode == 200) {
+        this.setState({
+          dataSource: data.drives,
+          noDrives: false,
+        })
+      } else {
+          this.setState({
+            dataSource: [1],
+            noDrives: true
+          })
+          //alert(data.message);
+        }
+      }
+    )
+    .catch((error) => {
+      alert(error)
+    });
+    //navigate('UserDashboard', {user_id: user_id})
+    navigate('RecommendedDrives', {user_id: user_id})
+  }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -67,13 +118,13 @@ class Signup3 extends Component {
 
                 numColumns = {3}
                 renderItem={({item}) => (
-                    <CausesCards cause={item}/>
+                    <CausesCards cause={item} func={this.func}/>
               )}
               keyExtractor={(item, index) => index.toString()}
           />
 
           </View>
-          <LoginButton text='Finish' onPress={() => {navigate('UserDashboard', {user_id: user_id})}}/>
+          <LoginButton text='Finish' onPress={() => this.onPressFinish(user_id, navigate)}/>
           <View style={{flexDirection: 'row', width: 25, justifyContent: 'space-between'}}>
             <Dot/>
             <Dot active={true}/>
