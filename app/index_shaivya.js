@@ -15,6 +15,7 @@ EStyleSheet.build({
    //$primaryBlue: '#258895',
    //$primaryBlue: '#3D96A1',
    $blueBackground: '#D3E3E6',
+   // $blueBackground: '#D8EAE2',
    $teal: '#6FACB4',
    $white: '#fff',
    $border: '#E2E2E2',
@@ -31,4 +32,4 @@ EStyleSheet.build({
    //$outline: 1, //Use this to outline containers
 });
 export default () => <Navigator/>;
-//export default () => <AppIntro/>;
+// export default () => <AppIntro/>;
