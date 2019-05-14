@@ -4,6 +4,7 @@ import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
 import { connect } from 'react-redux'
+import {LoginButton} from '../components/Login_SignUp'
 
 class RecommendedDrives extends Component {
 
@@ -76,7 +77,15 @@ componentWillMount() {
     });
   };
 
+  onPressDone(user_id, navigate){
+      navigate('UserDashboard', {navigate:navigate, user_id: user_id})
+  }
+
   render() {
+    const {navigate} = this.props.navigation;
+    const firstName = this.props.navigation.getParam('firstName', 'User');
+    const user_id = this.props.navigation.getParam('user_id', 0);
+
     return(
       <View>
       <FlatList
@@ -89,7 +98,9 @@ componentWillMount() {
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
+          ListFooterComponent={<LoginButton text='Done' onPress={() => this.onPressDone(user_id, navigate)}/>}
       />
+
       </View>
     );
   }
