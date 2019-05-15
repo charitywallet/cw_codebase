@@ -346,7 +346,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#D3E3E6",
+    backgroundColor: "$blueBackground",
     //backgroundColor: "#D8EAE2",
     //marginTop: -15,
     flexDirection: 'column',

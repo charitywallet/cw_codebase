@@ -28,11 +28,11 @@ export default class TabsAdvancedExample extends Component {
     return (
       <Container>
         <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
+        <Tab heading={ <TabHeading><Text style={styles.tabText}>Limits</Text></TabHeading>}>
+          <Limits/>
+        </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>Cards</Text></TabHeading>}>
             <Cards />
-          </Tab>
-          <Tab heading={ <TabHeading><Text style={styles.tabText}>Limits</Text></TabHeading>}>
-            <Limits/>
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>App Settings</Text></TabHeading>}>
             <AppSettings/>
