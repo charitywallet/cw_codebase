@@ -197,7 +197,7 @@ componentWillMount() {
         autoCorrect={false}
         platform="ios"
       />
-      {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your drives. </Text> : null}
+      {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your supported drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
             data={this.state.dataSource}

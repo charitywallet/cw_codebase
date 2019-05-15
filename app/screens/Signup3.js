@@ -88,6 +88,8 @@ class Signup3 extends Component {
                 {[
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                   , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/arts.svg')
+                  , causeName: 'Arts'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
                   {causeImageURL: require('../components/Login_SignUp/images/child.svg')

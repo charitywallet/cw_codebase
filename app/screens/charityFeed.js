@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {CharityFeedCard} from '../components/DashboardComponents/CharityFeedCard';
 import {CharityFeedCard2} from '../components/DashboardComponents/CharityFeedCard2';
 import {DefaultCharityFeedCard} from '../components/DashboardComponents/DefaultCharityFeedCard';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class CharityFeed extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: []
+      dataSource: [],
+      noAlerts: false,
     };
   }
 
@@ -40,10 +42,17 @@ class CharityFeed extends Component {
           console.log("data", data)
           this.setState({
             dataSource: data.drive_engagement_feed,
+              noAlerts: false,
           }
         )
         } else {
-          alert(data.message);
+          if(data.message === "No updates for your drives. Support more drives to see how your change is changing the world."){
+            this.setState({
+              noAlerts: true,
+            })
+          } else {
+            alert(data.message);
+          }
         }
       })
       .catch((error) => {
@@ -54,7 +63,8 @@ class CharityFeed extends Component {
 
   render() {
     return(
-      <View style={{backgroundColor: "#D3E3E6", paddingTop: 5,}}>
+      <View style={styles.background}>
+      {this.state.noAlerts ? <Text style={styles.selectDrives}>No updates for your drives yet. Support more drives and check back later to see how your change is changing the world!</Text> : null}
       <FlatList
             data={this.state.dataSource}
             renderItem={({item}) => (
@@ -69,5 +79,17 @@ class CharityFeed extends Component {
   }
 };
 
+const styles = EStyleSheet.create({
+  background: {
+    backgroundColor: "$blueBackground",
+    paddingTop: 5,
+  },
+  selectDrives: {
+    fontFamily: '$textFont',
+    paddingLeft: 10,
+    paddingTop: 10,
+    backgroundColor: '#fff'
+  }
+});
 
 export default CharityFeed;

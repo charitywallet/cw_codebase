@@ -24,6 +24,7 @@ import DriveInformation from '../screens/DriveInformation'
 import CharityInformation from '../screens/CharityInformation'
 import PlaidPage from '../screens/PlaidPage'
 import RecommendedDrives from '../screens/RecommendedDrives'
+import GettingStarted from '../screens/GettingStarted'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -60,6 +61,7 @@ const AppContainer1 = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: '#4B97A1',
+      //activeTintColor: '#D3827E',
       inactiveTintColor: 'gray',
       style: {
         marginBottom: -20,
@@ -125,7 +127,8 @@ const RootStack = createStackNavigator(
         headerBackTitle: 'Back',
         headerTintColor: '#F0F0F0',
         headerStyle: {
-          backgroundColor: '#258895',
+          //backgroundColor: '#D3827E',
+          backgroundColor: '#4B97A1',
           //backgroundColor: '#3D96A1',
         },
       },
@@ -179,6 +182,16 @@ const RootStack = createStackNavigator(
         headerStyle: {
           backgroundColor: '#258895',
         },
+      },
+    },
+    AppIntro: {
+      screen: GettingStarted,
+      navigationOptions: {
+        //title: "Settings",
+        //headerTintColor: '#F0F0F0',
+        //headerStyle: {
+        //  backgroundColor: '#258895',
+        //},
       },
     },
   },

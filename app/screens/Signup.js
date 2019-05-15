@@ -106,7 +106,6 @@ class Signup extends Component {
         <View style={styles.socialContainer}>
           <SocialIcon title='Sign In With Facebook' button type='facebook'/>
         </View>
-        <Text style={styles.newUser} onPress={() => navigate('UserSignup2')}>Developer Sign Up.</Text>
       </Container>
     );
   }
@@ -115,3 +114,4 @@ export default Signup;
 
         // <LoginInput text='Re-enter Password'/>
         // onPress = {() => navigate('UserSignup2')}
+                // <Text style={styles.newUser} onPress={() => navigate('UserSignup2')}>Developer Sign Up.</Text>

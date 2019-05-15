@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {FlatList, View, Text} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {SearchBar} from 'react-native-elements';
+import {SearchBar, Button} from 'react-native-elements';
 import { connect } from 'react-redux'
 import {LoginButton} from '../components/Login_SignUp'
 
@@ -47,7 +47,7 @@ componentWillMount() {
     .then(response => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
-        console.log("response", data)
+        //console.log("response", data)
         this.setState({
           drives: data.drives,
           isLoading: false,
@@ -77,18 +77,21 @@ componentWillMount() {
     const user_id = this.props.navigation.getParam('user_id', 0);
 
     return(
-      <View>
+      <View style={{flex: 1,
+          alignItems: 'center',
+          backgroundColor: '$background'}}>
+      <Text style={styles.introText}>Here are some recommended drives for you based on your selected causes.</Text>
       <FlatList
             columnWrapperStyle={styles.row}
             data={this.state.dataSource}
             renderItem={({item}) => (
             <DrivesCard
-              drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}
-              sourcePage='Supported'/>
+              drive= {item} navigation={this.props.navigation} user_id={user_id}
+              sourcePage='Drives'/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
-          ListFooterComponent={<LoginButton text='Done' onPress={() => this.onPressDone(user_id, navigate)}/>}
+          ListFooterComponent={<View style={{alignItems: 'center'}}><LoginButton text='Done' onPress={() => this.onPressDone(user_id, navigate)}/><View style={{height: 30,}}></View></View>}
       />
 
       </View>
@@ -115,7 +118,31 @@ export default RecommendedDrives;
 
 const styles= EStyleSheet.create({
   row: {
-  flex: 1,
-  justifyContent: 'space-between'
-  }
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  introText: {
+    width: 290,
+    fontSize: 18,
+    paddingTop: 25,
+    paddingBottom: 15,
+    //paddingLeft: 80,
+    //fontWeight: '300',
+    color: '$inputText',
+    textAlign: 'justify',
+    fontFamily: '$textFont',
+  },
+  buttonContainer: {
+    //paddingTop: 10,
+    // alignContent: 'center',
+    // justifyContent: 'center',
+    // //paddingLeft: 20,
+    //width: '90%'
+  },
+  buttonText: {
+    //width: '60%',
+    // alignContent: 'center',
+    // justifyContent: 'center',
+    backgroundColor: '$buttonBackground',
+  },
 });

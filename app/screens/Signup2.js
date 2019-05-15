@@ -91,10 +91,10 @@ class Signup2 extends Component {
               </Tooltip>
             </View>
           <Text style={styles.required}></Text>
-          <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Checking Account"/>
+          <AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Donation Account"/>
           <View style={styles.tooltip1}>
             <Tooltip popover={<Text style={{color: '#6FACB4', textAlign: 'center'}}>
-                  This is the account we will use to calculate the change from each transaction.</Text>}
+                  This is the account we will use to donate the collected change for your account.</Text>}
                  backgroundColor="#F0F0F0" height={100} width={200}>
               <Ionicons name='ios-information-circle' size={30} color='grey' />
             </Tooltip>
