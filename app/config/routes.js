@@ -23,6 +23,7 @@ import DriveInfoHeader from '../components/CharityTabComponents/DriveInfoHeader/
 import DriveInformation from '../screens/DriveInformation'
 import CharityInformation from '../screens/CharityInformation'
 import PlaidPage from '../screens/PlaidPage'
+import RecommendedDrives from '../screens/RecommendedDrives'
 
 const AppContainer1 = createBottomTabNavigator(
   {
@@ -118,9 +119,10 @@ const RootStack = createStackNavigator(
     UserDashboard: {
       screen: AppContainer1,
       navigationOptions: {
-        title: "Dashboard",
+        title: "Charity Wallet",
         initialRouteName: 'Home',
-        // headerLeft: null, //TODO: Uncomment this.
+        headerLeft: null, //TODO: Uncomment this.
+        headerBackTitle: 'Back',
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',
@@ -154,6 +156,25 @@ const RootStack = createStackNavigator(
     CharityInformation: {
       screen: CharityInformation,
       navigationOptions: {
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
+      },
+    },
+    RecommendedDrives: {
+      screen: RecommendedDrives,
+      navigationOptions: {
+        headerTintColor: '#F0F0F0',
+        headerStyle: {
+          backgroundColor: '#258895',
+        },
+      },
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        title: "Settings",
         headerTintColor: '#F0F0F0',
         headerStyle: {
           backgroundColor: '#258895',

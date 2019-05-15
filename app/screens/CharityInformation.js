@@ -71,7 +71,9 @@ export default class CharityInfo extends Component {
                 columnWrapperStyle={styles.row}
                 data={this.state.dataSource}
                 renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
-                (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
+                (<View style={styles.noDrivesFoundContainer}>
+                  <Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>)
+                )}
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
                 ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
@@ -115,25 +117,3 @@ const styles= EStyleSheet.create({
     height:30,
   }
 });
-
-// <View style={styles.Container}>
-//   <FlatList
-//         columnWrapperStyle={styles.row}
-//         data={this.state.dataSource}
-//         renderItem={({item}) => ( !this.state.noDrives ? (<DrivesCard drive= {item}/>) :
-//         (<View style={styles.noDrivesFoundContainer}><Text style={styles.noDrivesFoundText}>No drives found. Please check back later.</Text></View>))}
-//         keyExtractor={(item, index) => index.toString()}
-//         numColumns={2}
-//         ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
-//   />
-// </View>
-
-// <FlatList
-//       columnWrapperStyle={styles.row}
-//       data={this.state.dataSource}
-//       renderItem={({item}) => (<DrivesCard drive= {item}/>)}
-//       keyExtractor={(item, index) => index.toString()}
-//       numColumns={2}
-//       ListHeaderComponent={<CharityInfoHeader charityData= {charity} />}
-// />
-// </View>

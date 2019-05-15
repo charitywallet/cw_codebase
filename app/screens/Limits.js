@@ -17,7 +17,9 @@ class Limits extends Component {
        , minTxValue: 2}
    };
 
-
+   static navigationOptions = {
+    title: 'Details',
+  };
 
   render() {
      let index = 0;

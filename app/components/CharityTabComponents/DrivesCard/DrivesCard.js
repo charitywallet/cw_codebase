@@ -4,19 +4,39 @@ import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 
 import ProgressBar from 'react-native-progress/Bar';
 import styles from './styles'
 import Icon from 'react-native-animated-icons';
+import { connect } from 'react-redux'
 
 const imageWidth = (Dimensions.get('window').width -25)/2;
 
-export default class DrivesCard extends Component {
+class DrivesCard extends Component {
 
   constructor(props){
     super(props);
+    if (this.props.sourcePage === 'Supported'){
+      var isActive = false;
+      //console.log("this.props.favoriteDrives", this.props.favoriteDrivesInfo)
+      for(const i in this.props.favoriteDrivesInfo){
+        //console.log("i", i)
+        //console.log("this.props.favoriteDrive", this.props.favoriteDrivesInfo[i])
+        if(this.props.favoriteDrivesInfo[i].drive_id === this.props.drive.drive_id){
+          // console.log("Topic exists in favorite")
+          isActive = true;
+          break;
+        }
+      };
+    }
+    else {
+      var isActive = this.props.drive.userSelected
+      //console.log("this.props.drive.userSelected", this.props.drive.userSelected)
+      //console.log("this.props", this.props)
+    }
     this.state = {
       triggerAnimationId:null,
-      hearts:[{isActive:this.props.drive.userSelected,"id":this.props.drive.drive_id}],
+      //hearts:[{isActive:isActive,"id":this.props.drive.drive_id}],
+      hearts:[{isActive:isActive,"id":this.props.drive.drive_id}],
       changed: false,
     };
-
+//console.log("hearts", this.state.hearts)
   }
 
   returnData(state){
@@ -39,17 +59,49 @@ export default class DrivesCard extends Component {
   //   //console.log( "comp will update");
   // }
 
-  onPressHearts = (item) => {
+  // shouldComponentUpdate(nextProps, nextState){
+  //   // console.log("this.props.drive.userSelected", this.props.drive.userSelected)
+  //   // console.log("this.state.hearts[0].isActive",this.state.hearts[0].isActive)
+  //   if(this.props.drive.userSelected !== this.state.hearts[0].isActive){
+  //     console.log("update")
+  //     return true
+  //   }
+  //   console.log("dont update")
+  //   return false
+  // }
+
+  onPressHearts = (item, drive) => {
+    if (item.isActive) {
+      //console.log("remove")
+      this.props.removeFromFav(drive)
+    } else {
+      //console.log("add")
+      this.props.addToFav(drive)
+    }
 
     if(!item)return
-    // item.isActive!=item.isActive
     let {hearts} = this.state
-    let updatedlist=hearts.map(o => o.id === item.id
-                          ?{ ...o, isActive: o.isActive?false:true}
-                        :o)
-    this.setState({
-      triggerAnimationId:hearts.find(x => x.id === item.id).id,
-      hearts: updatedlist})
+    console.log("sourcePage", this.props.sourcePage)
+    if (this.props.sourcePage === 'Supported'){
+      let updatedlist=hearts.map(o => o.id === item.id
+                            ?{ ...o, isActive: o.isActive?true:false}
+                          :o)
+      this.setState({
+        triggerAnimationId:hearts.find(x => x.id === item.id).id,
+        hearts: updatedlist})
+    }
+    else {
+      let updatedlist=hearts.map(o => o.id === item.id
+                            ?{ ...o, isActive: o.isActive?false:true}
+                          :o)
+      this.setState({
+        triggerAnimationId:hearts.find(x => x.id === item.id).id,
+        hearts: updatedlist})
+    }
+    // console.log("updatedlist", updatedlist)
+    // this.setState({
+    //   triggerAnimationId:hearts.find(x => x.id === item.id).id,
+    //   hearts: updatedlist})
     if (this.props.func) {
       this.props.func(this.props.drive.userSelected, this.props.drive.drive_id);
     }
@@ -74,7 +126,6 @@ export default class DrivesCard extends Component {
       user_id: this.props.user_id,
       drive_id: this.props.drive.drive_id,
       charity_id: this.props.drive.charity_id,
-      my_drives: 0,
     }),
   }).then(processResponse)
     .then(response => {
@@ -86,6 +137,10 @@ export default class DrivesCard extends Component {
       //     dataSource: data.drives,
       //   }
       // )
+      console.log("successful")
+      console.log("userid", this.props.user_id)
+      console.log("drive_id", this.props.drive.drive_id)
+      console.log("charity_id", this.props.drive.charity_id)
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -93,12 +148,13 @@ export default class DrivesCard extends Component {
     .catch((error) => {
       alert(error)
     });
-    this.props.drive.userSelected = !this.props.drive.userSelected;
+    //this.props.drive.userSelected = !this.props.drive.userSelected;
   }
 
   onPressDrive = (text) => {
     this.props.navigation.navigate('DriveInformation',
-        {drive: this.props.drive, navigation:this.props.navigation, user_id:this.props.user_id, returnData: this.returnData.bind(this)});
+        {drive: this.props.drive, navigation:this.props.navigation, user_id:this.props.user_id,
+        sourcePage: this.props.sourcePage})//, returnData: this.returnData.bind(this)});
   }
 
   render() {
@@ -116,7 +172,10 @@ export default class DrivesCard extends Component {
               {hearts.map((o,i) => {
 
                 return   (
-                  <TouchableOpacity style={{height:25,}} key={i} onPress={()=>this.onPressHearts(o)}>
+                  <TouchableOpacity style={{height:25,}} key={i}
+                  onPress={()=>this.onPressHearts(o, this.props.drive)}>
+                  {/*onPress={()=>this.props.addToFav(o)}>*/}
+
                     <Icon
                       item={o}
                       fontSize={25}
@@ -128,7 +187,7 @@ export default class DrivesCard extends Component {
                       red,
                        o.isActive?red:red,
                     ]}
-                    animation={{toValue: 1,duration: 300}}
+                    animation={{toValue: 1,duration: 400}}
                     colorInputRange={[0, 0.56, 1]}
                   />
                   </TouchableOpacity>)
@@ -140,7 +199,7 @@ export default class DrivesCard extends Component {
               {hearts.map((o,i) => {
 
                 return   (
-                  <TouchableOpacity style={{height:25,}} key={i} onPress={()=>this.onPressHearts(o)}>
+                  <TouchableOpacity style={{height:25,}} key={i} onPress={()=>this.onPressHearts(o, this.props.drive)}>
                     <Icon
                       item={o}
                       fontSize={25}
@@ -178,3 +237,21 @@ export default class DrivesCard extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+    return {
+        favoriteDrivesInfo: state.favoriteDrivesInfo,
+        allDrivesInfo: state.allDrivesInfo,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToFav: (drive) => dispatch({ type: 'ADD_TO_FAV', drive:drive }),
+        removeFromFav: (drive) => dispatch({ type: 'REMOVE_FROM_FAV', drive:drive }),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrivesCard)
+
+//export default DrivesCard;
