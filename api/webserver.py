@@ -486,6 +486,7 @@ def recommended_drives():
                 user_id=0
                 # print("why",user_id)
                 # response["drives"]= get_drives(user_id,0)
+                response["drives"]= "No recommended drives"
             else:
                 response["drives"]= get_recommended_drives(user_id)
 
@@ -631,7 +632,7 @@ def bir_test():
 
 
 @app.route('/logout', methods=["POST"])
-def signin():
+def signout():
     response={}
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
