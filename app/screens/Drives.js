@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
-import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated, Modal} from 'react-native';
+import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {SearchBar} from 'react-native-elements';
+import { Overlay, Button, Input } from 'react-native-elements';
 import { connect } from 'react-redux'
+import {LoginButton} from '../components/Login_SignUp'
+
+
+const imageWidth = Dimensions.get('window').width;
+const imageHeight = Dimensions.get('window').height;
 
 class Drives extends Component {
 
@@ -16,6 +21,7 @@ constructor(props) {
     animation: new Animated.Value(0),
     localFavDrives: this.props.favoriteDrivesInfo,
     currentlyDisplayed: this.props.favoriteDrivesInfo,
+    isVisibleFirst: false,
 
   };
   this.arrayholder = this.props.allDrivesInfo;
@@ -101,29 +107,23 @@ componentDidMount() {
     //this.props.funcDrivesMainDisable();
   }
 
-  search = text => {
-    //console.log(text);
-  };
-  clear = () => {
-    this.search.clear();
-  };
+  funcFirstDrive = (first) => {
+    if (first) {
+      this.setState({
+        isVisibleFirst: true
+      })
+    }
+    else {
+      this.setState({
+        isVisibleFirst: false
+      })
+    }
+  }
 
-  SearchFilterFunction(text) {
-    //passing the inserted text in textinput
-    //console.log("arrayholder", this.arrayholder)
-    const newData = this.arrayholder.filter(function(item) {
-      //applying filter for the inserted text in search bar
-      const itemData = item.driveTitle ? item.driveTitle.toUpperCase() : ''.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-
+  onDonePress = () => {
     this.setState({
-      //setting the filtered newData on datasource
-      //After setting the data it will automatically re-render the view
-      currentlyDisplayed: newData,
-      search: text,
-    });
+      isVisibleFirst: false
+    })
   }
 
 
@@ -174,7 +174,7 @@ componentDidMount() {
             renderItem={({item}) => (
             <DrivesCard
               drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}
-              sourcePage='Drives' func={this.func}/>
+              sourcePage='Drives' func={this.func} funcFirstDrive={this.funcFirstDrive}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
@@ -189,6 +189,18 @@ componentDidMount() {
           </Animated.View>
         </View>
       </Animated.View>
+      <Overlay isVisible={this.state.isVisibleFirst} onBackdropPress={this.onDonePress}
+      overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
+        <View style={styles.overlayContent}>
+          <Text style={styles.overlayText}>Yay, you started supporting your first drive. {"\n"}
+           Supporting a drive means this is where your change will go when it reaches $5,
+            and at the end of the month.</Text>
+          <View style={styles.buttonGroup}>
+            <Button title="Ok" onPress = {this.onDonePress} containerStyle = {styles.buttonContainer1}
+            titleStyle={styles.buttonText} buttonStyle={styles.button}/>
+          </View>
+        </View>
+      </Overlay>
       </View>
     );
   }
@@ -243,4 +255,45 @@ const styles= EStyleSheet.create({
     justifyContent: "center",
     minHeight: 70,
   },
+  overlay: {
+    height: imageHeight/3.5,
+    alignItems: 'center',
+  },
+  overlayContent: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  overlayText: {
+    paddingTop: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+    justifyContent: 'space-evenly',
+    textAlign: 'center',
+    fontFamily: '$textFont',
+    fontSize: 15,
+  },
+  buttonGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    paddingTop: 30,
+  },
+  buttonContainer1: {
+    width: imageWidth/3.5,
+    height: 40,
+    marginLeft:5,
+    marginBottom: 20,
+  },
+  buttonContainer2: {
+    width: imageWidth/3.5,
+    height: 40,
+    paddingLeft: 10,
+  },
+  buttonText : {
+    color: 'white',
+    fontFamily: '$textFont',
+  },
+  button: {
+    backgroundColor: '$buttonBackground',
+  }
 });

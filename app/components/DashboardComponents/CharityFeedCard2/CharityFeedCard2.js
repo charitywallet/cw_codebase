@@ -17,9 +17,9 @@ export default class CharityFeedCard2 extends Component {
           source={{uri:this.props.charity.feedImageURL}}
         />
         <View style={styles.driveNameContainer}>
-          <Text style={styles.driveName}>{this.props.charity.driveName}</Text>
+          <Text style={styles.driveName}>{this.props.charity.driveTitle}</Text>
         </View>
-       <CardContent
+       <CardContent style={{fontFamily: 'Avenir'}}
        text={this.props.charity.feedMessage}
         />
         <CardAction

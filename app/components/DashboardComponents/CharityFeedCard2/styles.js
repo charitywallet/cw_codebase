@@ -17,6 +17,7 @@ export default EStyleSheet.create({
   driveName:{
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: '$textFont',
   },
   driveNameContainer:{
     paddingRight: 16,

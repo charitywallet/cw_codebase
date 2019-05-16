@@ -96,8 +96,6 @@ class Signup3 extends Component {
                   , causeName: 'Children'},
                   {causeImageURL: require('../components/Login_SignUp/images/civil.svg')
                   , causeName: 'Civil Rights'},
-                  {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
-                  , causeName: 'Nature'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
                   {causeImageURL: require('../components/Login_SignUp/images/health.svg')
@@ -106,10 +104,10 @@ class Signup3 extends Component {
                   , causeName: 'Homeless'},
                   {causeImageURL: require('../components/Login_SignUp/images/food.svg')
                   , causeName: 'Hunger'},
-                  {causeImageURL: require('../components/Login_SignUp/images/flag.svg')
-                  , causeName: 'LGBTQ'},
                   {causeImageURL: require('../components/Login_SignUp/images/world.svg')
                   , causeName: 'International'},
+                  {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
+                  , causeName: 'Nature'},
                   {causeImageURL: require('../components/Login_SignUp/images/policy.svg')
                   , causeName: 'Public Policy'},
                   {causeImageURL: require('../components/Login_SignUp/images/religion.svg')

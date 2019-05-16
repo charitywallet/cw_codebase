@@ -269,14 +269,12 @@ onThanksPress = () => {
     return(
       <View style={styles.container}>
        <Overlay isVisible={this.state.isFirstTimeVisible} onBackdropPress={this.onThanksPress}
-       overlayStyle={styles.overlayFirstTime} windowBackgroundColor="rgba(0, 0, 0, .7)">
+       overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
          <View style={styles.overlayContent}>
            <Text style={styles.overlayText}>Congrats on taking the first step towards changing the world!
-           Go to the Drives page and select drives to start donating. {"\n"}</Text>
-           <Text style={styles.overlayText1}>Selecting a drive does not mean you have donated to it.
-           Your change would be donated only when it reaches $5 or at the end of the month, whichever comes first, to the drives you have selected!</Text>
+           Go to the Drives page and select drives to start donating.</Text>
            <View style={styles.buttonGroup}>
-             <Button title="Done" onPress = {this.onThanksPress} containerStyle = {styles.buttonContainer1}
+             <Button title="Ok" onPress = {this.onThanksPress} containerStyle = {styles.buttonContainer1}
              titleStyle={styles.buttonText} buttonStyle={styles.button}/>
            </View>
          </View>
@@ -392,7 +390,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   overlayFirstTime: {
-    height: imageHeight/2.5,
+    height: imageHeight/4.5,
     alignItems: 'center',
   },
   overlayContent: {

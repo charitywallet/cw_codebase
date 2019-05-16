@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import {FlatList, View, Text} from 'react-native';
+import {FlatList, View, Text, Animated, Dimensions, TouchableOpacity} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {SearchBar, Button} from 'react-native-elements';
+import { Overlay, Button, Input } from 'react-native-elements';
 import { connect } from 'react-redux'
 import {LoginButton} from '../components/Login_SignUp'
+
+const imageWidth = Dimensions.get('window').width;
+const imageHeight = Dimensions.get('window').height;
 
 class RecommendedDrives extends Component {
 
@@ -19,8 +22,10 @@ constructor(props) {
     loading: false,
     shouldUpdate: this.props.drives_added_by_user,
     initial: true,
-    dataSource: []
+    dataSource: [],
+    isVisibleFirst: false,
   };
+  this.arrayholder = this.props.allDrivesInfo;
 }
 
 componentWillMount() {
@@ -68,13 +73,36 @@ componentWillMount() {
   };
 
   onPressDone(user_id, navigate){
+    console.log("Rec done")
       navigate('UserDashboard', {navigate:navigate, user_id: user_id, sourcePage: 'Recommended'})
+  }
+
+  funcFirstDrive = (first) => {
+    if (first) {
+      this.setState({
+        isVisibleFirst: true
+      })
+    }
+    else {
+      this.setState({
+        isVisibleFirst: false
+      })
+    }
+  }
+
+  onDonePress = () => {
+    this.setState({
+      isVisibleFirst: false
+    })
   }
 
   render() {
     const {navigate} = this.props.navigation;
     const firstName = this.props.navigation.getParam('firstName', 'User');
     const user_id = this.props.navigation.getParam('user_id', 0);
+    console.log("rec user id", user_id)
+
+
 
     return(
       <View style={{flex: 1,
@@ -87,13 +115,24 @@ componentWillMount() {
             renderItem={({item}) => (
             <DrivesCard
               drive= {item} navigation={this.props.navigation} user_id={user_id}
-              sourcePage='Drives'/>
+              sourcePage='Drives' funcFirstDrive={this.funcFirstDrive}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
           ListFooterComponent={<View style={{alignItems: 'center'}}><LoginButton text='Done' onPress={() => this.onPressDone(user_id, navigate)}/><View style={{height: 30,}}></View></View>}
       />
-
+      <Overlay isVisible={this.state.isVisibleFirst} onBackdropPress={this.onDonePress}
+      overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
+        <View style={styles.overlayContent}>
+          <Text style={styles.overlayText}>Yay, you started supporting your first drive. {"\n"} {"\n"}
+          Selecting a drive does not mean you have donated to it.
+          Your change would be donated only when it reaches $5 and at the end of the month to the drives you have selected!</Text>
+          <View style={styles.buttonGroup}>
+            <Button title="Ok" onPress = {this.onDonePress} containerStyle = {styles.buttonContainer1}
+            titleStyle={styles.buttonText} buttonStyle={styles.button}/>
+          </View>
+        </View>
+      </Overlay>
       </View>
     );
   }
@@ -133,16 +172,66 @@ const styles= EStyleSheet.create({
     fontFamily: '$textFont',
   },
   buttonContainer: {
-    //paddingTop: 10,
-    // alignContent: 'center',
-    // justifyContent: 'center',
-    // //paddingLeft: 20,
-    //width: '90%'
   },
   buttonText: {
-    //width: '60%',
-    // alignContent: 'center',
-    // justifyContent: 'center',
     backgroundColor: '$buttonBackground',
   },
+  sheet: {
+    position: "absolute",
+    top: Dimensions.get("window").height,
+    left: 0,
+    right: 0,
+    height: "100%",
+    justifyContent: "flex-end",
+  },
+  popup: {
+    backgroundColor: "$primaryBlue",
+    marginHorizontal: 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 70,
+  },
+  overlay: {
+    height: imageHeight/3,
+    alignItems: 'center',
+  },
+  overlayContent: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  overlayText: {
+    paddingTop: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+    justifyContent: 'space-evenly',
+    textAlign: 'center',
+    fontFamily: '$textFont',
+    fontSize: 15,
+  },
+  buttonGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    paddingTop: 30,
+  },
+  buttonContainer1: {
+    width: imageWidth/3.5,
+    height: 40,
+    marginLeft:5,
+    marginBottom: 20,
+  },
+  buttonContainer2: {
+    width: imageWidth/3.5,
+    height: 40,
+    paddingLeft: 10,
+  },
+  buttonText : {
+    color: 'white',
+    fontFamily: '$textFont',
+  },
+  button: {
+    backgroundColor: '$buttonBackground',
+  }
 });

@@ -76,8 +76,13 @@ class DrivesCard extends Component {
       this.props.removeFromFav(drive)
     } else {
       //console.log("add")
-      if (this.props.favoriteDrivesInfo.length === 0){
-        alert("Yay, you started supporting your first drive. Supporting this means you have selected this drive to donate your change to.")
+      if (this.props.funcFirstDrive) {
+        var first = false
+        if (this.props.favoriteDrivesInfo.length === 0 && this.props.lifetimeTotal === 0){
+          first = true
+        }
+        this.props.funcFirstDrive(first);
+
       }
       this.props.addToFav(drive)
     }
@@ -245,6 +250,7 @@ function mapStateToProps(state) {
     return {
         favoriteDrivesInfo: state.favoriteDrivesInfo,
         allDrivesInfo: state.allDrivesInfo,
+        lifetimeTotal: state.lifetimeTotal
     }
 }
 

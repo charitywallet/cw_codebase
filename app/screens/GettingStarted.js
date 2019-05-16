@@ -113,8 +113,8 @@ export default class AppIntro extends Component {
         showSkipButton
         hideNextButton
         // hideDoneButton
-        onSkip={() => this.props.navigation.navigate('UserSignup')}
-        onDone={() => this.props.navigation.navigate('UserSignup')}
+        onSkip={() => this.props.navigation.navigate('UserLogin')}
+        onDone={() => this.props.navigation.navigate('UserLogin')}
       />
     );
   }

@@ -17,9 +17,9 @@ var MOCK_DATA = []
   MOCK_DATA = [
     {
       id: "1",
-      cardTitle: "You signed up for a good cause. Donate more to increase your lifetime donations which are",
+      cardTitle: "Donate more to increase your lifetime donations which are",
       cardAmount: '$'+lifetime_total,
-      cardMessage: "Congrats! Way to go!"
+      cardMessage: "You signed up for a good cause!"
     }]} else {
       MOCK_DATA = [
         {

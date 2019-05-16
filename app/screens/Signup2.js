@@ -60,11 +60,6 @@ class Signup2 extends Component {
 
     return(
         <Container>
-        <OverlaySignup userId = {JSON.stringify(user_id)}
-         stateInitial={this.state.isVisible} onBackdropPress={this.handlePressBackdrop}
-         handleFillNowButton={this.handleFillNowButton}
-         button1="Fill Now"/>
-
           <LoginInput text='First Name' onChangeText={firstName => this.setState({ firstName })}
                 value={this.state.firstName}/>
           <Text style={styles.required}>*Required</Text>

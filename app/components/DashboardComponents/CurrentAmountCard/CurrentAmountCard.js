@@ -12,13 +12,13 @@ const month = new Date().getMonth();
 const year = new Date().getYear();
 
 const CurrentAmountCard = ({ month_total, onPressDonateNow, onPressDonateCustom }) => {
+  var amtLeft = 5 - month_total;
   return (
     <View style={styles.container}>
       <Text style={styles.date}>{ formattedDate }</Text>
       <Text style={styles.amount}>${ month_total }</Text>
       <Text style={styles.bottomText}>collected this month</Text>
-      <Text style={styles.smallText}>(your change will be donated automatically to your supported drives when it reaches $5,
-        and at the end of the month.)</Text>
+      <Text style={styles.smallText}>Next Donation in ${amtLeft} or 15 days.</Text>
       <View style={styles.buttonContainer}>
           <Button raised
           title= 'Donate Now' onPress={onPressDonateNow}

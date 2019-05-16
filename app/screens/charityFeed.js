@@ -72,7 +72,6 @@ class CharityFeed extends Component {
               charity= {item}/>
           )}
           keyExtractor={(item, index) => index.toString()}
-          ListFooterComponent={<DefaultCharityFeedCard />}
       />
       </View>
     );

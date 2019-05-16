@@ -200,7 +200,7 @@ componentWillMount() {
       {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your supported drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
-            data={this.state.dataSource}
+            data={this.props.favoriteDrivesInfo}
             extraData={this.state.refresh}
             renderItem={({item}) => (
             <DrivesCard
