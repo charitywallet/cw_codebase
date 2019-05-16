@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://vb-d9a.anonymous.cw-codebase.exp.direct",
+  "packagerNgrokUrl": "https://packager.vb-d9a.anonymous.cw-codebase.exp.direct",
+  "ngrokPid": 55958,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19003,
+  "packagerPid": 55931
 }
