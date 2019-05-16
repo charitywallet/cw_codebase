@@ -81,7 +81,7 @@ class DrivesCard extends Component {
 
     if(!item)return
     let {hearts} = this.state
-    console.log("sourcePage", this.props.sourcePage)
+    // console.log("sourcePage", this.props.sourcePage)
     if (this.props.sourcePage === 'Supported'){
       let updatedlist=hearts.map(o => o.id === item.id
                             ?{ ...o, isActive: o.isActive?true:false}
@@ -137,10 +137,10 @@ class DrivesCard extends Component {
       //     dataSource: data.drives,
       //   }
       // )
-      console.log("successful")
-      console.log("userid", this.props.user_id)
-      console.log("drive_id", this.props.drive.drive_id)
-      console.log("charity_id", this.props.drive.charity_id)
+      // console.log("successful")
+      // console.log("userid", this.props.user_id)
+      // console.log("drive_id", this.props.drive.drive_id)
+      // console.log("charity_id", this.props.drive.charity_id)
       } else {
         alert(data.message); //TODO: Network error component
       }

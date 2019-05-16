@@ -160,14 +160,14 @@ componentDidMount() {
     };
     return(
       <View>
-      <SearchBar
+    {/*}<SearchBar
         placeholder='Type here...'
         onChangeText={text => this.SearchFilterFunction(text)}
         onClear={text => this.SearchFilterFunction('')}
         value={this.state.search}
         autoCorrect={false}
         platform="ios"
-      />
+      />*/}
       <FlatList
             columnWrapperStyle={styles.row}
             data={this.props.allDrivesInfo}

@@ -189,14 +189,14 @@ componentWillMount() {
   render() {
     return(
       <View>
-      <SearchBar
+      {/*<SearchBar
         placeholder="Type Here..."
         onChangeText={text => this.SearchFilterFunction(text)}
         onClear={text => this.SearchFilterFunction('')}
         value={this.state.search}
         autoCorrect={false}
         platform="ios"
-      />
+      />*/}
       {this.props.favoriteDrivesInfo.length === 0 ? <Text style={styles.selectDrives}> Please select drives to view your supported drives. </Text> : null}
       <FlatList
             columnWrapperStyle={styles.row}
