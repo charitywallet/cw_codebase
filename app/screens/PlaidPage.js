@@ -25,50 +25,6 @@ componentWillUpdate(){
 
   }
 }
-  // handleFinishButton = (navigation) => {
-  //   //console.log(this.state.data)
-  //   function processResponse(response) {
-  //     const statusCode = response.status;
-  //     const data = response.json();
-  //     return Promise.all([statusCode, data]).then(res => ({
-  //       statusCode: res[0],
-  //       data: res[1]
-  //     }));
-  //   }
-  //
-  //   fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/set_ptoken', {
-  //   method: 'POST',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     //user_id: this.state.user_id,
-  //     user_id: this.props.navigation.state.params.user_id,
-  //     public_token: this.state.data.metadata.public_token,
-  //   }),
-  // }).then(processResponse)
-  //   .then(response => {
-  //     const { statusCode, data } = response;
-  //     if (statusCode == 200) {
-  //       // this.setState({
-  //       //   success: true,
-  //       // })
-  //       console.log("public_token", this.state.data.metadata.public_token);
-  //       //console.log("user id", this.props.user_id);
-  //     } else {
-  //       // this.setState({
-  //       //   success: false,
-  //       // })
-  //       //alert(data.message); //TODO: Network error component
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     alert(error)
-  //   });
-  //
-  //   navigation.navigate('UserSignup2', {plaid_data: this.state.data, error: false,textVisible: true})
-  // }
 
   handleErrorButton = (navigation) => {
     //console.log("Back button", this.state)
@@ -76,6 +32,7 @@ componentWillUpdate(){
   }
 
   componentWillUnmount() {
+    var error = false;
     if (this.state.data && this.state.data.metadata && this.state.data.metadata.public_token) {
 
       function processResponse(response) {
@@ -87,7 +44,7 @@ componentWillUpdate(){
         }));
       }
 
-      fetch('http://0.0.0.0:5000/set_ptoken', {
+      fetch('http://charitywallet.us-west-1.elasticbeanstalk.com/set_ptoken', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -102,27 +59,29 @@ componentWillUpdate(){
       .then(response => {
         const { statusCode, data } = response;
         if (statusCode == 200) {
-          this.setState({
-            success: true,
-          })
+          error = false;
+          // this.setState({
+          //   success: true,
+          // })
           //console.log("public_token", this.state.data.metadata.public_token);
           //console.log("user id", this.props.user_id);
         } else {
-          this.setState({
-            success: false,
-          })
+          // this.setState({
+          //   success: false,
+          // })
           alert(data.message); //TODO: Network error component
         }
       })
       .catch((error) => {
+        error = true;
         alert(error)
       });
       console.log("public_token", this.state.data.metadata.public_token);
-      this.props.navigation.state.params.returnData(this.state.data, true, false, this.state.data.metadata.institution.name,
+      this.props.navigation.state.params.returnData(this.state.data, true, error, this.state.data.metadata.institution.name,
       this.props.navigation.state.params.idx);
       this.props.navigation.goBack();
     } else {
-      this.props.navigation.state.params.returnData(null, false, true, null, this.props.navigation.state.params.idx);
+      this.props.navigation.state.params.returnData(null, false, error, null, this.props.navigation.state.params.idx);
       this.props.navigation.goBack();
     }
   }
@@ -142,7 +101,7 @@ componentWillUpdate(){
       {this.state.data && this.state.data.metadata &&
         this.state.data.metadata.public_token ?
         <View style={styles.container}>
-           <Text style={styles.messageText}>{this.state.data.metadata.institution.name} account added successfully. Please go back to continue with the Sign Up. {this.state.data.metadata.public_token}</Text>
+           <Text style={styles.messageText}>{this.state.data.metadata.institution.name} account added successfully. Please go back to continue with the Sign Up.</Text>
            {/*<LoginButton text="Done" onPress={() => this.handleFinishButton(this.props.navigation)}/>*/}
         </View>: null }
         {(this.state.errorMessageVisible) ?

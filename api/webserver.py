@@ -482,8 +482,11 @@ def recommended_drives():
         try:
             #get all drives if no user_id
             if user_id is None or user_id==0:
+                print("why",user_id)
                 user_id=0
-                response["drives"]= get_drives(user_id,0)
+                # print("why",user_id)
+                # response["drives"]= get_drives(user_id,0)
+                response["drives"]= "No recommended drives"
             else:
                 response["drives"]= get_recommended_drives(user_id)
 
@@ -625,6 +628,38 @@ def bir_test():
         response['message']="Bad Request Format"
 
     result=json.dumps(response)
+    return Response(result, status=status_code, mimetype='application/json')
+
+
+@app.route('/logout', methods=["POST"])
+def signout():
+    response={}
+    if request.headers['Content-Type'] == 'application/json':
+        arguments = request.get_json()
+        user_id=arguments.get("user_id")
+        status=""
+        try:
+            end_session(int(user_id),datetime.datetime.now())
+            status_code = 200
+            message="Logout Successfull for user_id: {}".format(int(user_id))
+            logging.info(message)
+            response['message']=message
+
+        except Exception as e:
+            status_code = 400
+            status = e
+            message="Logout Failed for user_id: {}".format(status)
+            logging.info(message)
+            response['message']=message
+
+    else:
+        status_code = 400
+        logging.warning("Bad Request Format")
+        response['message']="Bad Request Format"
+
+    result=json.dumps(response)
+    print(response)
+
     return Response(result, status=status_code, mimetype='application/json')
 
 

@@ -173,7 +173,7 @@ onDonateNowYesPress = () => {
         const { statusCode, data } = response;
         if (statusCode == 200) {
           this.getUserDetails()
-          console.log("successful")
+          //console.log("successful")
           this.setState({
             isDonateNowVisible: false,
             isVisibleThanks: true,
@@ -326,6 +326,7 @@ function mapStateToProps(state) {
         favoriteDrivesInfo: state.favoriteDrivesInfo,
         lifetimeTotal: state.lifetimeTotal,
         monthTotal: state.monthTotal,
+        allDrives: state.allDrivesInfo,
     }
 }
 
@@ -345,7 +346,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#D3E3E6",
+    backgroundColor: "$blueBackground",
     //backgroundColor: "#D8EAE2",
     //marginTop: -15,
     flexDirection: 'column',

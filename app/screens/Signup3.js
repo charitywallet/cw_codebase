@@ -73,7 +73,7 @@ class Signup3 extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const firstName = this.props.navigation.getParam('firstName', 'User');
-    const user_id = this.props.navigation.getParam('user_id', 1);
+    const user_id = this.props.navigation.getParam('user_id', 0);
 
     return(
       <View style={{flex: 1,
@@ -88,6 +88,8 @@ class Signup3 extends Component {
                 {[
                   {causeImageURL: require('../components/Login_SignUp/images/dog-paw.svg')
                   , causeName: 'Animals'},
+                  {causeImageURL: require('../components/Login_SignUp/images/arts.svg')
+                  , causeName: 'Arts'},
                   {causeImageURL: require('../components/Login_SignUp/images/cancer1.svg')
                   , causeName: 'Cancer'},
                   {causeImageURL: require('../components/Login_SignUp/images/child.svg')
@@ -95,7 +97,7 @@ class Signup3 extends Component {
                   {causeImageURL: require('../components/Login_SignUp/images/civil.svg')
                   , causeName: 'Civil Rights'},
                   {causeImageURL: require('../components/Login_SignUp/images/environment.svg')
-                  , causeName: 'Environment'},
+                  , causeName: 'Nature'},
                   {causeImageURL: require('../components/Login_SignUp/images/educ.svg')
                   , causeName: 'Education'},
                   {causeImageURL: require('../components/Login_SignUp/images/health.svg')

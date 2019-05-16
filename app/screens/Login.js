@@ -121,8 +121,7 @@ class Login extends Component {
               value={this.state.password} autoCapitalize='none' secureTextEntry={true}/>
         <Text style={styles.forgotPassword} onPress={() => this.onPressForgotPassword()}> Forgot Password</Text>
         <LoginButton text='Login' onPress={() => this.onPressSignIn()} disabled={!isEnabled}/>
-        <Text style={styles.newUser} onPress={() => navigate('UserSignup')}> New User? SIGN UP.</Text>
-        <Text style={styles.newUser} onPress={() => navigate('UserDashboard', {user_id: 1})}>Developer Sign in.</Text>
+        <Text style={styles.newUser} onPress={() => navigate('AppIntro')}>New User? SIGN UP.</Text>
       </Container>
     );
   }

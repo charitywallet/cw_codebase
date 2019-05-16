@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated} from 'react-native';
+import {Text, FlatList, View, TouchableOpacity, Dimensions, Animated, Modal} from 'react-native';
 import {DrivesCard} from '../components/CharityTabComponents/DrivesCard';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SearchBar} from 'react-native-elements';
@@ -15,9 +15,10 @@ constructor(props) {
     user_id: this.props.user_id,
     animation: new Animated.Value(0),
     localFavDrives: this.props.favoriteDrivesInfo,
+    currentlyDisplayed: this.props.favoriteDrivesInfo,
 
   };
-  this.arrayholder = [];
+  this.arrayholder = this.props.allDrivesInfo;
   this.drives_selected = {};
 }
 
@@ -65,20 +66,21 @@ componentDidMount() {
     });
   };
 
-shouldComponentUpdate(nextProps, nextState){
-  if (nextProps.favoriteDrivesInfo !== this.props.favoriteDrivesInfo){
-    //console.log("should update")
-    return true
-  }
-  return false
-}
+// shouldComponentUpdate(nextProps, nextState){
+//   if (nextProps.favoriteDrivesInfo !== this.props.favoriteDrivesInfo){
+//     //console.log("should update")
+//     return true
+//   }
+//   return false
+// }
 
   func = (user_selected, drive_id) => {
-    console.log("user_selected", user_selected)
-    console.log("drive_id", drive_id)
+    // console.log("user_selected", user_selected)
+    // console.log("drive_id", drive_id)
     //this.props.funcDrivesMain(true);
     var already_selected = this.drives_selected[drive_id];
-    if (((already_selected === undefined) && !user_selected) || already_selected === false) {
+    // console.log("already_selected", already_selected)
+    if (((already_selected === undefined) && user_selected) || already_selected === false) {
       this.drives_selected[drive_id] = true;
       Animated.sequence([
         	Animated.timing(this.state.animation, {
@@ -108,6 +110,7 @@ shouldComponentUpdate(nextProps, nextState){
 
   SearchFilterFunction(text) {
     //passing the inserted text in textinput
+    //console.log("arrayholder", this.arrayholder)
     const newData = this.arrayholder.filter(function(item) {
       //applying filter for the inserted text in search bar
       const itemData = item.driveTitle ? item.driveTitle.toUpperCase() : ''.toUpperCase();
@@ -118,7 +121,7 @@ shouldComponentUpdate(nextProps, nextState){
     this.setState({
       //setting the filtered newData on datasource
       //After setting the data it will automatically re-render the view
-      dataSource: newData,
+      currentlyDisplayed: newData,
       search: text,
     });
   }
@@ -171,7 +174,7 @@ shouldComponentUpdate(nextProps, nextState){
             renderItem={({item}) => (
             <DrivesCard
               drive= {item} navigation={this.props.navigation} user_id={this.props.user_id}
-              sourcePage='Drives'/> //func={this.func}/>
+              sourcePage='Drives' func={this.func}/>
           )}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
@@ -180,7 +183,7 @@ shouldComponentUpdate(nextProps, nextState){
         <View style={[styles.sheet]}>
           <Animated.View style={[styles.popup, slideUp]}>
             <TouchableOpacity>
-              <Text style={{color: '#f0f0f0', fontFamily: 'Avenir',}}>The drive has been added to your Supported Drives.</Text>
+              <Text style={{color: '#f0f0f0', fontFamily: 'Avenir', fontWeight: '700', marginBottom: 55,}}>The drive has been added to your Supported Drives.</Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
@@ -193,7 +196,8 @@ shouldComponentUpdate(nextProps, nextState){
 function mapStateToProps(state) {
     return {
         favoriteDrivesInfo: state.favoriteDrivesInfo,
-        allDrivesInfo: state.allDrivesInfo
+        allDrivesInfo: state.allDrivesInfo,
+        allDrivesToggle: state.allDrivesToggle
     }
 }
 
@@ -236,6 +240,6 @@ const styles= EStyleSheet.create({
     borderTopRightRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    minHeight: 80,
+    minHeight: 130,
   },
 });

@@ -27,18 +27,16 @@ class DrivesCard extends Component {
     }
     else {
       var isActive = this.props.drive.userSelected
+      //console.log("this.props.drive.userSelected", this.props.drive.userSelected)
+      //console.log("this.props", this.props)
     }
-
-    console.log("isActive", isActive)
-    // console.log("driveid", this.props.drive.drive_id)
-    // console.log("id", this.props.drive.drive_id)
     this.state = {
       triggerAnimationId:null,
       //hearts:[{isActive:isActive,"id":this.props.drive.drive_id}],
       hearts:[{isActive:isActive,"id":this.props.drive.drive_id}],
       changed: false,
     };
-
+//console.log("hearts", this.state.hearts)
   }
 
   returnData(state){
@@ -59,6 +57,17 @@ class DrivesCard extends Component {
   //   }
   //   return false;
   //   //console.log( "comp will update");
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   // console.log("this.props.drive.userSelected", this.props.drive.userSelected)
+  //   // console.log("this.state.hearts[0].isActive",this.state.hearts[0].isActive)
+  //   if(this.props.drive.userSelected !== this.state.hearts[0].isActive){
+  //     console.log("update")
+  //     return true
+  //   }
+  //   console.log("dont update")
+  //   return false
   // }
 
   onPressHearts = (item, drive) => {
@@ -117,7 +126,6 @@ class DrivesCard extends Component {
       user_id: this.props.user_id,
       drive_id: this.props.drive.drive_id,
       charity_id: this.props.drive.charity_id,
-      my_drives: 0,
     }),
   }).then(processResponse)
     .then(response => {
@@ -129,6 +137,10 @@ class DrivesCard extends Component {
       //     dataSource: data.drives,
       //   }
       // )
+      console.log("successful")
+      console.log("userid", this.props.user_id)
+      console.log("drive_id", this.props.drive.drive_id)
+      console.log("charity_id", this.props.drive.charity_id)
       } else {
         alert(data.message); //TODO: Network error component
       }
@@ -175,7 +187,7 @@ class DrivesCard extends Component {
                       red,
                        o.isActive?red:red,
                     ]}
-                    animation={{toValue: 1,duration: 300}}
+                    animation={{toValue: 1,duration: 400}}
                     colorInputRange={[0, 0.56, 1]}
                   />
                   </TouchableOpacity>)

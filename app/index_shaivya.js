@@ -31,9 +31,12 @@ import store from './store';
 EStyleSheet.build({
    //$primaryBlue: '#92C7C7',
    $primaryBlue: '#4B97A1',
+   //$primaryBlue: '#D3827E',
    //$primaryBlue: '#258895',
    //$primaryBlue: '#3D96A1',
-   $blueBackground: '#D3E3E6',
+   $blueBackground: '#FFFBF0',
+   //$blueBackground: '#D3827E'
+   //$blueBackground: '#D3E3E6',
    // $blueBackground: '#D8EAE2',
    $teal: '#6FACB4',
    $white: '#fff',
