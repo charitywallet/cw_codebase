@@ -486,6 +486,7 @@ def recommended_drives():
                 user_id=0
                 # print("why",user_id)
                 # response["drives"]= get_drives(user_id,0)
+                response["drives"]= "No recommended drives"
             else:
                 response["drives"]= get_recommended_drives(user_id)
 
@@ -631,19 +632,23 @@ def bir_test():
 
 
 @app.route('/logout', methods=["POST"])
-def signin():
+def signout():
     response={}
     if request.headers['Content-Type'] == 'application/json':
         arguments = request.get_json()
         user_id=arguments.get("user_id")
         status=""
         try:
-            end_session(user_id,datetime.datetime.now())
+            end_session(int(user_id),datetime.datetime.now())
+            status_code = 200
+            message="Logout Successfull for user_id: {}".format(int(user_id))
+            logging.info(message)
+            response['message']=message
 
         except Exception as e:
             status_code = 400
             status = e
-            message="Logout Failed: {}".format(status)
+            message="Logout Failed for user_id: {}".format(status)
             logging.info(message)
             response['message']=message
 
