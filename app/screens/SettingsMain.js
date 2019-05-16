@@ -24,7 +24,7 @@ export default class TabsAdvancedExample extends Component {
 
   render() {
     const { navigation } = this.props;
-    const user_id = navigation.getParam('userId', '3');
+    const user_id = navigation.getParam('user_id', 0);
     return (
       <Container>
         <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabHeading}>
@@ -35,7 +35,7 @@ export default class TabsAdvancedExample extends Component {
             <Cards />
           </Tab>
           <Tab heading={ <TabHeading><Text style={styles.tabText}>App Settings</Text></TabHeading>}>
-            <AppSettings/>
+            <AppSettings user_id={user_id} navigation={navigation}/>
           </Tab>
         </Tabs>
         </Container>

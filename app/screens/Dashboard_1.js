@@ -370,24 +370,9 @@ const styles = EStyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
-  containerNoSelection: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    //marginTop: -15,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: 30,
-  },
-  textNoSelection: {
-    fontSize: 20,
-    color: '$primaryBlue',
-    textAlign: 'center'
-  },
   currencyCardContainer: {
     width: imageWidth,
-    paddingTop:73.5,
+    paddingTop:75.5,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',
     shadowOpacity: .3,
@@ -396,7 +381,7 @@ const styles = EStyleSheet.create({
   carouselContainer: {
     width: imageWidth,
     backgroundColor: 'white',
-    marginTop: 40,
+    marginTop: 52,
     height: 280,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',

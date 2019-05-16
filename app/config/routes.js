@@ -82,7 +82,7 @@ const RootStack = createStackNavigator(
   	UserLogin: {
       screen: Login,
       navigationOptions: {
-        title: "Login",
+        title: "Charity Wallet",
         headerLeft: null,
       },
     },

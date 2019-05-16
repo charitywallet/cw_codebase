@@ -76,6 +76,9 @@ class DrivesCard extends Component {
       this.props.removeFromFav(drive)
     } else {
       //console.log("add")
+      if (this.props.favoriteDrivesInfo.length === 0){
+        alert("Yay, you started supporting your first drive. Supporting this means you have selected this drive to donate your change to.")
+      }
       this.props.addToFav(drive)
     }
 
