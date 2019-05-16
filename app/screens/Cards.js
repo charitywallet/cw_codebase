@@ -41,7 +41,7 @@ class Cards extends Component {
         <Text style={styles.list}>1. Chase account</Text>
         {/*<AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Spending Account"/>*/}
         <AddPlaidAccountExternal title=""/>
-        <Text style={styles.heading}>CHECKING ACCOUNTS</Text>
+        <Text style={styles.heading}>DONATION ACCOUNTS</Text>
         {/*<AddPlaidAccountExternal navigation={this.props.navigation} user_id={user_id} title="Add Checking Account"/>*/}
         <AddPlaidAccountExternal title=""/>
       </View>

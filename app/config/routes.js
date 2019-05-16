@@ -82,7 +82,7 @@ const RootStack = createStackNavigator(
   	UserLogin: {
       screen: Login,
       navigationOptions: {
-        title: "Login",
+        title: "Charity Wallet",
         headerLeft: null,
       },
     },
@@ -122,6 +122,7 @@ const RootStack = createStackNavigator(
       screen: AppContainer1,
       navigationOptions: {
         title: "Charity Wallet",
+        gesturesEnabled: false,
         initialRouteName: 'Home',
         headerLeft: null, //TODO: Uncomment this.
         headerBackTitle: 'Back',

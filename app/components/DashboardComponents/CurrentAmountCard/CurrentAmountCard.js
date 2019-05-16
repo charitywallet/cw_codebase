@@ -17,6 +17,8 @@ const CurrentAmountCard = ({ month_total, onPressDonateNow, onPressDonateCustom 
       <Text style={styles.date}>{ formattedDate }</Text>
       <Text style={styles.amount}>${ month_total }</Text>
       <Text style={styles.bottomText}>collected this month</Text>
+      <Text style={styles.smallText}>(your change will be donated automatically to your supported drives when it reaches $5,
+        and at the end of the month.)</Text>
       <View style={styles.buttonContainer}>
           <Button raised
           title= 'Donate Now' onPress={onPressDonateNow}

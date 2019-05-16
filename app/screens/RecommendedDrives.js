@@ -68,7 +68,7 @@ componentWillMount() {
   };
 
   onPressDone(user_id, navigate){
-      navigate('UserDashboard', {navigate:navigate, user_id: user_id})
+      navigate('UserDashboard', {navigate:navigate, user_id: user_id, sourcePage: 'Recommended'})
   }
 
   render() {

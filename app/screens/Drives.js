@@ -160,14 +160,14 @@ componentDidMount() {
     };
     return(
       <View>
-      <SearchBar
+    {/*}<SearchBar
         placeholder='Type here...'
         onChangeText={text => this.SearchFilterFunction(text)}
         onClear={text => this.SearchFilterFunction('')}
         value={this.state.search}
         autoCorrect={false}
         platform="ios"
-      />
+      />*/}
       <FlatList
             columnWrapperStyle={styles.row}
             data={this.props.allDrivesInfo}
@@ -183,7 +183,8 @@ componentDidMount() {
         <View style={[styles.sheet]}>
           <Animated.View style={[styles.popup, slideUp]}>
             <TouchableOpacity>
-              <Text style={{color: '#f0f0f0', fontFamily: 'Avenir', fontWeight: '700', marginBottom: 55,}}>The drive has been added to your Supported Drives.</Text>
+              <Text style={{color: '#f0f0f0', fontFamily: 'Avenir', fontWeight: '600', padding: 5, textAlign: 'center'}}>
+              The drive has been added to your Supported Drives.</Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
@@ -240,6 +241,6 @@ const styles= EStyleSheet.create({
     borderTopRightRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    minHeight: 130,
+    minHeight: 70,
   },
 });

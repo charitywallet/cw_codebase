@@ -6,6 +6,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux'
 import { Overlay, Button, Input } from 'react-native-elements';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 //import FloatingHearts from 'react-native-floating-hearts'
 
 const imageWidth = Dimensions.get('window').width;
@@ -27,12 +28,22 @@ class Dashboard_1 extends Component {
     amount: '',
     count: 10,
     isVisibleThanks: false,
+    isFirstTimeVisible: false,
   }
 
 componentWillMount() {
   //console.log("mount")
     this.getUserDetails();
     this.getSupportedDrives();
+    if (this.props.navigation.getParam("sourcePage") === 'Recommended'){
+      this.setState({
+        isFirstTimeVisible: true
+      })
+    } else {
+      this.setState({
+        isFirstTimeVisible: false
+      })
+    }
 }
 
 getUserDetails() {
@@ -130,17 +141,7 @@ getSupportedDrives(){
   .catch((error) => {
     alert(error)
   });
-  // if (this.props.favoriteDrivesInfo.length===0 && this.props.lifetimeTotal===0){
-  //   this.setState({
-  //     isVisible: true,
-  //   })}
-    // else {
-  //   this.setState({
-  //     isVisible: false,
-  //   })
-  // }
 }
-
 
 onPressDonateNow = () => {
   console.log("pressed donate now");
@@ -256,15 +257,31 @@ onDonateCustomNoPress = () => {
 
 onThanksPress = () => {
     this.setState({
-      isVisibleThanks: false
+      isVisibleThanks: false,
+      isFirstTimeVisible: false,
     })
 }
 
   render() {
     const { count } = this.state.count
+    let red="rgba(245,60,60,0.85)"
+
     return(
       <View style={styles.container}>
-       {/*{this.state.count ? <FloatingHearts count={count} /> : null}*/}
+       <Overlay isVisible={this.state.isFirstTimeVisible} onBackdropPress={this.onThanksPress}
+       overlayStyle={styles.overlayFirstTime} windowBackgroundColor="rgba(0, 0, 0, .7)">
+         <View style={styles.overlayContent}>
+           <Text style={styles.overlayText}>Congrats on taking the first step towards changing the world!
+           Go to the Drives page and select drives to start donating. {"\n"}</Text>
+           <Text style={styles.overlayText1}>Selecting a drive does not mean you have donated to it.
+           Your change would be donated only when it reaches $5 or at the end of the month, whichever comes first, to the drives you have selected!</Text>
+           <View style={styles.buttonGroup}>
+             <Button title="Done" onPress = {this.onThanksPress} containerStyle = {styles.buttonContainer1}
+             titleStyle={styles.buttonText} buttonStyle={styles.button}/>
+           </View>
+         </View>
+       </Overlay>
+
 
       <Overlay isVisible={this.state.isDonateNowVisible} onBackdropPress={this.onDonateNowNoPress}
       overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
@@ -296,7 +313,8 @@ onThanksPress = () => {
       <Overlay isVisible={this.state.isVisibleThanks} onBackdropPress={this.onThanksPress}
       overlayStyle={styles.overlay} windowBackgroundColor="rgba(0, 0, 0, .7)">
         <View style={styles.overlayContent}>
-          <Text style={styles.overlayText}>Thanks for your donation! You are making a difference in the world.</Text>
+          <Text style={styles.overlayText}>Thanks for your donation! You are making a difference in the world.{"\n"}</Text>
+          <FontAwesome name="heart" size={25} color={red}/>
           <View style={styles.buttonGroup}>
             <Button title="Done" onPress = {this.onThanksPress} containerStyle = {styles.buttonContainer1}
             titleStyle={styles.buttonText} buttonStyle={styles.button}/>
@@ -352,24 +370,9 @@ const styles = EStyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
-  containerNoSelection: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    //marginTop: -15,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: 30,
-  },
-  textNoSelection: {
-    fontSize: 20,
-    color: '$primaryBlue',
-    textAlign: 'center'
-  },
   currencyCardContainer: {
     width: imageWidth,
-    paddingTop:73.5,
+    paddingTop:75.5,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',
     shadowOpacity: .3,
@@ -378,7 +381,7 @@ const styles = EStyleSheet.create({
   carouselContainer: {
     width: imageWidth,
     backgroundColor: 'white',
-    marginTop: 40,
+    marginTop: 52,
     height: 280,
     shadowOffset:{  width: 2,  height: 2,  },
     shadowColor: 'black',
@@ -386,6 +389,10 @@ const styles = EStyleSheet.create({
   },
   overlay: {
     height: imageHeight/4.5,
+    alignItems: 'center',
+  },
+  overlayFirstTime: {
+    height: imageHeight/2.5,
     alignItems: 'center',
   },
   overlayContent: {
@@ -397,9 +404,19 @@ const styles = EStyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     justifyContent: 'space-evenly',
-    textAlign: 'justify',
+    textAlign: 'center',
     fontFamily: '$textFont',
     fontSize: 15,
+  },
+  overlayText1: {
+    paddingTop: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+    justifyContent: 'space-evenly',
+    textAlign: 'center',
+    fontFamily: '$textFont',
+    fontSize: 15,
+    fontWeight: '700',
   },
   buttonGroup: {
     flexDirection: 'row',
@@ -411,6 +428,7 @@ const styles = EStyleSheet.create({
     width: imageWidth/3.5,
     height: 40,
     marginLeft:5,
+    marginBottom: 20,
   },
   buttonContainer2: {
     width: imageWidth/3.5,

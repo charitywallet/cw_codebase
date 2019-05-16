@@ -6,7 +6,7 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 280,
+    height: 295,
     backgroundColor: '$background',
     // backgroundColor: '#D8EAE2',
     marginTop: -80,
@@ -40,6 +40,19 @@ export default EStyleSheet.create({
     //paddingTop: 7,
     fontFamily: '$textFont',
   },
+  smallText:{
+    fontSize: 12,
+    fontWeight: 'normal',
+    justifyContent: 'center',
+    alignContent: 'center',
+    color: '$inputText',
+    //paddingTop: 7,
+    padding: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    textAlign: 'center',
+    fontFamily: '$textFont',
+  },
   buttonContainer:
   {
     width: 320,
@@ -47,7 +60,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-around',
     alignContent: 'center',
     //flexWrap: "nowrap" ,
-    paddingTop: 20,
+    paddingTop: 10,
     //paddingLeft: 20,
   },
   buttonStyle:{
